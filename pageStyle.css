@@ -213,6 +213,7 @@ input[type=number]{
     cursor: pointer;
 }
 .centered {
+    width: 270px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -237,7 +238,6 @@ input[type=number]{
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
-    cursor: default;
 }
 .talentIcon {
     /*filter: grayscale(100%);*/
