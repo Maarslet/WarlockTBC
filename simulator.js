@@ -1,4 +1,5 @@
 function runSim(gearTable, baseLine, makeBaseLine) {
+  return
   console.time('Timer')
   var SP   = Number(document.getElementById("spellPower").value) + 30*document.getElementById("enchantSpellPower").checked + 8*document.getElementById("enchantFocus1").checked + 8*document.getElementById("enchantFocus2").checked + 18*document.getElementById("enchantZG1").checked + 18*document.getElementById("enchantZG2").checked + 18*document.getElementById("enchantZGShoulder").checked + 15*document.getElementById("enchantPowerScourge").checked;
   var ShP  = Number(document.getElementById("shadowPower").value) + 20*document.getElementById("enchantShadow").checked;
