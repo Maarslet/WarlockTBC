@@ -20,7 +20,7 @@ function talentFunc(click,element) {
           }
           catch(err) {}
           if (element !== undefined && text !== undefined && talent !== undefined) {
-            if (talent.id == "talentAmpCurse" || talent.id == "talentSiphon" || talent.id == "talentExhaust" || talent.id == "talentDarkPact" || talent.id == "talentFelDomination" || talent.id == "talentDemonicSacrifice" || talent.id == "talentSoulLink" || talent.id == "talentShadowburn" || talent.id == "talentRuin" || talent.id == "talentConflagrate")
+            if (talent.id == "talentAmpCurse" || talent.id == "talentSiphon" || talent.id == "talentExhaust" || talent.id == "talentDarkPact" || talent.id == "talentUnstable" || talent.id == "talentFelDomination" || talent.id == "talentDemonicSacrifice" || talent.id == "talentSoulLink" || talent.id == "talentSummonFelguard" || talent.id == "talentShadowburn" || talent.id == "talentRuin" || talent.id == "talentConflagrate" || talent.id == "talentShadowfury")
               var max = 1;
             else if (talent.id == "talentLifeTap" || talent.id == "talentDrainSoul" || talent.id == "talentGrimReach" || talent.id == "talentNightfall" || talent.id == "talentDrainMana" || talent.id == "talentHealthstone" || talent.id == "talentHealthFunnel" || talent.id == "talentMasterSummon" || talent.id == "talentFirestone" || talent.id == "talentSpellstone" || talent.id == "talentImpFirebolt" || talent.id == "talentImpLash" || talent.id == "talentIntensity" || talent.id == "talentDestructiveReach" || talent.id == "talentPyroclasm")
               var max = 2;
