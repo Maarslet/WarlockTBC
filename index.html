@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Warlock Simulator</title>
+    <script src="/WarlockSim/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="/WarlockSim/math.js"></script>
+    <script src="/WarlockSim/simulator.js"></script>
+    <script src="/WarlockSim/talents.js"></script>
+    <script src="/WarlockSim/cookies.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1FQXTFVJSS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-1FQXTFVJSS');
+    </script>
+    <script type="text/javascript">
+      function openPage(pageName,elmnt,color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].style.backgroundColor = "";
+        }
+        document.getElementById(pageName).style.display = "block";
+        elmnt.style.backgroundColor = color;
+      }
+      
+      function openGear(gearName,elmnt,color) {
+        var i, gearcontent, gearlinks;
+        gearcontent = document.getElementsByClassName("gearcontent");
+        for (i = 0; i < gearcontent.length; i++) {
+          gearcontent[i].style.display = "none";
+        }
+        gearlinks = document.getElementsByClassName("gearlink");
+        for (i = 0; i < gearlinks.length; i++) {
+          gearlinks[i].style.backgroundColor = "";
+        }
+        document.getElementById(gearName).style.display = "block";
+        elmnt.style.backgroundColor = color;
+        
+        if (gearName == "gearEnchants")
+          return
+        
+        var gearTable = document.getElementById(gearName).children[0].children[0].children[1].children;
+        var baseLine = runSim(gearTable[0], 0, true);
+        for (let i = 0; i < gearTable.length; i++) {
+          setTimeout(function(){ runSim(gearTable[i], baseLine); }, 1);
+        }
+        setTimeout(function(){
+          $('#'+gearTable[0].parentNode.parentNode.id).DataTable().destroy();
+          $('#'+gearTable[0].parentNode.parentNode.id).DataTable();
+        }, 100);
+      }
+      
+      function clickTable(tableName,element,noSim) {
+        var i, tableContent
+        tableContent = document.getElementById(tableName).children[1].children;
+        for (i = 0; i < tableContent.length; i++) {
+          document.getElementById(tableName).children[1].children[i].style.backgroundColor = "#FFF";
+          document.getElementById(tableName).children[1].children[i].setAttribute('name', tableName + 'Inactive');
+        }
+        if (arguments.length >= 2) {
+          element.style.backgroundColor = "#9482C9";
+          element.setAttribute('name', 'activeItem');
+        }
+        if (arguments.length !== 3) {
+          runSim();
+        }
+      }
+      
+      $.extend( $.fn.dataTable.defaults, {
+        searching: false,
+        info:  false,
+        paging: false,
+        processing: false,
+        order: [[12, 'desc']]
+      } );
+      $(document).ready( function () {
+        $('#tableMainHand').DataTable();
+        $('#tableOffHand').DataTable();
+        $('#tableStaff').DataTable();
+        $('#tableHelmet').DataTable();
+        $('#tableNeck').DataTable();
+        $('#tableShoulders').DataTable();
+        $('#tableBack').DataTable();
+        $('#tableChest').DataTable();
+        $('#tableWrists').DataTable();
+        $('#tableHands').DataTable();
+        $('#tableWaist').DataTable();
+        $('#tableLegs').DataTable();
+        $('#tableFeet').DataTable();
+        $('#tableRing1').DataTable();
+        $('#tableRing2').DataTable();
+        $('#tableTrinket1').DataTable();
+        $('#tableTrinket2').DataTable();
+        $('#tableWand').DataTable();
+        Chart.defaults.global.defaultFontColor = 'black';
+        
+        //document.getElementById("DSRuin").click();
+        setTalents('DS/Ruin');
+        loadCookie();
+        
+        setTimeout(function(){ 
+          document.getElementById("defaultOpen").click();
+          }, 10);
+        setTimeout(function(){ 
+          document.getElementById('defaultGear').click();
+          }, 10);
+      } );
+      
+    </script> 
+    <link rel="stylesheet" href="pageStyle.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+  </head>
+  <body style="background-color:#888888;">
+    <div class="row">
+      <div class="column info" oninput="runSim()">
+        <div style="text-align:center"><b style="font-size:32px">Warlock Simulator</b><br><b style="font-size:24px">WoW Classic</b></div>
+        
+        <div id="dps"></div>
+        <div id="statWeights"></div>
+        
+        <h2>Settings</h2>
+        <label style=color:#9482C9> <input type="checkbox" id="tailoring" checked>      300 Tailoring</label><br><br>
+
+        <b>Fight Info</b><br>
+        <label style=color:#9482C9> <input type="number" id="fightStart" value="40">    Minimum Fight Duration</label><br>
+        <label style=color:#9482C9> <input type="number" id="fightEnd" value="60">      Maximum Fight Duration</label><br>
+        <label style=color:#9482C9> <input type="number" id="bossShadowRes" value="0">  Boss Shadow Resistance</label><br>
+        <label style=color:#f20000> <input type="number" id="bossFireRes" value="0">    Boss Fire Resistance</label><br>
+        <br>
+
+        <label style="display:inline-block;text-align:center"><b>Boss Level</b><br>
+          <select id="bossLevel" style="width:80px">
+            <option value="63">     63</option>
+            <option value="62">     62</option>
+            <option value="61">     61</option>
+            <option value="60">     60</option>
+          </select>
+        </label>&nbsp;&nbsp;&nbsp;
+        <label style="display:inline-block;text-align:center"><b>Race</b><br>
+          <select id="race" style="width:80px">
+            <option value="gnome">  Gnome</option>
+            <option value="human">  Human</option>
+            <option value="undead"> Undead</option>
+            <option value="orc">    Orc</option>
+          </select>
+        </label>
+        &nbsp;&nbsp;&nbsp;<button id="myButton" type="button" onclick="runSim();">Run Sim</button><br>
+        
+        <p id="finalStats"></p>
+        <p id="setBonuses"></p>
+        
+      </div>
+      <div class="column allTheTabs">
+        <button class="tablink" onclick="openPage('main', this, '#838383'); runSim()" id="defaultOpen">Graphs</button>
+        <button class="tablink" onclick="openPage('buffs', this, '#838383')">Buffs & Consumables</button>
+        <button class="tablink" onclick="openPage('talents', this, '#838383')">Talents & Rotation</button>
+        <button class="tablink" onclick="openPage('gear', this, '#838383')">Gear</button>
+        <button class="tablink" onclick="openPage('advanced', this, '#555555')">Advanced</button><br>
+
+        <div id="main" class="tabcontent" name="main" oninput="runSim();">
+          <div class="row">
+            <!--<div class="column settings" style="background-color:#555555;">
+            </div>-->
+            <div class="column graphs">
+              <div id="dpsWrapper" style="background-color:#999999;height:400px;padding:5px"><canvas id="dpsCanvas" width=300px height=200px></canvas></div>
+            </div>
+            <div class="column graphs">
+              <div id="statWeightWrapper" style="background-color:#999999;height:400px;padding:5px"><canvas id="statWeightCanvas" width=300px height=200px></canvas></div>
+            </div>
+          </div>
+        </div> <!--Main tab-->
+        <div id="buffs" class="tabcontent" name="buffs" oninput="runSim();">
+          <p>Pick your buffs & consumables</p>
+          <div class="row">
+            <div class="column buffs" style="background-color:#555555;">
+              <h2>Debuffs on Boss</h2>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="curseShadow" checked>      Curse of Shadow</label>        <span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow damage by 10% and lowers Shadow resistance by 75</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="shadowWeaving" checked>    Shadow Weaving</label>         <span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow damage by 15%</span></span></div><br>
+              <div class="tooltip"><label style=color:#f20000> <input type="checkbox" id="curseElements" checked>    Curse of the Elements</label>  <span class="tooltiptext"><span class="tooltipgeneric">Increases Fire damage by 10% and lowers Fire resistance by 75</span></span></div><br>
+              <div class="tooltip"><label style=color:#f20000> <input type="checkbox" id="Scorch" checked>           Scorch</label>                 <span class="tooltiptext"><span class="tooltipgeneric">Increases Fire damage by 15%</span></span></div><br>
+              <br><br>
+
+              <h2>Consumables</h2>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="supremeFlask" checked>     Flask of Supreme Power</label> <span class="tooltiptext"><span class="tooltipgeneric">Gives 150 Spell power for 2 hours</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="blessedOil">               Blessed Wizard Oil</label>     <span class="tooltiptext"><span class="tooltipgeneric">Gives 60 Spell power against Undead for 1 hour. Only one oil can be active per weapon</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="brilliantOil" checked>     Brilliant Wizard Oil</label>   <span class="tooltiptext"><span class="tooltipgeneric">Gives 36 Spell power and 1% Spell crit for 30 minutes. Only one oil can be active per weapon</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="arcaneElixir" checked>     Greater Arcane Elixir</label>  <span class="tooltiptext"><span class="tooltipgeneric">Gives 35 Spell power for 1 hour</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="shadowElixir" checked>     Elixir of Shadow Power</label> <span class="tooltiptext"><span class="tooltipgeneric">Gives 40 Shadow power for 30 minutes</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="holiday" checked>          Very Berry Cream</label>       <span class="tooltiptext"><span class="tooltipgeneric">Gives 23 Spell power for 1 hour</span></span></div><br>
+              <div class="tooltip"><label style=color:#f20000> <input type="checkbox" id="fireElixir" checked>       Elixir of Fire Power</label>   <span class="tooltiptext"><span class="tooltipgeneric">Gives 40 Fire power for 30 minutes</span></span></div><br>
+              <br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="manaPotion" checked>       Major Mana Potion</label>      <span class="tooltiptext"><span class="tooltipgeneric">Restores 1350 to 2250 mana</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="demonicRune" checked>      Demonic Rune</label>           <span class="tooltiptext"><span class="tooltipgeneric">Restores 900 to 1500 mana at the cost of 600 to 1000 life</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="runnTumTuber">             Runn Tum Tuber Surprise</label><span class="tooltiptext"><span class="tooltipgeneric">Increases Intellect by 10 for 10 minutes. Only one food buff can be active at any one time</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="nightfinSoup">             Nightfin Soup</label>          <span class="tooltiptext"><span class="tooltipgeneric">Increases Mp5 by 8 for 10 minutes. Only one food buff can be active at any one time</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="magebloodPotion">          Mageblood Potion</label>       <span class="tooltiptext"><span class="tooltipgeneric">Increases Mp2 by 12 for 1 hour</span></span></div><br>
+              <br><br>
+            </div>
+            <div class="column buffs" style="background-color:#555555;">
+              <h2>World Buffs</h2>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="hakkarBuff" checked>       Spirit of Zandalar</label>               <span class="tooltiptext"><span class="tooltipgeneric">Increases primary stats by 15% for 2 hours</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="onyxiaBuff" checked>       Rallying Cry of the Dragonslayer</label> <span class="tooltiptext"><span class="tooltipgeneric">Gives 10% Spell crit for 2 hours</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="songflower" checked>       Songflower Serenade</label>              <span class="tooltiptext"><span class="tooltipgeneric">Gives 15 to every primary stat and 5% Spell crit for 1 hour</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="diremaulBuff" checked>     Dire Maul Tribute Buffs</label>          <span class="tooltiptext"><span class="tooltipgeneric">Gives 3% Spell crit and 15% increased stamina for 2 hours</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="darkMoonFaire">            Dark Moon Faire</label>                  <span class="tooltiptext"><span class="tooltipgeneric">Increases damage dealt by 10% for 2 hours</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="tracesOfSilithus">         Traces of Silithyst</label>              <span class="tooltiptext"><span class="tooltipgeneric">Increases damage dealt by 5% for 30 minutes (Banned by WCL)</span></span></div><br>
+              <br><br>
+
+              <h2>Buffs</h2>
+              <div class="tooltip"><label style=color:#69CCF0> <input type="checkbox" id="arcaneIntellect" checked>  Arcane Intellect</label>                 <span class="tooltiptext"><span class="tooltipgeneric">Gives 31 Intellect</span></span></div><br>
+              <div class="tooltip"><label style=color:#FF7D0A> <input type="checkbox" id="markOfTheWild" checked>    Improved Mark of the Wild</label>        <span class="tooltiptext"><span class="tooltipgeneric">Gives 16 of every primary stat</span></span></div><br>
+              <div class="tooltip"><label style=color:#FF7D0A> <input type="checkbox" id="moonkinAura">              Moonkin Aura</label>                     <span class="tooltiptext"><span class="tooltipgeneric">Gives 3% Spell crit</span></span></div><br>
+              <div class="tooltip"><label style=color:#F58CBA> <input type="checkbox" id="blessingOfWisdom" checked> Blessing of Wisdom</label>               <span class="tooltiptext"><span class="tooltipgeneric">Gives 42 Mp5</span></span></div><br>
+              <div class="tooltip"><label style=color:#F58CBA> <input type="checkbox" id="blessingOfKings" checked>  Blessing of Kings</label>                <span class="tooltiptext"><span class="tooltipgeneric">Increases primary stats by 10%</span></span></div><br>
+              <div class="tooltip"><label style=color:#0070DE> <input type="checkbox" id="manaSpringTotem">          Mana Spring Totem</label>                <span class="tooltiptext"><span class="tooltipgeneric">Gives 25 Mp5</span></span></div><br>
+              <br>
+              <div class="tooltip"><label style=color:#FFFFFF> <input type="number" id="powerInfusion" value="0" min="0" style="width:40px">  Power Infusion</label><span class="tooltiptext"><span class="tooltipgeneric">Increases spell damage dealt by 20% for 15 seconds</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="number" id="warlockAtiesh" value="0" min="0" style="width:40px">  Warlock Atiesh</label><span class="tooltiptext"><span class="tooltipgeneric">Gives 33 Spell power when in your group</span></span></div><br>
+              <div class="tooltip"><label style=color:#69CCF0> <input type="number" id="mageAtiesh" value="0" min="0" style="width:40px">     Mage Atiesh</label>   <span class="tooltiptext"><span class="tooltipgeneric">Gives 2% Spell crit when in your group</span></span></div><br>
+              <div class="tooltip"><label style=color:#FF7D0A> <input type="number" id="druidAtiesh" value="0" min="0" style="width:40px">    Druid Atiesh</label>  <span class="tooltiptext"><span class="tooltipgeneric">Gives 11 Mp5 when in your group</span></span></div><br>
+              <br><br>
+            </div>
+          </div>
+        </div> <!--Buffs tab-->
+        <div id="talents" class="tabcontent" name="talent" oninput="runSim();">
+          <p>Pick your talents & rotation</p>
+          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('DS/Ruin');runSim()" id="DSRuin"> DS/Ruin</button>
+          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('SM/Ruin');runSim()">             SM/Ruin</button>
+          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('DS/ES');runSim()">               DS/ES</button>
+          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('SM/DS');runSim()">               SM/DS</button>
+          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('Conflagrate');runSim()">         Conflagrate</button>
+          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('Reset');runSim()">               Reset</button>
+          <div class="row">
+            <div class="column talents" style="background-color:#555555;">
+              <table class="center" id="afflictionTree" onclick="runSim();" oncontextmenu="runSim();">
+                <tr>
+                  <th colspan='4' style='text-align:center'>Affliction</th>
+                </tr>
+                <tr><td>   </td> 
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentSuppression" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_unsummonbuilding.jpg" alt="T">   <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Suppression</span><br>Reduces the chance for enemies to resist your Affliction spells by <span class="tooltipinfo">2%/4%/6%/8%/10%</span>.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentCorruption" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_abominationexplosion.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Corruption</span><br>Reduces the casting time of your Corruption spell by <span class="tooltipinfo">0.4/0.8/1.2/1.6/2</span> sec.</span></div></td> 
+                    <td>   </td>
+                </tr>
+                <tr><td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentWeakness" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofmannoroth.jpg" alt="T"> <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Curse of Weakness</span><br>Increases the effect of your Curse of Weakness by <span class="tooltipinfo">6/13/20%</span>.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentDrainSoul" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_haunting.jpg" alt="T">        <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Drain Soul</span><br>Gives you a <span class="tooltipinfo">50/100%</span> chance to get a 100% increase to your Mana regeneration for 10 sec if the target is killed by you while you drain its soul. In addition your Mana may continue to regenerate while casting at 50% of normal.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentLifeTap" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_burningspirit.jpg" alt="T">     <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Life Tap</span><br>Increases the amount of Mana awarded by your Life Tap spell by <span class="tooltipinfo">10/20%</span>.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentDrainLife" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_lifedrain02.jpg" alt="T">     <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Drain Life</span><br>Increases the Health drained by your Drain Life spell by <span class="tooltipinfo">2/4/6/8/10%</span>.</span></div></td>
+                </tr>
+                <tr><td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentAgony" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curseofsargeras.jpg" alt="T"> <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Curse of Agony</span><br>Increases the damage done by your Curse of Agony by <span class="tooltipinfo">2/4/6%</span>.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentFelConc" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_fingerofdeath.jpg" alt="T"> <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Fel Concentration</span><br>Gives you a <span class="tooltipinfo">14/28/42/56/70%</span> chance to avoid interuption caused by damage while channeling the Drain Life, Drain Mana, or Drain Soul spell.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentAmpCurse" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_contagion.jpg" alt="T">    <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Amplify Curse</span><br>Increases the effect of your next Curse of Weakness or Curse of Agony by <span class="tooltipinfo">50%</span>, or your next Curse of Exhaustion by <span class="tooltipinfo">20%</span>. Lasts 30 sec.</span></div></td>
+                    <td>   </td>
+                </tr>
+                <tr><td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentGrimReach" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_callofbone.jpg" alt="T">  <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Grim Reach</span><br>Increases the range of your Affliction spells by <span class="tooltipinfo">10/20%</span>.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentNightfall" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_twilight.jpg" alt="T">    <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Nightfall</span><br>Gives your Corruption and Drain Life spells a <span class="tooltipinfo">2/4%</span> chance to cause you to enter a Shadow Trance state after damaging the opponent. The Shadow Trance state reduces the casting time of your next Shadow Bolt spell by 100%.</span></div></td>
+                    <td>   </td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentDrainMana" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_siphonmana.jpg" alt="T">  <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Drain Mana</span><br>Causes <span class="tooltipinfo">15/30%</span> of the Mana drained by your Drain Mana spell to damage the opponent.</span></div></td>
+                </tr>
+                <tr><td>   </td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentSiphon" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_requiem.jpg" alt="T">      <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Siphon Life (Rank 4)</span><br>Transfers 45 health from the target to the caster every 3 sec. Lasts 30 sec.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentExhaust" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_grimward.jpg" alt="T">    <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Curse of Exhaustion</span><br>Reduces the target's movement speed by 10% for 12 sec. Only one Curse per Warlock can be active on any one target.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentImpExhaust" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_grimward.jpg" alt="T"> <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Curse of Exhaustion</span><br>Increases the speed reduction of your Curse of Exhaustion by <span class="tooltipinfo">5/10/15/20%</span>.</span></div></td>
+                </tr>
+                <tr><td>   </td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentShadowMastery" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_shadetruesight.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Shadow Mastery</span><br>Increases the damage dealt or life drained by your Shadow spells by <span class="tooltipinfo">2/4/6/8/10%</span>.</span></div></td>
+                    <td>   </td>
+                    <td>   </td>
+                </tr>
+                <tr><td>   </td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentDarkPact" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_darkritual.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Dark Pact (Rank 3)</span><br>Drains 250 of your pet's Mana, returning 100% to you.</span></div></td>
+                    <td>   </td>
+                    <td>   </td>
+                </tr>
+              </table>
+            </div>
+            <div class="column talents" style="background-color:#555555;">
+              <table class="center" id="demonologyTree" onclick="runSim();" oncontextmenu="runSim();">
+                <tr>
+                  <th colspan='4' style='text-align:center'>Demonology</th>
+                </tr>
+                <tr><td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentHealthstone" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/inv_stone_04.jpg" alt="T">           <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Healthstone</span><br>Increases the amount of Health restored by your Healthstone by <span class="tooltipinfo">10/20%</span>.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentImpImp" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_summonimp.jpg" alt="T">      <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Imp</span><br>Increases the effect of your Imp's Firebolt, Fire Shield, and Blood Pact spells by <span class="tooltipinfo">10/20/30%</span>.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentStamina" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_metamorphosis.jpg" alt="T"> <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Demonic Embrace</span><br>Increases your Stamina by <span class="tooltipinfo">3/6/9/12/15%</span> but reduces your total Spirit by <span class="tooltipinfo">1/2/3/4/5%</span>.</span></div></td>
+                    <td>   </td>
+                </tr>
+                <tr><td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentHealthFunnel" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_lifedrain.jpg" alt="T">  <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Health Funnel</span><br>Increases the amount of Health transferred by your Health Funnel spell by <span class="tooltipinfo">10/20%</span>.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentImpVoid" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_summonvoidwalker.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Voidwalker</span><br>Increases the effectiveness of your Voidwalker's Torment, Consume Shadows, Sacrifice and Suffering spells by <span class="tooltipinfo">10/20/30%</span>.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentFelIntellect" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_holy_magicalsentry.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Fel Intellect</span><br>Increases the maximum Mana of your Imp, Voidwalker, Succubus, and Felhunter by <span class="tooltipinfo">3/6/9/12/15%</span>.</span></div></td>
+                    <td>   </td>
+                </tr>
+                <tr><td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentImpSuccubus" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_summonsuccubus.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Succubus</span><br>Increases the effect of your Succubus' Lash of Pain and Soothing Kiss spells by <span class="tooltipinfo">10/20/30%</span>, and increases the duration of your Succubus' Seduction and Lesser Invisibility spells by <span class="tooltipinfo">10/20/30%</span>.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentFelDomination" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_nature_removecurse.jpg" alt="T"> <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Fel Domination</span><br>Your next Imp, Voidwalker, Succubus, or Felhunter Summon spell has its casting time reduced by 5.5 sec and its Mana cost reduced by 50%.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentFelStamina" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_antishadow.jpg" alt="T">     <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Fel Stamina</span><br>Increases the maximum Health of your Imp, Voidwalker, Succubus, and Felhunter by <span class="tooltipinfo">3/6/9/12/15%</span>.</span></div></td>
+                    <td>   </td>
+                </tr>
+                <tr><td>   </td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentMasterSummon" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_impphaseshift.jpg" alt="T">    <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Master Summoner</span><br>Reduces the casting time of your Imp, Voidwalker, Succubus, Felhunter Summoning spells by <span class="tooltipinfo">2/4</span> sec and the Mana cost by <span class="tooltipinfo">20/40%</span>.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentUnholyPower" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_shadowworddominate.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Unholy Power</span><br>Increases the damage done by your Voidwalker, Succubus, and Felhunter's melee attacks by <span class="tooltipinfo">4/8/12/16/20%</span>.</span></div></td>
+                    <td>   </td>
+                </tr>
+                <tr><td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentEnslaveDemon" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_enslavedemon.jpg" alt="T">     <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Enslave Demon</span><br>Reduces the Attack Speed and Casting Speed penalty of your Ensalve Demon spell by <span class="tooltipinfo">2/4/6/8/10%</span> and reduces the resist chance by <span class="tooltipinfo">2/4/6/8/10%</span>.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentDemonicSacrifice" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_psychicscream.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Demonic Sacrifice</span><br>When activated, sacrifices your summoned demon to grant you an effect that lasts 30 min. The effect is canceled if any Demon is summoned.<br><br>Imp: Increases your Fire damage by 15%.<br><br>Voidwalker: Restores 3% of total Health every 4 sec.<br><br>Succubus: Increases your Shadow damage dealt by 15%.<br><br>Felhunter: Restores 2% of total Mana every 4 sec.</span></div></td>
+                    <td>   </td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentFirestone" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/inv_ammo_firetar.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Firestone</span><br>Increases the bonus Fire damage from Firestones and the Firestone effect by <span class="tooltipinfo">15/30%</span>.</span></div></td>
+                </tr>
+                <tr><td>   </td>
+                    <td>   </td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentMasterDemon" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_shadowpact.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Master Demonologist</span><br>Grants both the Warlock and the summoned demon an effect as long as that demon is active.<br><br>Imp - Reduces threat caused by <span class="tooltipinfo">4/8/12/16/20%</span>.<br><br>Voidwalker - Reduces physical damage taken by <span class="tooltipinfo">2/4/6/8/10%</span>.<br><br>Succubus - Increases all damage caused by <span class="tooltipinfo">2/4/6/8/10%</span>.<br><br>Felhunter - Increases all resistances by <span class="tooltipinfo">.2/.4/.6/.8/1</span> per level.</span></div></td>
+                    <td>   </td>
+                </tr>
+                <tr><td>   </td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentSoulLink" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_gathershadows.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Soul Link</span><br>When active, 30% of all damage taken by the caster is taken by your Imp, Voidwalker, Succubus, or Felhunter demon instead. In addition, both the demon and the master will inflict 3% more damage. Lasts as long as the demon is active.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentSpellstone" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/inv_misc_gem_sapphire_01.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Spellstone</span><br>Increases the amount of damage absorbed by your Spellstone by <span class="tooltipinfo">15/30%</span>.</span></div></td>
+                    <td>   </td>
+                </tr>
+              </table>
+              <div style="text-align:center;margin-top:6px"><b id="totalTalentPoints" style="font-size:16px;color:#9482C9"></b></div>
+            </div>
+            <div class="column talents" style="background-color:#555555">
+              <table class="center" id="destructionTree" onclick="runSim();" oncontextmenu="runSim();">
+                <tr>
+                  <th colspan='4' style='text-align:center'>Destruction</th>
+                </tr>
+                <tr><td>   </td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentShadowBolt" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_shadowbolt.jpg" alt="T"> <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Shadow Bolt</span><br>Your Shadow Bolt critical strikes increase Shadow damage dealt to the target by <span class="tooltipinfo">4/8/12/16/20%</span> until 4 non-periodic damage sources are applied. Effect lasts a maximum of 12 sec.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentCataclysm" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_fire_windsofwoe.jpg" alt="T">    <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Cataclysm</span><br>Reduces the Mana cost of your Destruction spells by <span class="tooltipinfo">1/2/3/4/5%</span>.</span></div></td>
+                    <td>   </td>
+                </tr>
+                <tr><td>   </td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentBane" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_deathpact.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Bane</span><br>Reduces the casting time of your Shadow Bolt and Immolate spells by <span class="tooltipinfo">0.1/0.2/0.3/0.4/0.5</span> sec and your Soul Fire spell by <span class="tooltipinfo">0.4/0.8/1.2/1.6/2 sec</span>.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentAftermath" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_fire_fire.jpg" alt="T">  <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Aftermath</span><br>Gives your Destruction spells a <span class="tooltipinfo">2/4/6/8/10%</span> chance to daze the target for 5 sec.</span></div></td>
+                    <td>   </td>
+                </tr>
+                <tr><td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentImpFirebolt" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_fire_firebolt.jpg" alt="T">      <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Firebolt</span><br>Reduces the casting time of your Imp's Firebolt spell by <span class="tooltipinfo">0.5/1</span> sec.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentImpLash" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_curse.jpg" alt="T">           <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Last of Pain</span><br>Reduces the cooldown of your Succubus' Lash of Pain spell by <span class="tooltipinfo">3/6</span> sec.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentDevastation" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_fire_flameshock.jpg" alt="T">    <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Devastation</span><br>Increases the critical strike chance of your Destruction spells by <span class="tooltipinfo">1/2/3/4/5%</span>.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentShadowburn" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_scourgebuild.jpg" alt="T"> <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Shadowburn (Rank 6)</span><br>Instantly blasts the target for 462 to 514 Shadow damage. If the target dies within 5 sec of Shadowburn, and yields experience of honor, the caster gains a Soul Shard.</span></div></td>
+                </tr>
+                <tr><td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentIntensity" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_fire_lavaspawn.jpg" alt="T">             <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Intensity</span><br>Gives you a <span class="tooltipinfo">35/70%</span> chance to resist interruption caused by damage while channeling the Rain of Fire, Hellfire, or Soul Fire spell.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentDestructiveReach" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_corpseexplode.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Destructive Reach</span><br>Increases the range of your Destruction spells by <span class="tooltipinfo">10/20%</span>.</span></div></td>
+                    <td>   </td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentSearingPain" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_fire_soulburn.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Searing Pain</span><br>Increases the critical strike chance of your Searing Pain spell by <span class="tooltipinfo">2/4/6/8/10%</span>.</span></div></td>
+                </tr>
+                <tr><td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentPyroclasm" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_fire_volcano.jpg" alt="T">     <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Pyroclasm</span><br>Gives your Rain of Fire, Hellfire, and Soul Fire spells a <span class="tooltipinfo">13/26%</span> chance to stun the target for 3 sec.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentImmolate" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_fire_immolation.jpg" alt="T">   <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Improved Immolate</span><br>Increases the initial damage of your Immolate spell by <span class="tooltipinfo">5/10/15/20/25%</span>.</span></div></td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentRuin" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_shadowwordpain.jpg" alt="T"> <b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Ruin</span><br>Increases the critical strike damage bonus of your Destruction spells by 100%.</span></div></td>
+                    <td>   </td>
+                </tr>
+                <tr><td>   </td>
+                    <td>   </td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentEmberstorm" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_fire_selfdestruct.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Emberstorm</span><br>Increases the damage done by your Fire spells by <span class="tooltipinfo">2/4/6/8/10%</span>.</span></div></td>
+                    <td>   </td>
+                </tr>
+                <tr><td>   </td>
+                    <td><div class="tooltip"><div class="wrapper" onclick="talentFunc('left',this);" oncontextmenu="talentFunc('right',this); return false"><img id="talentConflagrate" class="talentIcon" src="https://wow.zamimg.com/images/wow/icons/large/spell_fire_fireball.jpg" alt="T"><b class="bottom-right">0</b></div> <span class="tooltiptext"><span class="tooltipheader">Conflagrate (Rank 4)</span><br>Ignites a target that is already afflicted by Immolate, dealing 447 to 557 Fire damage and consuming the Immolate spell.</span></div></td>
+                    <td>   </td>
+                    <td>   </td>
+                </tr>
+              </table>
+            </div>
+            <div style="width:30px">
+            </div>
+            <div class="column rotation" style="background-color:#555555;">
+              <h2>Rotation</h2>
+              <b>Damage over Time Abilities</b><br>
+              <label style=color:#9482C9> <input type="radio" name="curse" value="none" checked>  No Curse</label><br>
+              <label style=color:#9482C9> <input type="radio" name="curse" value="debuff">        Recklessness / Elements / Shadow</label><br>
+              <label style=color:#9482C9> <input type="radio" name="curse" value="agony">         Curse of Agony</label><br>
+              <label style=color:#9482C9> <input type="radio" name="curse" value="doom">          Curse of Doom</label><br>
+              <label style=color:#9482C9> <input type="checkbox" id="rotationCorruption">         Corruption</label><br>
+              <label style=color:#f20000> <input type="checkbox" id="rotationImmolate">           Immolate (Rank 8)</label><br>
+              <label style=color:#9482C9> <input type="checkbox" id="rotationSiphonLife">         Siphon Life</label><br>
+              <br>
+
+              <b>Primary Damage Spell</b><br>
+              <label style=color:#9482C9> <input type="radio" name="primary" value="shadowBolt" checked>  Shadow Bolt</label><br>
+              <label style=color:#f20000> <input type="radio" name="primary" value="searingPain">         Searing Pain</label><br>
+              <label style=color:#f20000> <input type="radio" name="primary" value="immolateR7">          Immolate (Rank 7)</label><br>
+              <label style=color:#f20000> <input type="radio" name="primary" value="immolateR8">          Immolate (Rank 8)</label><br>
+              <label style=color:#9482C9> <input type="radio" name="primary" value="drainLife">           Drain Life</label><br>
+              <br>
+
+              <b>Finisher</b><br>
+              <label style=color:#9482C9> <input type="radio" name="finisher" value="shadowburn" checked>   Shadowburn</label><br>
+              <label style=color:#9482C9> <input type="radio" name="finisher" value="deathCoil">            Death Coil</label><br>
+              <label style=color:#f20000> <input type="radio" name="finisher" value="searingPain">          Searing Pain</label><br>
+              <label style=color:#9482C9> <input type="radio" name="finisher" value="none">                 No Finisher</label><br>
+              <br>
+            </div>
+          </div>
+        </div> <!--Talent tab-->
+        <div id="gear" class="tabcontent" name="gear" oninput="runSim();">
+          <br>
+          <button class="gearlink" onclick="openGear('gearMainHand', this, '#9482C9')" id="defaultGear">Main Hand</button>
+          <button class="gearlink" onclick="openGear('gearOffHand', this, '#9482C9')">Off Hand</button>
+          <button class="gearlink" onclick="openGear('gearStaff', this, '#9482C9')">Staff</button>
+          <button class="gearlink" onclick="openGear('gearHelmet', this, '#9482C9')">Helmet</button>
+          <button class="gearlink" onclick="openGear('gearNeck', this, '#9482C9')">Neck</button>
+          <button class="gearlink" onclick="openGear('gearShoulders', this, '#9482C9')">Shoulders</button>
+          <button class="gearlink" onclick="openGear('gearBack', this, '#9482C9')">Back</button>
+          <button class="gearlink" onclick="openGear('gearChest', this, '#9482C9')">Chest</button>
+          <button class="gearlink" onclick="openGear('gearWrists', this, '#9482C9')">Wrists</button>
+          <button class="gearlink" onclick="openGear('gearHands', this, '#9482C9')">Hands</button>
+          <button class="gearlink" onclick="openGear('gearWaist', this, '#9482C9')">Waist</button>
+          <button class="gearlink" onclick="openGear('gearLegs', this, '#9482C9')">Legs</button>
+          <button class="gearlink" onclick="openGear('gearFeet', this, '#9482C9')">Feet</button>
+          <button class="gearlink" onclick="openGear('gearRing1', this, '#9482C9')">Ring 1</button>
+          <button class="gearlink" onclick="openGear('gearRing2', this, '#9482C9')">Ring 2</button>
+          <button class="gearlink" onclick="openGear('gearTrinket1', this, '#9482C9')">Trinket 1</button>
+          <button class="gearlink" onclick="openGear('gearTrinket2', this, '#9482C9')">Trinket 2</button>
+          <button class="gearlink" onclick="openGear('gearWand', this, '#9482C9')">Wand</button>
+          <button class="gearlink" onclick="openGear('gearEnchants', this, '#9482C9')">Enchants</button>
+          <br>
+          <div id="gearMainHand" class="gearcontent" name="gearMainHand">
+            <table class="gearTable compact row-border hover" id="tableMainHand"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Wraith Blade</td><td>Naxx</td><td>10</td><td>8</td><td>95</td><td></td><td></td><td>1%</td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Midnight Haze</td><td>Naxx</td><td>20</td><td>12</td><td>85</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Grand Marshal's Mageblade</td><td>PvP</td><td>14</td><td>8</td><td>72</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Sharpened Silithid Femur</td><td>AQ40</td><td>14</td><td>7</td><td>72</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Claw of Chromaggus</td><td>BWL</td><td>7</td><td>17</td><td>64</td><td></td><td></td><td></td><td></td><td></td><td>4</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Runesword of the Red</td><td>Quest</td><td>17</td><td>9</td><td>64</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')" class="setAQ20"><td>Kris of Unspoken Names</td><td>AQ20</td><td>9</td><td>7</td><td>59</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Azuresong Mageblade</td><td>MC</td><td>7</td><td>12</td><td>40</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Fang of the Mystics</td><td>Azuregos</td><td></td><td>10</td><td>40</td><td></td><td></td><td></td><td>1%</td><td></td><td>4</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Sageclaw</td><td>PvP</td><td>8</td><td></td><td>30</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Bloodcaller</td><td>ZG</td><td>12</td><td>15</td><td>33</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Elemental Attuned Blade</td><td>World</td><td></td><td>6</td><td>32</td><td></td><td></td><td></td><td></td><td></td><td>3</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Fang of Venoxis</td><td>ZG</td><td></td><td>8</td><td>24</td><td></td><td></td><td></td><td></td><td></td><td>6</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>The Lost Kris of Zedd</td><td>AQ20</td><td>6</td><td></td><td>14</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Sorcerous Dagger</td><td>MC</td><td>8</td><td>17</td><td>20</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Sageblade</td><td>Crafted</td><td>14</td><td>3</td><td>20</td><td></td><td></td><td></td><td></td><td>10</td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Blade of the New Moon</td><td>Dire Maul</td><td>5</td><td></td><td></td><td>19</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Witchblade</td><td>Scholomance</td><td></td><td>8</td><td>14</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableMainHand',this); clickTable('tableStaff')"><td>Inventor's Focal Sword</td><td>Maraudon</td><td></td><td></td><td></td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearOffHand" class="gearcontent" name="gearOffHand">
+            <table class="gearTable compact row-border hover" id="tableOffHand"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableOffHand',this); clickTable('tableStaff')"><td>Sapphiron's Left Eye</td><td>Naxx</td><td>12</td><td>8</td><td>26</td><td></td><td></td><td>1%</td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableOffHand',this); clickTable('tableStaff')"><td>Royal Scepter of Vek'lor</td><td>AQ40</td><td>10</td><td>9</td><td>20</td><td></td><td></td><td>1%</td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableOffHand',this); clickTable('tableStaff')"><td>Scepter of Interminable Focus</td><td>Stratholme</td><td></td><td></td><td>9</td><td></td><td></td><td>1%</td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableOffHand',this); clickTable('tableStaff')"><td>Jin'do's Bag of Whammies</td><td>ZG</td><td>8</td><td>11</td><td>18</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableOffHand',this); clickTable('tableStaff')"><td>Talon of Furious Concentration</td><td>AQ20</td><td>8</td><td>8</td><td>21</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableOffHand',this); clickTable('tableStaff')"><td>Tome of Shadow Force</td><td>PvP</td><td>8</td><td></td><td></td><td>34</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableOffHand',this); clickTable('tableStaff')"><td>Therazane's Touch</td><td>PvP</td><td></td><td></td><td>33</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableOffHand',this); clickTable('tableStaff')"><td>Master Dragonslayer's Orb</td><td>BWL</td><td>10</td><td>14</td><td>28</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableOffHand',this); clickTable('tableStaff')"><td>Gem of Nerubis</td><td>Naxx</td><td>14</td><td>10</td><td>25</td><td></td><td></td><td></td><td></td><td>10</td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableOffHand',this); clickTable('tableStaff')"><td>Grand Marshal's Tome of Power</td><td>PvP</td><td>17</td><td>16</td><td>20</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableOffHand',this); clickTable('tableStaff')"><td>Tome of the Lost</td><td>UBRS</td><td>6</td><td>7</td><td>18</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableOffHand',this); clickTable('tableStaff')"><td>Fire Runed Grimoire</td><td>MC</td><td>12</td><td>21</td><td>11</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableOffHand',this); clickTable('tableStaff')"><td>Tome of Fiery Arcana</td><td>PvP</td><td></td><td></td><td></td><td></td><td>40</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearStaff" class="gearcontent" name="gearStaff">
+            <table class="gearTable compact row-border hover" id="tableStaff"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Atiesh, Greatstaff of the Guardian</td><td>Naxx</td><td>30</td><td>29</td><td>183</td><td></td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Brimstone Staff</td><td>Naxx</td><td>31</td><td>30</td><td>113</td><td></td><td></td><td>2%</td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Soulseeker</td><td>Naxx</td><td>30</td><td>31</td><td>126</td><td></td><td></td><td></td><td>2%</td><td>25</td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')" style="background-color:#AAAAAA" name="activeItem"><td>Blessed Qiraji Acolyte Staff</td><td>AQ40</td><td>32</td><td>33</td><td>76</td><td></td><td></td><td>2%</td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Staff of the Shadow Flame</td><td>BWL</td><td>24</td><td>29</td><td>84</td><td></td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Staff of the Ruins</td><td>AQ20</td><td>24</td><td>23</td><td>60</td><td></td><td></td><td>1%</td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Grand Marshal's Stave</td><td>PvP</td><td>41</td><td>23</td><td>71</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Ironbark Staff</td><td>PvP</td><td>19</td><td>10</td><td>41</td><td></td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Jin'do's Judgement</td><td>ZG</td><td>10</td><td>10</td><td>27</td><td></td><td></td><td>2%</td><td></td><td></td><td>14</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Shadow Wing Focus Staff</td><td>BWL</td><td>22</td><td>40</td><td>56</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Staff of Dominance</td><td>MC</td><td>16</td><td>37</td><td>40</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Staff of the Qiraji Prophets</td><td>AQ40</td><td>21</td><td>26</td><td>56</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Lord Valthalak's Staff of Command</td><td>UBRS</td><td>11</td><td>10</td><td>30</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Amberseal Keeper</td><td>Kazzak</td><td></td><td>20</td><td>44</td><td></td><td></td><td></td><td></td><td></td><td>12</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Soul Harvester</td><td>Quest</td><td>16</td><td></td><td></td><td>24</td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Rod of the Ogre Magi</td><td>Dire Maul</td><td>11</td><td>14</td><td>23</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Amethyst War Staff</td><td>Silithus</td><td>6</td><td>9</td><td>34</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Zulian Ceremonial Staff</td><td>ZG</td><td>13</td><td>16</td><td>32</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableStaff',this); clickTable('tableMainHand'); clickTable('tableOffHand')"><td>Staff of Jordan</td><td>World</td><td></td><td>11</td><td>26</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearHelmet" class="gearcontent" name="gearHelmet">
+            <table class="gearTable compact row-border hover" id="tableHelmet"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableHelmet',this)" class="setT1"><td>Felheart Horns</td><td>MC</td><td>27</td><td>20</td><td>20</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHelmet',this)" class="setT2"><td>Nemesis Skullcap</td><td>Onyxia</td><td>26</td><td>16</td><td>32</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHelmet',this)" style="background-color:#AAAAAA" name="activeItem" class="setT25"><td>Doomcaller's Circlet</td><td>AQ40</td><td>27</td><td>24</td><td>33</td><td></td><td></td><td>1%</td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHelmet',this)" class="setT3"><td>Plagueheart Circlet</td><td>Naxx</td><td>28</td><td>25</td><td>33</td><td></td><td></td><td>1%</td><td>2%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHelmet',this)"><td>Mish'undare, Circlet of the Mind Flayer</td><td>BWL</td><td>15</td><td>24</td><td>35</td><td></td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHelmet',this)"><td>Spellweaver's Turban</td><td>UBRS</td><td></td><td>9</td><td>36</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHelmet',this)"><td>Preceptor's Hat</td><td>Naxx</td><td>18</td><td>24</td><td>51</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHelmet',this)"><td>Bloodvine Goggles</td><td>Crafted</td><td></td><td></td><td></td><td></td><td></td><td>2%</td><td>1%</td><td></td><td>9</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHelmet',this)"><td>The Hexxer's Cover</td><td>ZG</td><td>10</td><td>10</td><td>41</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHelmet',this)" class="setT05"><td>Deathmist Mask</td><td>Quest</td><td>24</td><td>24</td><td>16</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHelmet',this)"><td>Eye of Flame</td><td>BoE</td><td></td><td>10</td><td></td><td></td><td>43</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHelmet',this)" class="setPvPRare"><td>Rank 10 Helmet</td><td>PvP</td><td>21</td><td>18</td><td>21</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHelmet',this)" class="setPvPEpic"><td>Rank 13 Helmet</td><td>PvP</td><td>30</td><td>24</td><td>32</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHelmet',this)"><td>Crimson Felt Hat</td><td>Stratholme</td><td>8</td><td>8</td><td>30</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHelmet',this)"><td>Cap of the Scarlet Savant</td><td>Quest</td><td>17</td><td>20</td><td></td><td></td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHelmet',this)"><td>Dreamweave Circlet</td><td>Crafting</td><td></td><td>10</td><td>21</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearNeck" class="gearcontent" name="gearNeck">
+            <table class="gearTable compact row-border hover" id="tableNeck"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableNeck',this)"><td>Gem of Trapped Innocents</td><td>Naxx</td><td>9</td><td>7</td><td>15</td><td></td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableNeck',this)"><td>Amulet of Vek'nilash</td><td>AQ40</td><td>9</td><td>5</td><td>27</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableNeck',this)" style="background-color:#AAAAAA" name="activeItem"><td>Choker of the Fire Lord</td><td>MC</td><td>7</td><td>7</td><td>34</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableNeck',this)"><td>Dark Advisor's Pendant</td><td>Scholomance</td><td>8</td><td>7</td><td></td><td>20</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableNeck',this)"><td>Diana's Pearl Necklace</td><td>Stratholme</td><td>8</td><td>8</td><td>9</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableNeck',this)"><td>Malice Stone Pendant</td><td>Naxx</td><td>9</td><td>8</td><td>28</td><td></td><td></td><td></td><td></td><td>13</td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableNeck',this)"><td>Charm of the Shifting Sands</td><td>AQ20</td><td>9</td><td>12</td><td>25</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableNeck',this)"><td>Soul Corrupter's Necklace</td><td>ZG</td><td>10</td><td>16</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableNeck',this)"><td>Star of Mystaria</td><td>Stratholme</td><td>9</td><td>9</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableNeck',this)"><td>Jeklik's Opaline Talisman</td><td>ZG</td><td></td><td></td><td>22</td><td></td><td></td><td></td><td></td><td></td><td>3</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableNeck',this)"><td>Orb of the Darkmoon</td><td>Quest</td><td>11</td><td></td><td>22</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableNeck',this)"><td>Choker of Enlightenment</td><td>MC</td><td>9</td><td>10</td><td>18</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableNeck',this)"><td>Amulet of the Dawn</td><td>Quest</td><td>13</td><td>13</td><td>15</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableNeck',this)" class="setZG"><td>Kezan's Unstoppable Taint</td><td>ZG</td><td>13</td><td>8</td><td>14</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableNeck',this)"><td>Anastari Heirloom</td><td>Stratholme</td><td>15</td><td></td><td></td><td>13</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearShoulders" class="gearcontent" name="gearShoulders">
+            <table class="gearTable compact row-border hover" id="tableShoulders"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableShoulders',this)" class="setT3"><td>Plagueheart Shoulderpads</td><td>Naxx</td><td>22</td><td>12</td><td>36</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableShoulders',this)"><td>Rime Covered Mantle</td><td>Naxx</td><td>12</td><td>12</td><td>39</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableShoulders',this)" style="background-color:#AAAAAA" name="activeItem" class="setT25"><td>Doomcaller's Mantle</td><td>AQ40</td><td>20</td><td>11</td><td>28</td><td></td><td></td><td>1%</td><td></td><td>10</td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableShoulders',this)"><td>Mantle of the Blackwing Cabal</td><td>BWL</td><td>12</td><td>16</td><td>34</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableShoulders',this)"><td>Abyssal Cloth Amice of Sorcery</td><td>Silithus</td><td>13</td><td>13</td><td>15</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableShoulders',this)" class="setPvPEpic"><td>Rank 13 Shoulders</td><td>PvP</td><td>24</td><td>17</td><td>25</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableShoulders',this)" class="setPvPRare"><td>Rank 10 Shoulders</td><td>PvP</td><td>17</td><td>13</td><td>12</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableShoulders',this)" class="setT2"><td>Nemesis Shoulders</td><td>BWL</td><td>20</td><td>13</td><td>23</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableShoulders',this)"><td>Felcloth Shoulders</td><td>Crafting</td><td></td><td></td><td></td><td>26</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableShoulders',this)"><td>Mantle of Maz'Nadir</td><td>AQ20</td><td>11</td><td>15</td><td>21</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableShoulders',this)"><td>Burial Shawl</td><td>Scholomance</td><td></td><td>16</td><td>20</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableShoulders',this)"><td>Kentic Amice</td><td>BRD</td><td>5</td><td>13</td><td>14</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableShoulders',this)" class="setZG"><td>Zandalar Demoniac's Mantle</td><td>ZG</td><td>23</td><td>19</td><td>12</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableShoulders',this)" class="setT1"><td>Felheart Shoulder Pads</td><td>MC</td><td>25</td><td>17</td><td>9</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableShoulders',this)"><td>Mantle of Phrenic Power</td><td>AQ40</td><td>20</td><td>20</td><td></td><td></td><td>33</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearBack" class="gearcontent" name="gearBack">
+            <table class="gearTable compact row-border hover" id="tableBack"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableBack',this)"><td>Cloak of the Necropolis</td><td>Naxx</td><td>12</td><td>11</td><td>26</td><td></td><td></td><td>1%</td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableBack',this)"><td>Cloak of the Devoured</td><td>AQ40</td><td>11</td><td>10</td><td>30</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableBack',this)" style="background-color:#AAAAAA" name="activeItem"><td>Cloak of Consumption</td><td>ZG</td><td></td><td>10</td><td>23</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableBack',this)"><td>Cloak of the Brood Lord</td><td>BWL</td><td>10</td><td>14</td><td>28</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableBack',this)"><td>Veil of Eclipse</td><td>Naxx</td><td>10</td><td>10</td><td>28</td><td></td><td></td><td></td><td></td><td>10</td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableBack',this)"><td>Cloak of the Hakkari Worshipers</td><td>ZG</td><td>6</td><td>6</td><td>23</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableBack',this)"><td>Cape of the Trinity</td><td>AQ40</td><td>17</td><td>12</td><td>21</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableBack',this)" class="setAQ20"><td>Shroud of Unspoken Names</td><td>AQ20</td><td>16</td><td>9</td><td>18</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableBack',this)"><td>Sapphiron Drape</td><td>Onyxia</td><td>10</td><td>17</td><td>14</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableBack',this)"><td>Spritecaster Cape</td><td>BRD</td><td>4</td><td>4</td><td>14</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearChest" class="gearcontent" name="gearChest">
+            <table class="gearTable compact row-border hover" id="tableChest"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableChest',this)" class="setT3"><td>Plagueheart Robe</td><td>Naxx</td><td>27</td><td>22</td><td>51</td><td></td><td></td><td>1%</td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)" class="setBV"><td>Bloodvine Vest</td><td>Crafting</td><td></td><td>13</td><td>27</td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)"><td>Garb of Royal Ascension</td><td>AQ40</td><td>21</td><td></td><td>30</td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)" class="setT25"><td>Doomcaller's Robes</td><td>AQ40</td><td>23</td><td>17</td><td>41</td><td></td><td></td><td></td><td>1%</td><td>20</td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)"><td>Crystal Webbed Robe</td><td>Naxx</td><td>25</td><td>19</td><td>53</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)"><td>Robe of Volatile Power</td><td>MC</td><td>10</td><td>15</td><td>23</td><td></td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)" style="background-color:#AAAAAA" name="activeItem" class="setT2"><td>Nemesis Robes</td><td>BWL</td><td>26</td><td>16</td><td>32</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)"><td>Jade Inlaid Vestments</td><td>Ysondre</td><td>16</td><td>18</td><td>44</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)"><td>Vestments of the Shifting Sands</td><td>AQ20</td><td>20</td><td>14</td><td>32</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)" class="setZG"><td>Zandalar Demoniac's Robe</td><td>ZG</td><td>35</td><td></td><td>27</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)"><td>Robe of the Void</td><td>Crafting</td><td>14</td><td></td><td>46</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)"><td>Robes of the Battleguard</td><td>AQ40</td><td>23</td><td>17</td><td>36</td><td></td><td></td><td></td><td></td><td>20</td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)" class="setPvPEpic"><td>Rank 12 Chest</td><td>PvP</td><td>30</td><td>24</td><td>32</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)" class="setPvPRare"><td>Rank 8 Chest</td><td>PvP</td><td>20</td><td>20</td><td>25</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)" class="setT05"><td>Deathmist Robe</td><td>Quest</td><td>27</td><td>22</td><td></td><td>12</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)" class="setT1"><td>Felheart Robes</td><td>MC</td><td>31</td><td>20</td><td>13</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)"><td>Flarecore Robe</td><td>Crafting</td><td>35</td><td></td><td>23</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)"><td>Dreamweave Vest</td><td>Crafting</td><td></td><td>9</td><td>18</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableChest',this)" class="setUDC"><td>Robe of Undead Cleansing</td><td>Event</td><td>12</td><td>13</td><td>48</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearWrists" class="gearcontent" name="gearWrists">
+            <table class="gearTable compact row-border hover" id="tableWrists"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableWrists',this)" style="background-color:#AAAAAA" name="activeItem"><td>Rockfury Bracers</td><td>Quest</td><td>7</td><td></td><td>27</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWrists',this)"><td>Bracers of Arcane Accuracy</td><td>BWL</td><td>9</td><td>12</td><td>21</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWrists',this)"><td>The Soul Harvester's Bindings</td><td>Naxx</td><td>14</td><td>11</td><td>21</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWrists',this)"><td>Burrower Bracers</td><td>AQ40</td><td>10</td><td>13</td><td>28</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWrists',this)" class="setT3"><td>Plagueheart Bindings</td><td>Naxx</td><td>23</td><td>14</td><td>23</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWrists',this)"><td>Black Bark Wristbands</td><td>Lethon</td><td>15</td><td>4</td><td>25</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWrists',this)"><td>Shackles of the Unscarred</td><td>AQ20</td><td>9</td><td>12</td><td>21</td><td></td><td></td><td></td><td></td><td>10</td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWrists',this)"><td>Dryad's Wrist Bindings</td><td>PvP</td><td>8</td><td>8</td><td>22</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWrists',this)" class="setZG"><td>Zandalar Demoniac's Wraps</td><td>ZG</td><td>15</td><td>8</td><td>16</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWrists',this)" class="setT2"><td>Nemesis Bracers</td><td>BWL</td><td>21</td><td>11</td><td>15</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWrists',this)" class="setT1"><td>Felheart Bracers</td><td>MC</td><td>18</td><td>11</td><td>13</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWrists',this)" class="setT05"><td>Deathmist Bracers</td><td>Quest</td><td>12</td><td>12</td><td>8</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWrists',this)"><td>Sublime Wristguards</td><td>Dire Maul</td><td>6</td><td>10</td><td>12</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWrists',this)" class="setUDC"><td>Bracers of Undead Cleansing</td><td>Event</td><td>6</td><td>7</td><td>26</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearHands" class="gearcontent" name="gearHands">
+            <table class="gearTable compact row-border hover" id="tableHands"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableHands',this)"><td>Dark Storm Gauntlets</td><td>AQ40</td><td>19</td><td>15</td><td>37</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHands',this)" style="background-color:#AAAAAA" name="activeItem"><td>Ebony Flame Gloves</td><td>BWL</td><td>17</td><td>12</td><td></td><td>43</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHands',this)" class="setT3"><td>Plagueheart Gloves</td><td>Naxx</td><td>25</td><td>17</td><td>26</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHands',this)"><td>Bloodtinged Gloves</td><td>ZG</td><td>10</td><td>10</td><td>19</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHands',this)" class="setT05"><td>Deathmist Wraps</td><td>Quest</td><td>16</td><td>13</td><td>13</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHands',this)"><td>Felcloth Gloves</td><td>Crafting</td><td>9</td><td></td><td></td><td>33</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHands',this)" class="setT2"><td>Nemesis Gloves</td><td>BWL</td><td>17</td><td>15</td><td>15</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHands',this)" class="setPvPEpic"><td>Rank 12 Gloves</td><td>PvP</td><td>20</td><td>3</td><td>30</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHands',this)"><td>Hands of Power</td><td>LBRS</td><td></td><td>6</td><td>26</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHands',this)" class="setT1"><td>Felheart Gloves</td><td>MC</td><td>18</td><td>15</td><td>9</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHands',this)" class="setPvPRare"><td>Rank 7 Gloves</td><td>PvP</td><td>14</td><td>4</td><td>21</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHands',this)"><td>Dreamweave Gloves</td><td>Crafting</td><td></td><td>4</td><td>18</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHands',this)"><td>Gloves of the Hypnotic Flame</td><td>MC</td><td>18</td><td>19</td><td>9</td><td></td><td>23</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHands',this)"><td>Inferno Gloves</td><td>Crafting</td><td>9</td><td></td><td></td><td></td><td>33</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHands',this)"><td>Gloves of Delusional Power</td><td>World Dragons</td><td>14</td><td>16</td><td>27</td><td></td><td></td><td></td><td></td><td></td><td>5</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableHands',this)" class="setUDC"><td>Gloves of Undead Cleansing</td><td>Event</td><td>10</td><td>10</td><td>35</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearWaist" class="gearcontent" name="gearWaist">
+            <table class="gearTable compact row-border hover" id="tableWaist"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableWaist',this)"><td>Eyestalk Waist Cord</td><td>AQ40</td><td>10</td><td>9</td><td>41</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWaist',this)" class="setT3"><td>Plagueheart Belt</td><td>Naxx</td><td>23</td><td>12</td><td>34</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWaist',this)"><td>Angelista's Grasp</td><td>BWL</td><td>17</td><td>20</td><td></td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWaist',this)"><td>Mana Igniting Cord</td><td>MC</td><td>12</td><td>16</td><td>25</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWaist',this)" style="background-color:#AAAAAA" name="activeItem" class="setT2"><td>Nemesis Belt</td><td>BWL</td><td>18</td><td>8</td><td>25</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWaist',this)"><td>Firemaw's Clutch</td><td>BWL</td><td>12</td><td>12</td><td>35</td><td></td><td></td><td></td><td></td><td></td><td>5</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWaist',this)"><td>Ban'thok Sash</td><td>BRD</td><td>10</td><td>11</td><td>12</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWaist',this)"><td>Sash of Whispered Secrets</td><td>MC</td><td>20</td><td></td><td></td><td>33</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWaist',this)"><td>Belt of Untapped Power</td><td>ZG</td><td>6</td><td>7</td><td>29</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWaist',this)" class="setT1"><td>Felheart Belt</td><td>MC</td><td>18</td><td>15</td><td>20</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWaist',this)"><td>Clutch of Andros</td><td>Scholomance</td><td>9</td><td>19</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWaist',this)" class="setT05"><td>Deathmist Belt</td><td>Quest</td><td>16</td><td>16</td><td>12</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearLegs" class="gearcontent" name="gearLegs">
+            <table class="gearTable compact row-border hover" id="tableLegs"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableLegs',this)"><td>Leggings of Polarity</td><td>Naxx</td><td>20</td><td>14</td><td>44</td><td></td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)" style="background-color:#AAAAAA" name="activeItem"><td>Fel Infused Leggings</td><td>Kazzak</td><td>21</td><td></td><td></td><td>64</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)" class="setBV"><td>Bloodvine Leggings</td><td>Crafting</td><td></td><td>6</td><td>37</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)"><td>Leggings of the Black Blizzard</td><td>AQ20</td><td>14</td><td>16</td><td>41</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)" class="setT3"><td>Plagueheart Leggings</td><td>Naxx</td><td>30</td><td>25</td><td>37</td><td></td><td></td><td></td><td>1%</td><td>10</td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)" class="setT25"><td>Doomcaller's Trousers</td><td>AQ40</td><td>28</td><td>24</td><td>34</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)" class="setT2"><td>Nemesis Leggings</td><td>MC</td><td>23</td><td>16</td><td>39</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)"><td>Flarecore Leggings</td><td>Crafting</td><td>21</td><td></td><td>43</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)" class="setPvPEpic"><td>Rank 12 Leggings</td><td>PvP</td><td>28</td><td>19</td><td>37</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)"><td>Leggings of Torment</td><td>UBRS</td><td>16</td><td>16</td><td></td><td>34</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)"><td>Skyshroud Leggings</td><td>LBRS</td><td>8</td><td>8</td><td>34</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)" class="setT1"><td>Felheart Pants</td><td>MC</td><td>20</td><td>19</td><td>30</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)"><td>Abyssal Cloth Pants of Sorcery</td><td>Silithus</td><td>15</td><td>15</td><td>18</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)"><td>Bloodtinged Kilt</td><td>ZG</td><td>20</td><td>20</td><td>28</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)" class="setPvPRare"><td>Rank 8 Leggings</td><td>PvP</td><td>21</td><td>13</td><td>28</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)" class="setT05"><td>Deathmist Leggings</td><td>Quest</td><td>22</td><td>21</td><td>16</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)"><td>Leggings of the Festering Swarm</td><td>AQ40</td><td>17</td><td>23</td><td></td><td></td><td>57</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableLegs',this)"><td>Spiritshroud Leggings</td><td>UBRS</td><td>13</td><td>16</td><td>19</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearFeet" class="gearcontent" name="gearFeet">
+            <table class="gearTable compact row-border hover" id="tableFeet"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableFeet',this)" class="setT3"><td>Plagueheart Sandals</td><td>Naxx</td><td>20</td><td>16</td><td>32</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableFeet',this)" class="setBV"><td>Bloodvine Boots</td><td>Crafting</td><td></td><td>16</td><td>19</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableFeet',this)"><td>Boots of Epiphany</td><td>AQ40</td><td>18</td><td>19</td><td>34</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableFeet',this)"><td>Snowblind Shoes</td><td>Azuregos</td><td>10</td><td>10</td><td>32</td><td></td><td></td><td></td><td></td><td></td><td>5</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableFeet',this)"><td>Betrayer's Boots</td><td>ZG</td><td>8</td><td>12</td><td>30</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableFeet',this)" class="setT25"><td>Doomcaller's Footwraps</td><td>AQ40</td><td>20</td><td>16</td><td>28</td><td></td><td></td><td></td><td></td><td>10</td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableFeet',this)" class="setPvPEpic"><td>Rank 12 Boots</td><td>PvP</td><td>22</td><td>13</td><td>26</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableFeet',this)"><td>Maleki's Footwraps</td><td>Stratholme</td><td>9</td><td>9</td><td></td><td>27</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableFeet',this)" style="background-color:#AAAAAA" name="activeItem" class="setT2"><td>Nemesis Boots</td><td>BWL</td><td>20</td><td>17</td><td>23</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableFeet',this)"><td>Omnicast Boots</td><td>BRD</td><td>6</td><td>9</td><td>22</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableFeet',this)"><td>Recomposed Boots</td><td>AQ40</td><td>21</td><td>13</td><td>20</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableFeet',this)"><td>Dragonrider Boots</td><td>UBRS</td><td>5</td><td>16</td><td>18</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableFeet',this)" class="setPvPRare"><td>Rank 7 Boots</td><td>PvP</td><td>17</td><td>13</td><td>18</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableFeet',this)" class="setT1"><td>Felheart Slippers</td><td>MC</td><td>23</td><td>11</td><td>18</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableFeet',this)" class="setT05"><td>Deathmist Sandals</td><td>Quest</td><td>24</td><td>14</td><td>12</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableFeet',this)"><td>Fire Striders</td><td>Stratholme</td><td></td><td></td><td></td><td></td><td>29</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearRing1" class="gearcontent" name="gearRing1">
+            <table class="gearTable compact row-border hover" id="tableRing1"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableRing1',this)"><td>Ring of the Fallen God</td><td>AQ40</td><td>5</td><td>6</td><td>37</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Band of the Inevitable</td><td>Naxx</td><td></td><td></td><td>36</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Seal of the Damned</td><td>Naxx</td><td>17</td><td></td><td>21</td><td></td><td></td><td>1%</td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)" style="background-color:#AAAAAA" name="activeItem" class="setAQ20"><td>Ring of Unspoken Names</td><td>AQ20</td><td>12</td><td></td><td>14</td><td></td><td></td><td>1%</td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Band of Forced Concentration</td><td>BWL</td><td>9</td><td>12</td><td>21</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Ritssyn's Ring of Chaos</td><td>AQ40</td><td>6</td><td></td><td>25</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Mindtear Band</td><td>Taerar</td><td>6</td><td>6</td><td>22</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Wrath of Cenarius (Not Added)</td><td>Quest</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Band of Dark Dominion</td><td>BWL</td><td>12</td><td>6</td><td></td><td>33</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Rune Band of Wizardry</td><td>UBRS</td><td>7</td><td></td><td>16</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)" class="setZGRing"><td>Zanzil's Seal</td><td>ZG</td><td>10</td><td>10</td><td>11</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Ring of Spell Power</td><td>MC</td><td></td><td></td><td>33</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Signet of the Bronze Dragonflight</td><td>Quest</td><td>8</td><td>9</td><td>28</td><td></td><td></td><td></td><td></td><td></td><td>5</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)" class="setT3"><td>Plagueheart Ring</td><td>Naxx</td><td>24</td><td></td><td>29</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Ring of Swarming Thought</td><td>AQ40</td><td></td><td></td><td>26</td><td></td><td></td><td></td><td></td><td>20</td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Band of Servitude</td><td>ZG</td><td>8</td><td>9</td><td>23</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Elemental Focus Band</td><td>World</td><td>8</td><td>11</td><td>22</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Ring of the Desert Winds</td><td>AQ20</td><td></td><td>9</td><td>9</td><td></td><td></td><td></td><td>1%</td><td></td><td>3</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)" class="setZGRing"><td>Zanzil's Band</td><td>ZG</td><td></td><td>13</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td>4</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Songstone of Ironforge</td><td>Quest</td><td></td><td>7</td><td>18</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Ring of Blackrock</td><td>BWL</td><td></td><td></td><td>19</td><td></td><td></td><td></td><td></td><td></td><td>9</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Ring of Eternal Flame</td><td>Naxx</td><td></td><td>10</td><td></td><td></td><td>34</td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Don Rodrigo's Band</td><td>PvP</td><td>7</td><td></td><td></td><td></td><td></td><td></td><td>1%</td><td>20</td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing1',this)"><td>Dragonslayer's Signet</td><td>Onyxia</td><td>12</td><td>12</td><td></td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearRing2" class="gearcontent" name="gearRing2">
+            <table class="gearTable compact row-border hover" id="tableRing2"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableRing2',this)" style="background-color:#AAAAAA" name="activeItem"><td>Ring of the Fallen God</td><td>AQ40</td><td>5</td><td>6</td><td>37</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Band of the Inevitable</td><td>Naxx</td><td></td><td></td><td>36</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Seal of the Damned</td><td>Naxx</td><td>17</td><td></td><td>21</td><td></td><td></td><td>1%</td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)" class="setAQ20"><td>Ring of Unspoken Names</td><td>AQ20</td><td>12</td><td></td><td>14</td><td></td><td></td><td>1%</td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Band of Forced Concentration</td><td>BWL</td><td>9</td><td>12</td><td>21</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Ritssyn's Ring of Chaos</td><td>AQ40</td><td>6</td><td></td><td>25</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Mindtear Band</td><td>Taerar</td><td>6</td><td>6</td><td>22</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Wrath of Cenarius (Not Added)</td><td>Quest</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Band of Dark Dominion</td><td>BWL</td><td>12</td><td>6</td><td></td><td>33</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Rune Band of Wizardry</td><td>UBRS</td><td>7</td><td></td><td>16</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)" class="setZGRing"><td>Zanzil's Seal</td><td>ZG</td><td>10</td><td>10</td><td>11</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Ring of Spell Power</td><td>MC</td><td></td><td></td><td>33</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Signet of the Bronze Dragonflight</td><td>Quest</td><td>8</td><td>9</td><td>28</td><td></td><td></td><td></td><td></td><td></td><td>5</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)" class="setT3"><td>Plagueheart Ring</td><td>Naxx</td><td>24</td><td></td><td>29</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Ring of Swarming Thought</td><td>AQ40</td><td></td><td></td><td>26</td><td></td><td></td><td></td><td></td><td>20</td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Band of Servitude</td><td>ZG</td><td>8</td><td>9</td><td>23</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Elemental Focus Band</td><td>World</td><td>8</td><td>11</td><td>22</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Ring of the Desert Winds</td><td>AQ20</td><td></td><td>9</td><td>9</td><td></td><td></td><td></td><td>1%</td><td></td><td>3</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)" class="setZGRing"><td>Zanzil's Band</td><td>ZG</td><td></td><td>13</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td>4</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Songstone of Ironforge</td><td>Quest</td><td></td><td>7</td><td>18</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Ring of Blackrock</td><td>BWL</td><td></td><td></td><td>19</td><td></td><td></td><td></td><td></td><td></td><td>9</td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Ring of Eternal Flame</td><td>Naxx</td><td></td><td>10</td><td></td><td></td><td>34</td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Don Rodrigo's Band</td><td>PvP</td><td>7</td><td></td><td></td><td></td><td></td><td></td><td>1%</td><td>20</td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableRing2',this)"><td>Dragonslayer's Signet</td><td>Onyxia</td><td>12</td><td>12</td><td></td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearTrinket1" class="gearcontent" name="gearTrinket1">
+            <table class="gearTable compact row-border hover" id="tableTrinket1"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableTrinket1',this)"><td>Mark of the Champion</td><td>Naxx</td><td></td><td></td><td>85</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket1',this)"><td>Neltharion's Tear</td><td>BWL</td><td></td><td></td><td>44</td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket1',this)"><td>Rune of the Dawn</td><td>Quest</td><td></td><td></td><td>48</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket1',this)"><td>Briarwood Reed</td><td>UBRS</td><td></td><td></td><td>29</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket1',this)"><td>Eye of the Beast</td><td>Quest</td><td></td><td></td><td></td><td></td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket1',this)"><td>Royal Seal of Eldre'Thalas</td><td>Quest</td><td></td><td></td><td>23</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket1',this)"><td>The Restrained Essence of Sapphiron</td><td>Naxx</td><td></td><td></td><td>40</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket1',this)"><td>Talisman of Ephemeral Power</td><td>MC</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket1',this)"><td>Eye of Diminution</td><td>Naxx</td><td></td><td></td><td></td><td></td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket1',this)" style="background-color:#AAAAAA" name="activeItem"><td>Zandalarian Hero Charm</td><td>ZG</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket1',this)"><td>Hazza'rah's Charm of Destruction</td><td>ZG</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket1',this)"><td>Nat Pagle's Broken Reel</td><td>ZG</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket1',this)"><td>Eye of Moam</td><td>AQ20</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket1',this)"><td>The Black Book (Not Added)</td><td>BWL</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket1',this)"><td>Pimgib's Collar (Not Added)</td><td>Dire Maul</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket1',this)"><td>Fetish of the Sand Reaver (Not Added)</td><td>AQ40</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearTrinket2" class="gearcontent" name="gearTrinket2">
+            <table class="gearTable compact row-border hover" id="tableTrinket2"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableTrinket2',this)"><td>Mark of the Champion</td><td>Naxx</td><td></td><td></td><td>85</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket2',this)" style="background-color:#AAAAAA" name="activeItem"><td>Neltharion's Tear</td><td>BWL</td><td></td><td></td><td>44</td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket2',this)"><td>Rune of the Dawn</td><td>Quest</td><td></td><td></td><td>48</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket2',this)"><td>Briarwood Reed</td><td>UBRS</td><td></td><td></td><td>29</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket2',this)"><td>Eye of the Beast</td><td>Quest</td><td></td><td></td><td></td><td></td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket2',this)"><td>Royal Seal of Eldre'Thalas</td><td>Quest</td><td></td><td></td><td>23</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket2',this)"><td>The Restrained Essence of Sapphiron</td><td>Naxx</td><td></td><td></td><td>40</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket2',this)"><td>Talisman of Ephemeral Power</td><td>MC</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket2',this)"><td>Eye of Diminution</td><td>Naxx</td><td></td><td></td><td></td><td></td><td></td><td></td><td>2%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket2',this)"><td>Zandalarian Hero Charm</td><td>ZG</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket2',this)"><td>Hazza'rah's Charm of Destruction</td><td>ZG</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket2',this)"><td>Nat Pagle's Broken Reel</td><td>ZG</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket2',this)"><td>Eye of Moam</td><td>AQ20</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket2',this)"><td>The Black Book (Not Added)</td><td>BWL</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket2',this)"><td>Pimgib's Collar (Not Added)</td><td>Dire Maul</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableTrinket2',this)"><td>Fetish of the Sand Reaver (Not Added)</td><td>AQ40</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearWand" class="gearcontent" name="gearWand">
+            <table class="gearTable compact row-border hover" id="tableWand"><thead>
+              <tr><th>Name</th><th>Source</th><th>Stamina</th><th>Intellect</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Spell Hit</th><th>Spell Crit</th><th>Spell Pen</th><th>Mp5</th><th>Value</th><th>DPS</th></tr>
+              </thead><tbody>
+              <tr onclick="clickTable('tableWand',this)"><td>Doomfinger</td><td>Naxx</td><td></td><td></td><td>16</td><td></td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWand',this)"><td>Wand of Qiraji Nobility</td><td>AQ40</td><td>5</td><td></td><td>19</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWand',this)"><td>Wand of Fates</td><td>Naxx</td><td>7</td><td>7</td><td>12</td><td></td><td></td><td>1%</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWand',this)" style="background-color:#AAAAAA" name="activeItem"><td>Touch of Chaos</td><td>ZG</td><td></td><td></td><td>18</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWand',this)"><td>Skul's Ghastly Touch</td><td>Stratholme</td><td></td><td></td><td></td><td>14</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWand',this)"><td>Bonecreeper Stylus</td><td>Scholomance</td><td></td><td>4</td><td>11</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWand',this)"><td>Ritssyn's Wand of Bad Mojo</td><td>Stratholme</td><td>4</td><td></td><td>11</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWand',this)"><td>Lethtendris's Wand</td><td>Dire Maul</td><td></td><td></td><td>9</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWand',this)"><td>Dragon's Touch</td><td>BWL</td><td>7</td><td>12</td><td>6</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWand',this)"><td>Stormrager</td><td>Quest</td><td>8</td><td>5</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr onclick="clickTable('tableWand',this)"><td>Pyric Caduceus</td><td>BRD</td><td></td><td></td><td></td><td></td><td>13</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="gearEnchants" class="gearcontent" name="gearEnchants" oninput="runSim()">
+            <div class="row">
+              <div class="column buffs" style="background-color:#555555;">
+                <h2>Weapon</h2>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantSpellPower" checked>    Spell Power</label><br>
+                <br><br>
+
+                <h2>Helmet</h2>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantZG1" checked>           Hoodoo Hex</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantFocus1">                Arcanum of Focus</label><br>
+                <br><br>
+
+                <h2>Shoulders</h2>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantPowerScourge">          Power of the Scourge</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantZGShoulder" checked>    Zandalar Signet of Mojo</label><br>
+                <br><br>
+
+                <h2>Back</h2>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantThreat" checked>        Subtlety</label><br>
+                <br><br>
+
+                <h2>Chest</h2>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantGreaterStats">          Greater Stats</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantStats" checked>         Stats</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantMana">                  Major Mana</label><br>
+                <br><br>
+              </div>
+              <div class="column buffs" style="background-color:#555555;">
+                <h2>Wrists</h2>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantIntellect" checked>     Greater Intellect</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantStaminaWrists">         Superior Stamina</label><br>
+                <br><br>
+
+                <h2>Hands</h2>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantShadow" checked>        Shadow Power</label><br>
+                <label style=color:#f20000> <input type="checkbox" id="enchantFire">                  Fire Power</label><br>
+                <br><br>
+
+                <h2>Legs</h2>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantZG2" checked>           Hoodoo Hex</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantFocus2">                Arcanum of Focus</label><br>
+                <br><br>
+
+                <h2>Feet</h2>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantMinorSpeed" checked>    Minor Speed</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="enchantStaminaFeet">           Greater Stamina</label><br>
+                <br><br>
+              </div>
+            </div>
+          </div>
+        </div> <!--Gear tab-->
+        <div id="advanced" class="tabcontent" name="advanced" oninput="runSim();" style="background-color:#555555">
+          <h3>Don't change these settings unless you know what you are doing</h3>
+          <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="disableLifeTap">    Disable Life Tap</label><span class="tooltiptext"><span class="tooltipgeneric">For curiosity purposes</span></span></div><br><br>
+          <div class="tooltip"><label style=color:#9482C9> <input type="number" id="warlockCount" value="3" min="1" style="width:40px"> Warlock Count</label><span class="tooltiptext"><span class="tooltipgeneric">The amount of *identical* warlocks in raid</span></span></div><br><br>
+          
+          <b>Custom Stats Modifications</b><br>
+          <label style=color:#9482C9> <input type="number" id="spellPower" value="0">     Spell Power</label><br>
+          <label style=color:#9482C9> <input type="number" id="shadowPower" value="0">    Shadow Power</label><br>
+          <label style=color:#f20000> <input type="number" id="firePower" value="0">      Fire Power</label><br>
+          <label style=color:#9482C9> <input type="number" id="spellCrit" value="0">      Spell Crit</label><br>
+          <label style=color:#9482C9> <input type="number" id="spellHit" value="0">       Spell Hit</label><br>
+          <label style=color:#9482C9> <input type="number" id="intellect" value="0">      Intellect</label><br>
+          <label style=color:#9482C9> <input type="number" id="spellPen" value="0">       Spell Penetration</label><br>
+          <label style=color:#9482C9> <input type="number" id="mp5" value="0">            Mana per 5</label><br>
+          <br>
+        </div> <!--Advanced tab-->
+      </div>
+    </div>
+  </body>
+</html>

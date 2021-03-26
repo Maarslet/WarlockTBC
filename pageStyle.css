@@ -1,0 +1,286 @@
+html * {
+    font-family: "Overpass Mono", monospace;
+}
+html {
+    overflow-y: hidden;
+}
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+table {
+    border: 2px solid #000000;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+}
+td {
+    /*border: 1px solid #000000;*/
+    text-align: left;
+    padding: 6px;
+}
+th {
+    /*border: 1px solid #000000;*/
+    text-align: left;
+    padding: 8px;
+}
+tr {
+    padding: 4px;
+}
+tr:nth-child(even) /*{ background-color: #dddddd; }*/
+tr:nth-child(odd) /*{ background-color: #dddddd; }*/
+
+.finalStats, .finalStats td, .finalStats tr, .finalStats th {
+    padding: 1px;
+}
+
+.gearTable {
+    width: 100%;
+    border: 0px solid #000000;
+    font-family: "Overpass Mono", monospace;
+    text-align: center;
+    table-layout: initial;
+}
+.gearTable th {
+    border-bottom: 2px solid #000000;
+    font-weight: normal;
+    text-align: center;
+}
+.gearTable tr td {
+    text-align: center;
+}
+.gearTable tr td:nth-child(1), .gearTable tr th:nth-child(1) {
+    text-align: left;
+    width: 400px;
+}
+.gearTable tr td:nth-child(2), .gearTable tr th:nth-child(2), .gearTable tr td:nth-child(3), .gearTable tr th:nth-child(3), .gearTable tr td:nth-child(4), .gearTable tr th:nth-child(4), .gearTable tr td:nth-child(5), .gearTable tr th:nth-child(5), {
+    width: 100px;
+}
+
+
+.loader {
+    border: 3px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 3px solid #3498db;
+    width: 9px;
+    height: 9px;
+    display:none;
+    -webkit-animation: spin 1.5s linear infinite; /* Safari */
+    animation: spin 1.5s linear infinite;
+}
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+* {box-sizing: border-box}
+
+/* Set height of body and the document to 100% */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial;
+}
+/* Style tab links */
+.tablink {
+    background-color: #666;
+    color: black;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 15px;
+    font-size: 20px;
+    width: 20%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+    color: black;
+    display: none;
+    padding: 50px 20px;
+    height: 100%;
+}
+
+.gearlink {
+    background-color: #878;
+    color: black;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 2px 2px;
+    font-size: 14px;
+    width: 5.26315789473%;
+}
+
+.gearlink:hover {
+  background-color: #979;
+}
+
+.gearcontent {
+    color: black;
+    display: none;
+    padding: 20px 10px;
+    height: 100%;
+}
+
+#main {background-color: #888888;}
+#buffs {background-color: #888888;}
+#talents {background-color: #888888;}
+#gear {background-color: #888888;}
+#advanced {background-color: #888888;}
+
+#gearMainHand {background-color: #888888;}
+#gearOffHand {background-color: #888888;}
+#gearStaff {background-color: #888888;}
+
+.row {
+    display: flex;
+}
+.column {
+    float: left;
+}
+.info {
+    width: 20%;
+    height: 100vh;
+    padding: 10px;
+    padding-bottom: 0px;
+    background-color: #555555;
+}
+.allTheTabs {
+    width: 80%;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+.buffs {
+    width: 350px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+.settings {
+    width: 300px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+.graphs {
+    width: 50%;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+.talents {
+    width: 250px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+.rotation {
+    width: 450px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+input[type=number]{
+    width: 50px;
+}
+.wrapper {
+    position: relative;
+    text-align: center;
+    color: orange;
+    filter: grayscale(100%);
+    z-index: 1;
+}
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    transform: translate(-50%, -50%);
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+.bottom-right {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+.talentIcon {
+    /*filter: grayscale(100%);*/
+    border: 2px solid orange;
+    border-radius: 4px;
+    width: 46px;
+    height: 46px;
+    user-drag: none; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    /*border-bottom: 1px dotted black;*/
+}
+.tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: #222;
+    opacity: 0.95;
+    text-align: left;
+    border-radius: 6px;
+    padding: 10px 10px;
+    position: absolute;
+    bottom: 100%;
+    left: 100%;
+    color: #e4d00a;
+    font-size: 14px;
+    z-index: 9999;
+}
+.tooltipheader {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 0;
+    color: #fff;
+}
+.tooltipinfo {
+    color: #66ff00;
+}
+.tooltipgeneric {
+    font-size: 16px;
+    color: #fff;
+}
+.tooltip:hover .tooltiptext{
+    visibility: visible;
+}
+
+
