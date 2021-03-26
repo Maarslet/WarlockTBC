@@ -1,2 +1,2 @@
-# WarlockSim
-https://maarslet.github.io/WarlockSim/
+# WarlockTBC
+https://maarslet.github.io/WarlockTBC/
