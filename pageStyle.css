@@ -180,9 +180,15 @@ body, html {
     padding-bottom: 0px;
 }
 .talents {
-    width: 250px;
+    background: #444;
+    border: 2px solid #444;
+    border-radius: 6px;
+    margin: 2px;
+    background-size: 100% 100%;
+    border-radius: 4px;
+    position: relative;
+    width: 270px;
     padding: 10px;
-    padding-bottom: 0px;
 }
 .rotation {
     width: 450px;
