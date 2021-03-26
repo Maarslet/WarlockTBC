@@ -211,6 +211,7 @@ input[type=number]{
     filter: grayscale(100%);
     z-index: 1;
     cursor: pointer;
+    padding: 6px;
 }
 .centered {
     width: 330px;
