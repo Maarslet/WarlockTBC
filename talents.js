@@ -22,12 +22,10 @@ function talentFunc(click,element) {
           if (element !== undefined && text !== undefined && talent !== undefined) {
             if (talent.id == "talentAmpCurse" || talent.id == "talentSiphon" || talent.id == "talentExhaust" || talent.id == "talentDarkPact" || talent.id == "talentUnstable" || talent.id == "talentFelDomination" || talent.id == "talentDemonicSacrifice" || talent.id == "talentSoulLink" || talent.id == "talentSummonFelguard" || talent.id == "talentShadowburn" || talent.id == "talentRuin" || talent.id == "talentConflagrate" || talent.id == "talentShadowfury")
               var max = 1;
-            else if (talent.id == "talentLifeTap" || talent.id == "talentDrainSoul" || talent.id == "talentGrimReach" || talent.id == "talentNightfall" || talent.id == "talentDrainMana" || talent.id == "talentHealthstone" || talent.id == "talentHealthFunnel" || talent.id == "talentMasterSummon" || talent.id == "talentFirestone" || talent.id == "talentSpellstone" || talent.id == "talentImpFirebolt" || talent.id == "talentImpLash" || talent.id == "talentIntensity" || talent.id == "talentDestructiveReach" || talent.id == "talentPyroclasm")
+            else if (talent.id == "talentWeakness" || talent.id == "talentDrainSoul" || talent.id == "talentLifeTap" || talent.id == "talentSoulSiphon" || talent.id == "talentAgony" || talent.id == "talentGrimReach" || talent.id == "talentNightfall" || talent.id == "talentHowlTerror" || talent.id == "talentHealthstone" || talent.id == "talentHealthFunnel" || talent.id == "talentMasterSummon" || talent.id == "talentEnslaveDemon" || talent.id == "talentFirestone" || talent.id == "talentImpFirebolt" || talent.id == "talentImpLash" || talent.id == "talentIntensity" || talent.id == "talentDestructiveReach" || talent.id == "talentPyroclasm")
               var max = 2;
-            else if (talent.id == "talentWeakness" || talent.id == "talentAgony" || talent.id == "talentImpImp" || talent.id == "talentImpVoid" || talent.id == "talentImpSuccubus")
+            else if (talent.id == "talentEmpCorr" || talent.id == "talentMalediction" || talent.id == "talentImpImp" || talent.id == "talentImpVoid" || talent.id == "talentFelIntellect" || talent.id == "talentImpSuccubus" || talent.id == "talentFelStamina" || talent.id == "talentFelArmor" || talent.id == "talentManaFeed" || talent.id == "talentDemonicResilience" || talent.id == "talentDemonicKnowledge" || talent.id == "talentSearingPain" || talent.id == "talentNetherProt" || talent.id == "talentBacklash" || talent.id == "talentSoulLeech")
               var max = 3;
-            else if (talent.id == "talentImpExhaust")
-              var max = 4;
             else
               var max = 5;
 
@@ -56,12 +54,10 @@ function talentFunc(click,element) {
     var talent = element.children[0];
     if (talent.id == "talentAmpCurse" || talent.id == "talentSiphon" || talent.id == "talentExhaust" || talent.id == "talentDarkPact" || talent.id == "talentUnstable" || talent.id == "talentFelDomination" || talent.id == "talentDemonicSacrifice" || talent.id == "talentSoulLink" || talent.id == "talentSummonFelguard" || talent.id == "talentShadowburn" || talent.id == "talentRuin" || talent.id == "talentConflagrate" || talent.id == "talentShadowfury")
       var max = 1;
-    else if (talent.id == "talentLifeTap" || talent.id == "talentDrainSoul" || talent.id == "talentGrimReach" || talent.id == "talentNightfall" || talent.id == "talentDrainMana" || talent.id == "talentHealthstone" || talent.id == "talentHealthFunnel" || talent.id == "talentMasterSummon" || talent.id == "talentFirestone" || talent.id == "talentSpellstone" || talent.id == "talentImpFirebolt" || talent.id == "talentImpLash" || talent.id == "talentIntensity" || talent.id == "talentDestructiveReach" || talent.id == "talentPyroclasm")
+    else if (talent.id == "talentWeakness" || talent.id == "talentDrainSoul" || talent.id == "talentLifeTap" || talent.id == "talentSoulSiphon" || talent.id == "talentAgony" || talent.id == "talentGrimReach" || talent.id == "talentNightfall" || talent.id == "talentHowlTerror" || talent.id == "talentHealthstone" || talent.id == "talentHealthFunnel" || talent.id == "talentMasterSummon" || talent.id == "talentEnslaveDemon" || talent.id == "talentFirestone" || talent.id == "talentImpFirebolt" || talent.id == "talentImpLash" || talent.id == "talentIntensity" || talent.id == "talentDestructiveReach" || talent.id == "talentPyroclasm")
       var max = 2;
-    else if (talent.id == "talentWeakness" || talent.id == "talentAgony" || talent.id == "talentImpImp" || talent.id == "talentImpVoid" || talent.id == "talentImpSuccubus")
+    else if (talent.id == "talentEmpCorr" || talent.id == "talentMalediction" || talent.id == "talentImpImp" || talent.id == "talentImpVoid" || talent.id == "talentFelIntellect" || talent.id == "talentImpSuccubus" || talent.id == "talentFelStamina" || talent.id == "talentFelArmor" || talent.id == "talentManaFeed" || talent.id == "talentDemonicResilience" || talent.id == "talentDemonicKnowledge" || talent.id == "talentSearingPain" || talent.id == "talentNetherProt" || talent.id == "talentBacklash" || talent.id == "talentSoulLeech")
       var max = 3;
-    else if (talent.id == "talentImpExhaust")
-      var max = 4;
     else
       var max = 5;
 
@@ -203,23 +199,27 @@ function setTalents(spec) {
 }
 
 function resetTalents() {
-  document.getElementById("talentSuppression").parentNode.children[1].innerHTML = 0;
+  /*document.getElementById("talentSuppression").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentCorruption").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentWeakness").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentDrainSoul").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentLifeTap").parentNode.children[1].innerHTML = 0;
-  document.getElementById("talentDrainLife").parentNode.children[1].innerHTML = 0;
+  document.getElementById("talentSoulSiphon").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentAgony").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentFelConc").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentAmpCurse").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentGrimReach").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentNightfall").parentNode.children[1].innerHTML = 0;
-  document.getElementById("talentDrainMana").parentNode.children[1].innerHTML = 0;
+  document.getElementById("talentEmpCorr").parentNode.children[1].innerHTML = 0;
+  document.getElementById("talentShadowEmbrace").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentSiphon").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentExhaust").parentNode.children[1].innerHTML = 0;
-  document.getElementById("talentImpExhaust").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentShadowMastery").parentNode.children[1].innerHTML = 0;
+  document.getElementById("talentContagion").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentDarkPact").parentNode.children[1].innerHTML = 0;
+  document.getElementById("talentHowlTerror").parentNode.children[1].innerHTML = 0;
+  document.getElementById("talentMalediction").parentNode.children[1].innerHTML = 0;
+  document.getElementById("talentUnstable").parentNode.children[1].innerHTML = 0;
 
   document.getElementById("talentHealthstone").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentImpImp").parentNode.children[1].innerHTML = 0;
@@ -254,12 +254,16 @@ function resetTalents() {
   document.getElementById("talentImmolate").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentRuin").parentNode.children[1].innerHTML = 0;
   document.getElementById("talentEmberstorm").parentNode.children[1].innerHTML = 0;
-  document.getElementById("talentConflagrate").parentNode.children[1].innerHTML = 0;
+  document.getElementById("talentConflagrate").parentNode.children[1].innerHTML = 0;*/
+  for (var i=0; i<document.getElementsByClassName('wrapper').length; i++) {
+    var currentID = document.getElementsByClassName('wrapper')[i].children[0].id;
+    document.getElementById(currentID).parentNode.children[1].innerHTML = 0;
+  }
   talentFunc();
 }
 
 function countTalents() {
-  var pointCount = Number(document.getElementById("talentSuppression").parentNode.children[1].innerHTML);
+  /*var pointCount = Number(document.getElementById("talentSuppression").parentNode.children[1].innerHTML);
   pointCount += Number(document.getElementById("talentCorruption").parentNode.children[1].innerHTML);
   pointCount += Number(document.getElementById("talentWeakness").parentNode.children[1].innerHTML);
   pointCount += Number(document.getElementById("talentDrainSoul").parentNode.children[1].innerHTML);
@@ -310,13 +314,18 @@ function countTalents() {
   pointCount += Number(document.getElementById("talentImmolate").parentNode.children[1].innerHTML);
   pointCount += Number(document.getElementById("talentRuin").parentNode.children[1].innerHTML);
   pointCount += Number(document.getElementById("talentEmberstorm").parentNode.children[1].innerHTML);
-  pointCount += Number(document.getElementById("talentConflagrate").parentNode.children[1].innerHTML);
+  pointCount += Number(document.getElementById("talentConflagrate").parentNode.children[1].innerHTML);*/
   
-  if (pointCount < 51)
+  var pointCount = 0;
+  for (var i=0; i<document.getElementsByClassName('wrapper').length; i++) {
+    var currentID = document.getElementsByClassName('wrapper')[i].children[0].id;
+    pointCount += Number(document.getElementById(currentID).parentNode.children[1].innerHTML);
+  }
+  if (pointCount < 61)
     var color = "green";
-  else if (pointCount == 51)
+  else if (pointCount == 61)
     var color = "orange";
-  else if (pointCount > 51)
+  else if (pointCount > 61)
     var color = "red";
   document.getElementById("totalTalentPoints").innerHTML = "Total Talent Points: <span style=color:" + color + ">" + pointCount + "</span>";
 }
