@@ -1,15 +1,65 @@
 function runSim(gearTable, baseLine, makeBaseLine) {
   return
   console.time('Timer')
+  
+  var tailoring = document.getElementById("tailoring").checked;
+  
+  var fightStart = Number(document.getElementById("fightStart").value);
+  var fightEnd = Number(document.getElementById("fightEnd").value);
+  var timeVec = new Array;
+  timeVec[0] = fightStart;
+  if (arguments.length > 0) {
+    for (var i=fightStart+5; i<=fightEnd; i=i+5)
+      timeVec[timeVec.length] = i;
+  }
+  else {
+    for (var i=fightStart+0.5; i<=fightEnd; i=i+0.5)
+      timeVec[timeVec.length] = i;
+  }
+  
+  var bossLevel = Number(document.getElementById("bossLevel").value);
+  var levelRes = (bossLevel-70)*8;
+  if (bossLevel == 73)
+    var baseHit = 83;
+  else if (bossLevel == 72)
+    var baseHit = 94;
+  else if (bossLevel == 71)
+    var baseHit = 95;
+  else if (bossLevel == 70)
+    var baseHit = 96;
+  
+  var race = document.getElementById("race").value, gnome = false, int = 0, stam = 0, spirit = 0;
+  if (race == "gnome") {
+    var gnome = true;
+    int     += 113;
+    stam    += 1;
+    spirit  += 1;}
+  else if (race == "human") {
+    int     += 110;
+    stam    += 1;
+    spirit  += 1;}
+  else if (race == "orc") {
+    int     += 107;
+    stam    += 1;
+    spirit  += 1;}
+  else if (race == "undead") {
+    int     += 108;
+    stam    += 1;
+    spirit  += 1;}
+  else if (race == "bloodelf") {
+    int     += 108;
+    stam    += 1;
+    spirit  += 1;}
+  
   var SP   = Number(document.getElementById("spellPower").value) + 30*document.getElementById("enchantSpellPower").checked + 8*document.getElementById("enchantFocus1").checked + 8*document.getElementById("enchantFocus2").checked + 18*document.getElementById("enchantZG1").checked + 18*document.getElementById("enchantZG2").checked + 18*document.getElementById("enchantZGShoulder").checked + 15*document.getElementById("enchantPowerScourge").checked;
   var ShP  = Number(document.getElementById("shadowPower").value) + 20*document.getElementById("enchantShadow").checked;
   var FiP  = Number(document.getElementById("firePower").value) + 20*document.getElementById("enchantFire").checked;
   var crit = Number(document.getElementById("spellCrit").value) + 1*document.getElementById("enchantPowerScourge").checked;
   var hit  = Number(document.getElementById("spellHit").value);
-  var int  = Number(document.getElementById("intellect").value) + 7*document.getElementById("enchantIntellect").checked + 3*document.getElementById("enchantStats").checked + 4*document.getElementById("enchantGreaterStats").checked;
+  int += Number(document.getElementById("intellect").value) + 7*document.getElementById("enchantIntellect").checked + 3*document.getElementById("enchantStats").checked + 4*document.getElementById("enchantGreaterStats").checked;
   var pen  = Number(document.getElementById("spellPen").value);
   var mp5  = Number(document.getElementById("mp5").value);
-  var tailoring = document.getElementById("tailoring").checked;
+  
   
   var classList = new Array;
   var items = document.getElementsByName('activeItem');
@@ -186,27 +236,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   
   if (arguments.length == 0)
     document.getElementById("setBonuses").innerHTML = "<table class='finalStats' style=text-align:left><tr><th>Set Bonuses Active</th></tr>" + bonusList + "</table>";
+
   
-  var race = document.getElementById("race").value, gnome = false;
-  if (race == "gnome") {
-    var gnome = true;
-    int += 113;}
-  else if (race == "human")
-    int += 110;
-  else if (race == "orc")
-    int += 107;
-  else if (race == "undead")
-    int += 108;
-  
-  //console.log("SP:"+(SP+ShP)); console.log("ShP:"+ShP); console.log("FiP:"+FiP); console.log("Crit:"+crit); console.log("Hit:"+hit); console.log("Int:"+int); console.log(" ")
-  
-  /*var SP = Number(document.getElementById("spellPower").value);
-  var crit = Number(document.getElementById("spellCrit").value);
-  var hit = Number(document.getElementById("spellHit").value);
-  var int = Number(document.getElementById("intellect").value);
-  var mp5 = Number(document.getElementById("mp5").value);*/
-  var fightStart = Number(document.getElementById("fightStart").value);
-  var fightEnd = Number(document.getElementById("fightEnd").value);
   
   var curse = document.querySelector('input[name=curse]:checked').value;
   var primary = document.querySelector('input[name=primary]:checked').value;
@@ -244,27 +275,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   
   var warlockCount = Number(document.getElementById("warlockCount").value);
 
-  var bossLevel = Number(document.getElementById("bossLevel").value);
-  var levelRes = (bossLevel-60)*8;
-  if (bossLevel == 63)
-    var baseHit = 83;
-  else if (bossLevel == 62)
-    var baseHit = 94;
-  else if (bossLevel == 61)
-    var baseHit = 95;
-  else if (bossLevel == 60)
-    var baseHit = 96;
   
-  var timeVec = new Array;
-  timeVec[0] = fightStart;
-  if (arguments.length > 0) {
-    for (var i=fightStart+5; i<=fightEnd; i=i+5)
-      timeVec[timeVec.length] = i;
-  }
-  else {
-    for (var i=fightStart+0.5; i<=fightEnd; i=i+0.5)
-      timeVec[timeVec.length] = i;
-  }
 
   var hakkarBuff = document.getElementById("hakkarBuff").checked;
   var onyxiaBuff = document.getElementById("onyxiaBuff").checked;
