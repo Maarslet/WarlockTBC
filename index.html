@@ -178,57 +178,23 @@
           <p>Pick your buffs & consumables</p>
           <div class="row">
             <div class="column buffs" style="background-color:#555555;">
-              <h2>Debuffs on Boss</h2>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="curseElements" value="maxCoE" checked>  Curse of the Elements (3/3 Malediction)</label><span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow and Fire damage by 13% and lowers Shadow and Fire resistance by 88</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="curseElements" value="minCoE">          Curse of the Elements (0/3 Malediction)</label><span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow and Fire damage by 10% and lowers Shadow and Fire resistance by 88</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="curseElements" value="noCoE">           No Curse of the Elements</label><span class="tooltiptext"><span class="tooltipgeneric">No curse. Your guild does not like casters</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="shadowWeaving" checked>    Shadow Weaving</label>         <span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow damage by 15%</span></span></div><br>
-              <div class="tooltip"><label style=color:#f20000> <input type="checkbox" id="Scorch" checked>           Scorch</label>                 <span class="tooltiptext"><span class="tooltipgeneric">Increases Fire damage by 15%</span></span></div><br>
-              <br><br>
-
-              <h2>Flasks</h2>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="flask" value="maxCoE" checked>  Flask of Pure Death</label>         <span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow, Fire, and Frost spell power by 80 for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="flask" value="minCoE">          Flask of Supreme Power</label>      <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 70 for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="flask" value="noCoE">           Flask of Mighty Restoration</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases mana regeneration by 25 mana per 5 seconds for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="flask" value="noCoE">           Flask of Distilled Wisdom</label>   <span class="tooltiptext"><span class="tooltipgeneric">Increases Intellect by 65 for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
-              
-              <h2>Battle Elixirs</h2>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="battleElixir" value="noCoE">           Adept's Elixir</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 24 and spell critical strike rating by 24 for 1 hour. Battle Elixir.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="battleElixir" value="noCoE">           Elixir of Major Shadow Power</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow spell power by 55 for 1 hour. Battle Elixir.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="battleElixir" value="noCoE">           Elixir of Major Firepower</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Fire spell power by 55 for 1 hour. Battle Elixir.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="battleElixir" value="noCoE">           Greater Arcane Elixir</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 35 for 1 hour. Battle Elixir.</span></span></div><br>
-              
-              <h2>Guardian Elixirs</h2>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="noCoE">         Elixir of Draenic Wisdom</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Intellect and Spirit by 30 for 1 hour. Guardian Elixir.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="noCoE">         Elixir of Empowerment</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell penetration by 30 for 1 hour. Guardian Elixir.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="noCoE">         Elixir of Greater Intellect</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Intellect by 25 for 1 hour. Guardian Elixir.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="noCoE">         Elixir of Major Mageblood</label> <span class="tooltiptext"><span class="tooltipgeneric">Regenerate 16 mana per 5 sec for 1 hour. Guardian Elixir.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="noCoE">         Major Troll's Blood Potion</label> <span class="tooltiptext"><span class="tooltipgeneric">Regenerate 20 health per 5 sec for 1 hour. Guardian Elixir.</span></span></div><br>
-              
-              <h2>Weapon Oils</h2>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="weaponOil" value="noCoE">              Blessed Wizard Oil</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power against Undead by 60 for 1 hour. Only one oil can be active per weapon.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="weaponOil" value="noCoE">              Superior Wizard Oil</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 42 for 1 hour. Only one oil can be active per weapon.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="weaponOil" value="noCoE">              Brilliant Wizard Oil</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 36 and spell critical strike rating by 14 for 1 hour. Only one oil can be active per weapon.</span></span></div><br>
-              
-              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="holiday" checked>          Very Berry Cream</label>       <span class="tooltiptext"><span class="tooltipgeneric">Gives 23 Spell power for 1 hour</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="manaPotion" checked>       Major Mana Potion</label>      <span class="tooltiptext"><span class="tooltipgeneric">Restores 1350 to 2250 mana</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="demonicRune" checked>      Demonic Rune</label>           <span class="tooltiptext"><span class="tooltipgeneric">Restores 900 to 1500 mana at the cost of 600 to 1000 life</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="runnTumTuber">             Runn Tum Tuber Surprise</label><span class="tooltiptext"><span class="tooltipgeneric">Increases Intellect by 10 for 10 minutes. Only one food buff can be active at any one time</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="nightfinSoup">             Nightfin Soup</label>          <span class="tooltiptext"><span class="tooltipgeneric">Increases Mp5 by 8 for 10 minutes. Only one food buff can be active at any one time</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="magebloodPotion">          Mageblood Potion</label>       <span class="tooltiptext"><span class="tooltipgeneric">Increases Mp2 by 12 for 1 hour</span></span></div><br>
-              <br><br>
-            </div>
-            <div class="column buffs" style="background-color:#555555;">
-              <h2>World Buffs</h2>
+              <!--<h2>World Buffs</h2>
               <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="hakkarBuff" checked>       Spirit of Zandalar</label>               <span class="tooltiptext"><span class="tooltipgeneric">Increases primary stats by 15% for 2 hours</span></span></div><br>
               <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="onyxiaBuff" checked>       Rallying Cry of the Dragonslayer</label> <span class="tooltiptext"><span class="tooltipgeneric">Gives 10% Spell crit for 2 hours</span></span></div><br>
               <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="songflower" checked>       Songflower Serenade</label>              <span class="tooltiptext"><span class="tooltipgeneric">Gives 15 to every primary stat and 5% Spell crit for 1 hour</span></span></div><br>
               <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="diremaulBuff" checked>     Dire Maul Tribute Buffs</label>          <span class="tooltiptext"><span class="tooltipgeneric">Gives 3% Spell crit and 15% increased stamina for 2 hours</span></span></div><br>
               <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="darkMoonFaire">            Dark Moon Faire</label>                  <span class="tooltiptext"><span class="tooltipgeneric">Increases damage dealt by 10% for 2 hours</span></span></div><br>
               <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="tracesOfSilithus">         Traces of Silithyst</label>              <span class="tooltiptext"><span class="tooltipgeneric">Increases damage dealt by 5% for 30 minutes (Banned by WCL)</span></span></div><br>
+              <br><br>-->
+              <h3>Debuffs on Boss</h3>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="curseElements" value="maxCoE" checked>  Curse of the Elements (3/3 Malediction)</label><span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow and Fire damage by 13% and lowers Shadow and Fire resistance by 88</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="curseElements" value="minCoE">          Curse of the Elements (0/3 Malediction)</label><span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow and Fire damage by 10% and lowers Shadow and Fire resistance by 88</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="curseElements" value="noCoE">           No Curse of the Elements</label><span class="tooltiptext"><span class="tooltipgeneric">No curse. Your guild does not like casters</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="shadowWeaving" checked>    Shadow Weaving</label>         <span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow damage by 15%</span></span></div><br>
+              <div class="tooltip"><label style=color:#f20000> <input type="checkbox" id="Scorch" checked>           Scorch</label>                 <span class="tooltiptext"><span class="tooltipgeneric">Increases Fire damage by 15%</span></span></div><br>
               <br><br>
-
-              <h2>Buffs</h2>
+              
+              <h3>Buffs</h3>
               <div class="tooltip"><label style=color:#69CCF0> <input type="checkbox" id="arcaneIntellect" checked>  Arcane Intellect</label>                 <span class="tooltiptext"><span class="tooltipgeneric">Gives 31 Intellect</span></span></div><br>
               <div class="tooltip"><label style=color:#FF7D0A> <input type="checkbox" id="markOfTheWild" checked>    Improved Mark of the Wild</label>        <span class="tooltiptext"><span class="tooltipgeneric">Gives 16 of every primary stat</span></span></div><br>
               <div class="tooltip"><label style=color:#FF7D0A> <input type="checkbox" id="moonkinAura">              Moonkin Aura</label>                     <span class="tooltiptext"><span class="tooltipgeneric">Gives 3% Spell crit</span></span></div><br>
@@ -241,6 +207,54 @@
               <div class="tooltip"><label style=color:#69CCF0> <input type="number" id="mageAtiesh" value="0" min="0" style="width:40px">     Mage Atiesh</label>   <span class="tooltiptext"><span class="tooltipgeneric">Gives 2% Spell crit when in your group</span></span></div><br>
               <div class="tooltip"><label style=color:#FF7D0A> <input type="number" id="druidAtiesh" value="0" min="0" style="width:40px">    Druid Atiesh</label>  <span class="tooltiptext"><span class="tooltipgeneric">Gives 11 Mp5 when in your group</span></span></div><br>
               <br><br>
+
+              
+            </div>
+            <div class="column buffs" style="background-color:#555555;">
+              <h3>Flasks</h3>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="flask" value="maxCoE" checked>  Flask of Pure Death</label>         <span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow, Fire, and Frost spell power by 80 for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="flask" value="minCoE">          Flask of Supreme Power</label>      <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 70 for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="flask" value="noCoE">           Flask of Mighty Restoration</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases mana regeneration by 25 mana per 5 seconds for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="flask" value="noCoE">           Flask of Distilled Wisdom</label>   <span class="tooltiptext"><span class="tooltipgeneric">Increases Intellect by 65 for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
+              
+              <h3>Battle Elixirs</h3>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="battleElixir" value="noCoE">           Adept's Elixir</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 24 and spell critical strike rating by 24 for 1 hour. Battle Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="battleElixir" value="noCoE">           Elixir of Major Shadow Power</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow spell power by 55 for 1 hour. Battle Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="battleElixir" value="noCoE">           Elixir of Major Firepower</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Fire spell power by 55 for 1 hour. Battle Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="battleElixir" value="noCoE">           Greater Arcane Elixir</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 35 for 1 hour. Battle Elixir.</span></span></div><br>
+              
+              <h3>Guardian Elixirs</h3>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="noCoE">         Elixir of Draenic Wisdom</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Intellect and Spirit by 30 for 1 hour. Guardian Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="noCoE">         Elixir of Empowerment</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell penetration by 30 for 1 hour. Guardian Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="noCoE">         Elixir of Greater Intellect</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Intellect by 25 for 1 hour. Guardian Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="noCoE">         Elixir of Major Mageblood</label> <span class="tooltiptext"><span class="tooltipgeneric">Regenerate 16 mana per 5 sec for 1 hour. Guardian Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="noCoE">         Major Troll's Blood Potion</label> <span class="tooltiptext"><span class="tooltipgeneric">Regenerate 20 health per 5 sec for 1 hour. Guardian Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="noCoE">         Elixir of Major Fortitude</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases maximum health by 250 and regenerate 10 health per 5 sec for 1 hour. Guardian Elixir.</span></span></div><br>
+              
+              <h3>Weapon Oils</h3>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="weaponOil" value="noCoE">              Blessed Wizard Oil</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power against Undead by 60 for 1 hour. Only one oil can be active per weapon.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="weaponOil" value="noCoE">              Superior Wizard Oil</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 42 for 1 hour. Only one oil can be active per weapon.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="weaponOil" value="noCoE">              Brilliant Wizard Oil</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 36 and spell critical strike rating by 14 for 1 hour. Only one oil can be active per weapon.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="weaponOil" value="noCoE">              Superior Mana Oil</label> <span class="tooltiptext"><span class="tooltipgeneric">Regenerate 14 mana per 5 sec for 1 hour. Only one oil can be active per weapon.</span></span></div><br>
+              
+              <h3>Food Buff</h3>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="foodBuff" value="noCoE">               Spicy Crawdad</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Stamina by 30 and Spirit by 20 for 30 minutes. Only one food buff can be active at any one time.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="foodBuff" value="noCoE">               Blackened Basilisk</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 23 and Spirit by 20 for 30 minutes. Only one food buff can be active at any one time.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="foodBuff" value="noCoE">               Skullfish Soup</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell critical strike rating by 20 and Spirit by 20 for 30 minutes. Only one food buff can be active at any one time.</span></span></div><br>
+              
+              <h3>Potion</h3>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="potion" value="noCoE">                 Super Rejuvenation Potion</label> <span class="tooltiptext"><span class="tooltipgeneric">Restores 1650 to 2750 mana and health. (2 minute cooldown)</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="potion" value="noCoE">                 Haste Potion</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases haste rating by 400 for 15 seconds. (2 minute cooldown)</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="potion" value="noCoE">                 Destruction Potion</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell critical chance by 2% and spell power by 120 for 15 seconds. (2 minute cooldown)</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="potion" value="noCoE">                 Super Mana Potion</label> <span class="tooltiptext"><span class="tooltipgeneric">Restores 1800 to 3000 mana. (2 minute cooldown)</span></span></div><br>
+              
+              <h3>Usable Items</h3>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="usable" value="noCoE">                 Flame Cap</label> <span class="tooltiptext"><span class="tooltipgeneric">Chance to strike a ranged or melee target for 40 Fire damage. Also increases Fire spell power by 80. Lasts 1 minute. (3 minute cooldown)</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="usable" value="noCoE">                 Demonic Rune</label> <span class="tooltiptext"><span class="tooltipgeneric">Restores 900 to 1500 mana at the cost of 600 to 1000 life. (2 minute cooldown)</span></span></div><br>
+              
+              <h3>Extra</h3>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="holiday" checked>                     Very Berry Cream</label> <span class="tooltiptext"><span class="tooltipgeneric">Gives 23 Spell power for 1 hour</span></span></div><br>
+              <br>
             </div>
           </div>
         </div>
