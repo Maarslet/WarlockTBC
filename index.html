@@ -68,6 +68,20 @@
         }
       }
       
+      function clickElixir(type) {
+        var i
+        if (type == "flask") {
+          for (i = 0; i<document.getElementsByName('battleElixir').length; i++)
+            document.getElementsByName('battleElixir')[i].checked = false;
+          for (i = 0; i<document.getElementsByName('guardianElixir').length; i++)
+            document.getElementsByName('guardianElixir')[i].checked = false;
+        }
+        else if (type == "elixir") {
+          for (i = 0; i<document.getElementsByName('flask').length; i++)
+            document.getElementsByName('flask')[i].checked = false;
+        }
+      }
+      
       $.extend( $.fn.dataTable.defaults, {
         searching: false,
         info:  false,
@@ -222,26 +236,26 @@
             </div>
             <div class="column buffs" style="background-color:#555555;">
               <b>Flasks</b><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="flask" value="pureDeath" checked>  Flask of Pure Death</label>         <span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow, Fire, and Frost spell power by 80 for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="flask" value="supremePower">          Flask of Supreme Power</label>      <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 70 for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="flask" value="restoration">           Flask of Mighty Restoration</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases mana regeneration by 25 mana per 5 seconds for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="flask" value="distilledWisdom">           Flask of Distilled Wisdom</label>   <span class="tooltiptext"><span class="tooltipgeneric">Increases Intellect by 65 for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9 oninput="clickElixir('flask');"> <input type="radio" name="flask" value="pureDeath">          Flask of Pure Death</label>         <span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow, Fire, and Frost spell power by 80 for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9 oninput="clickElixir('flask');"> <input type="radio" name="flask" value="supremePower">          Flask of Supreme Power</label>      <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 70 for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9 oninput="clickElixir('flask');"> <input type="radio" name="flask" value="restoration">           Flask of Mighty Restoration</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases mana regeneration by 25 mana per 5 seconds for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9 oninput="clickElixir('flask');"> <input type="radio" name="flask" value="distilledWisdom">           Flask of Distilled Wisdom</label>   <span class="tooltiptext"><span class="tooltipgeneric">Increases Intellect by 65 for 2 hours. Counts as both a Battle and Guardian elixir. This effect persists through death.</span></span></div><br>
               <br>
               
               <b>Battle Elixirs</b><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="battleElixir" value="adeptsElixir">           Adept's Elixir</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 24 and spell critical strike rating by 24 for 1 hour. Battle Elixir.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="battleElixir" value="shadowPower">           Elixir of Major Shadow Power</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow spell power by 55 for 1 hour. Battle Elixir.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="battleElixir" value="firePower">           Elixir of Major Firepower</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Fire spell power by 55 for 1 hour. Battle Elixir.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="battleElixir" value="greaterArcane">           Greater Arcane Elixir</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 35 for 1 hour. Battle Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9 oninput="clickElixir('elixir');"> <input type="radio" name="battleElixir" value="adeptsElixir">           Adept's Elixir</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 24 and spell critical strike rating by 24 for 1 hour. Battle Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9 oninput="clickElixir('elixir');"> <input type="radio" name="battleElixir" value="shadowPower">           Elixir of Major Shadow Power</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Shadow spell power by 55 for 1 hour. Battle Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9 oninput="clickElixir('elixir');"> <input type="radio" name="battleElixir" value="firePower">           Elixir of Major Firepower</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Fire spell power by 55 for 1 hour. Battle Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9 oninput="clickElixir('elixir');"> <input type="radio" name="battleElixir" value="greaterArcane">           Greater Arcane Elixir</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell power by 35 for 1 hour. Battle Elixir.</span></span></div><br>
               <br>
               
               <b>Guardian Elixirs</b><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="draenicWisdom">         Elixir of Draenic Wisdom</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Intellect and Spirit by 30 for 1 hour. Guardian Elixir.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="empowerment">         Elixir of Empowerment</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell penetration by 30 for 1 hour. Guardian Elixir.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="greaterIntellect">         Elixir of Greater Intellect</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Intellect by 25 for 1 hour. Guardian Elixir.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="mageblood">         Elixir of Major Mageblood</label> <span class="tooltiptext"><span class="tooltipgeneric">Regenerate 16 mana per 5 sec for 1 hour. Guardian Elixir.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="trollsblood">         Major Troll's Blood Potion</label> <span class="tooltiptext"><span class="tooltipgeneric">Regenerate 20 health per 5 sec for 1 hour. Guardian Elixir.</span></span></div><br>
-              <div class="tooltip"><label style=color:#9482C9> <input type="radio" name="guardianElixir" value="fortitude">         Elixir of Major Fortitude</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases maximum health by 250 and regenerate 10 health per 5 sec for 1 hour. Guardian Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9 oninput="clickElixir('elixir');"> <input type="radio" name="guardianElixir" value="draenicWisdom">         Elixir of Draenic Wisdom</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Intellect and Spirit by 30 for 1 hour. Guardian Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9 oninput="clickElixir('elixir');"> <input type="radio" name="guardianElixir" value="empowerment">         Elixir of Empowerment</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases spell penetration by 30 for 1 hour. Guardian Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9 oninput="clickElixir('elixir');"> <input type="radio" name="guardianElixir" value="greaterIntellect">         Elixir of Greater Intellect</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases Intellect by 25 for 1 hour. Guardian Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9 oninput="clickElixir('elixir');"> <input type="radio" name="guardianElixir" value="mageblood">         Elixir of Major Mageblood</label> <span class="tooltiptext"><span class="tooltipgeneric">Regenerate 16 mana per 5 sec for 1 hour. Guardian Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9 oninput="clickElixir('elixir');"> <input type="radio" name="guardianElixir" value="trollsblood">         Major Troll's Blood Potion</label> <span class="tooltiptext"><span class="tooltipgeneric">Regenerate 20 health per 5 sec for 1 hour. Guardian Elixir.</span></span></div><br>
+              <div class="tooltip"><label style=color:#9482C9 oninput="clickElixir('elixir');"> <input type="radio" name="guardianElixir" value="fortitude">         Elixir of Major Fortitude</label> <span class="tooltiptext"><span class="tooltipgeneric">Increases maximum health by 250 and regenerate 10 health per 5 sec for 1 hour. Guardian Elixir.</span></span></div><br>
               <br>
             </div>
             <div class="column buffs" style="background-color:#555555;">
