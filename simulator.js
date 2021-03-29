@@ -186,6 +186,66 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   
   SP += 23*document.getElementById("holiday").checked;
   
+  // Affliction Talents
+  var talentSuppression = Number(document.getElementById("talentSuppression").parentNode.children[1].innerHTML);
+  var talentCorruption = Number(document.getElementById("talentCorruption").parentNode.children[1].innerHTML);
+  var talentDrainSoul = Number(document.getElementById("talentDrainSoul").parentNode.children[1].innerHTML);
+  var talentLifeTap = Number(document.getElementById("talentLifeTap").parentNode.children[1].innerHTML);
+  var talentSoulSiphon = Number(document.getElementById("talentSoulSiphon").parentNode.children[1].innerHTML);
+  var talentAgony = Number(document.getElementById("talentAgony").parentNode.children[1].innerHTML);
+  var talentAmpCurse = Number(document.getElementById("talentAmpCurse").parentNode.children[1].innerHTML);
+  var talentNightfall = Number(document.getElementById("talentNightfall").parentNode.children[1].innerHTML);
+  var talentEmpCorr = Number(document.getElementById("talentEmpCorr").parentNode.children[1].innerHTML);
+  var talentSiphon = Number(document.getElementById("talentSiphon").parentNode.children[1].innerHTML);
+  var talentShadowMastery = Number(document.getElementById("talentShadowMastery").parentNode.children[1].innerHTML);
+  var talentContagion = Number(document.getElementById("talentContagion").parentNode.children[1].innerHTML);
+  var talentDarkPact = Number(document.getElementById("talentDarkPact").parentNode.children[1].innerHTML);
+  var talentUnstable = Number(document.getElementById("talentUnstable").parentNode.children[1].innerHTML);
+  
+  // Demonology Talents
+  var talentHealthstone = Number(document.getElementById("talentHealthstone").parentNode.children[1].innerHTML);
+  var talentImpImp = Number(document.getElementById("talentImpImp").parentNode.children[1].innerHTML);
+  var talentStamina = Number(document.getElementById("talentStamina").parentNode.children[1].innerHTML);
+  var talentFelIntellect = Number(document.getElementById("talentFelIntellect").parentNode.children[1].innerHTML);
+  var talentImpSuccubus = Number(document.getElementById("talentImpSuccubus").parentNode.children[1].innerHTML);
+  var talentFelDomination = Number(document.getElementById("talentFelDomination").parentNode.children[1].innerHTML);
+  var talentFelStamina = Number(document.getElementById("talentFelStamina").parentNode.children[1].innerHTML);
+  var talentFelArmor = Number(document.getElementById("talentFelArmor").parentNode.children[1].innerHTML);
+  var talentMasterSummon = Number(document.getElementById("talentMasterSummon").parentNode.children[1].innerHTML);
+  var talentUnholyPower = Number(document.getElementById("talentUnholyPower").parentNode.children[1].innerHTML);
+  var talentDemonicSacrifice = Number(document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML);
+  var talentFirestone = Number(document.getElementById("talentFirestone").parentNode.children[1].innerHTML);
+  var talentManaFeed = Number(document.getElementById("talentManaFeed").parentNode.children[1].innerHTML);
+  var talentMasterDemon = Number(document.getElementById("talentMasterDemon").parentNode.children[1].innerHTML);
+  var talentSoulLink = Number(document.getElementById("talentSoulLink").parentNode.children[1].innerHTML);
+  var talentDemonicKnowledge = Number(document.getElementById("talentDemonicKnowledge").parentNode.children[1].innerHTML);
+  var talentDemonicTactics = Number(document.getElementById("talentDemonicTactics").parentNode.children[1].innerHTML);
+  var talentSummonFelguard = Number(document.getElementById("talentSummonFelguard").parentNode.children[1].innerHTML);
+  
+  // Destruction Talents
+  var talentShadowBolt = Number(document.getElementById("talentShadowBolt").parentNode.children[1].innerHTML);
+  var talentCataclysm = Number(document.getElementById("talentCataclysm").parentNode.children[1].innerHTML);
+  var talentBane = Number(document.getElementById("talentBane").parentNode.children[1].innerHTML);
+  var talentImpFirebolt = Number(document.getElementById("talentImpFirebolt").parentNode.children[1].innerHTML);
+  var talentImpLash = Number(document.getElementById("talentImpLash").parentNode.children[1].innerHTML);
+  var talentDevastation = Number(document.getElementById("talentDevastation").parentNode.children[1].innerHTML);
+  var talentShadowburn = Number(document.getElementById("talentShadowburn").parentNode.children[1].innerHTML);
+  var talentDestructiveReach = Number(document.getElementById("talentDestructiveReach").parentNode.children[1].innerHTML);
+  var talentSearingPain = Number(document.getElementById("talentSearingPain").parentNode.children[1].innerHTML);
+  var talentImmolate = Number(document.getElementById("talentImmolate").parentNode.children[1].innerHTML);
+  var talentRuin = Number(document.getElementById("talentRuin").parentNode.children[1].innerHTML);
+  var talentEmberstorm = Number(document.getElementById("talentEmberstorm").parentNode.children[1].innerHTML);
+  var talentBacklash = Number(document.getElementById("talentBacklash").parentNode.children[1].innerHTML);
+  var talentConflagrate = Number(document.getElementById("talentConflagrate").parentNode.children[1].innerHTML);
+  var talentSoulLeech = Number(document.getElementById("talentSoulLeech").parentNode.children[1].innerHTML);
+  var talentShadowFlame = Number(document.getElementById("talentShadowFlame").parentNode.children[1].innerHTML);
+  var talentShadowfury = Number(document.getElementById("talentShadowfury").parentNode.children[1].innerHTML);
+  
+  
+  
+  
+  
+  
   
   var classList = new Array;
   var items = document.getElementsByName('activeItem');
