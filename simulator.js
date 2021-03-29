@@ -2,6 +2,17 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   return
   console.time('Timer')
   
+  var int  = Number(document.getElementById("intellect").value);
+  var stam = Number(document.getElementById("stamina").value);
+  var spirit = Number(document.getElementById("spirit").value);
+  var SP   = Number(document.getElementById("spellPower").value);
+  var ShP  = Number(document.getElementById("shadowPower").value);
+  var FiP  = Number(document.getElementById("firePower").value);
+  var crit = Number(document.getElementById("critRating").value);
+  var hit  = Number(document.getElementById("hitRating").value);
+  var haste = Number(document.getElementById("hasteRating").value);
+  var pen  = Number(document.getElementById("spellPen").value);
+  var mp5  = Number(document.getElementById("mp5").value);
   var tailoring = document.getElementById("tailoring").checked;
   
   var fightStart = Number(document.getElementById("fightStart").value);
@@ -28,37 +39,52 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   else if (bossLevel == 70)
     var baseHit = 96;
   
-  var race = document.getElementById("race").value, gnome = false, int = 0, stam = 0, spirit = 0;
+  var race = document.getElementById("race").value, gnome = false, human = false; 
   if (race == "gnome") {
-    var gnome = true;
-    int     += 113;
-    stam    += 1;
-    spirit  += 1;}
+    gnome   = true;
+    int     += 135;
+    stam    += 75;
+    spirit  += 130;}
   else if (race == "human") {
-    int     += 110;
-    stam    += 1;
-    spirit  += 1;}
+    int     += 129;
+    stam    += 76;
+    spirit  += 132;}
   else if (race == "orc") {
-    int     += 107;
-    stam    += 1;
-    spirit  += 1;}
+    int     += 126;
+    stam    += 78;
+    spirit  += 134;}
   else if (race == "undead") {
-    int     += 108;
-    stam    += 1;
-    spirit  += 1;}
+    int     += 131;
+    stam    += 77;
+    spirit  += 144;}
   else if (race == "bloodelf") {
-    int     += 108;
-    stam    += 1;
-    spirit  += 1;}
+    int     += 133;
+    stam    += 74;
+    spirit  += 130;}
   
-  var SP   = Number(document.getElementById("spellPower").value) + 30*document.getElementById("enchantSpellPower").checked + 8*document.getElementById("enchantFocus1").checked + 8*document.getElementById("enchantFocus2").checked + 18*document.getElementById("enchantZG1").checked + 18*document.getElementById("enchantZG2").checked + 18*document.getElementById("enchantZGShoulder").checked + 15*document.getElementById("enchantPowerScourge").checked;
-  var ShP  = Number(document.getElementById("shadowPower").value) + 20*document.getElementById("enchantShadow").checked;
-  var FiP  = Number(document.getElementById("firePower").value) + 20*document.getElementById("enchantFire").checked;
-  var crit = Number(document.getElementById("spellCrit").value) + 1*document.getElementById("enchantPowerScourge").checked;
-  var hit  = Number(document.getElementById("spellHit").value);
-  int += Number(document.getElementById("intellect").value) + 7*document.getElementById("enchantIntellect").checked + 3*document.getElementById("enchantStats").checked + 4*document.getElementById("enchantGreaterStats").checked;
-  var pen  = Number(document.getElementById("spellPen").value);
-  var mp5  = Number(document.getElementById("mp5").value);
+  var CoE = document.querySelector('input[name=curseElements]:checked').value;
+  var weaving = 1 + 0.10*document.getElementById("shadowWeaving").checked;
+  var scorch = 1 + 0.15*document.getElementById("scorch").checked;
+  var judgementWisdom = document.getElementById("judgementWisdom").checked;
+  
+  int += 40*document.getElementById("arcaneIntellect").checked + 19*document.getElementById("markOfTheWild").checked;
+  stam += 19*document.getElementById("markOfTheWild").checked;
+  spirit += 50*document.getElementById("divineSpirit").checked + 19*document.getElementById("markOfTheWild").checked;
+  mp5 += 49*document.getElementById("blessingOfWisdom").checked + 50*document.getElementById("manaSpringTotem").checked;
+  crit = 5*22*document.getElementById("moonkinAura").checked;
+  var kings = document.getElementById("blessingOfKings").checked;
+  
+  var warlockAtiesh = Number(document.getElementById("warlockAtiesh").value);
+  var mageAtiesh = Number(document.getElementById("mageAtiesh").value);
+  var druidAtiesh = Number(document.getElementById("druidAtiesh").value);
+  var felArmor = document.getElementById("felArmor").checked;
+  
+  var numPI = Number(document.getElementById("powerInfusion").value);
+  var usePI = false;
+  if (numPI > 0)
+    usePI = true;
+  
+  
   
   
   var classList = new Array;
@@ -262,25 +288,14 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var useCorruption = document.getElementById("rotationCorruption").checked;
   var useImmolate = document.getElementById("rotationImmolate").checked;
   var useSiphon = document.getElementById("rotationSiphonLife").checked;
+  
   var lifeTap = document.getElementById("disableLifeTap").checked == false;
-  
-  var numPI = Number(document.getElementById("powerInfusion").value);
-  var usePI = false;
-  if (numPI > 0)
-    usePI = true;
-  
-  var warlockAtiesh = Number(document.getElementById("warlockAtiesh").value);
-  var mageAtiesh = Number(document.getElementById("mageAtiesh").value);
-  var druidAtiesh = Number(document.getElementById("druidAtiesh").value);
-  
   var warlockCount = Number(document.getElementById("warlockCount").value);
 
-  
-
-  var hakkarBuff = document.getElementById("hakkarBuff").checked;
+  /*var hakkarBuff = document.getElementById("hakkarBuff").checked;
   var onyxiaBuff = document.getElementById("onyxiaBuff").checked;
   var songflower = document.getElementById("songflower").checked;
-  var diremaulBuff = document.getElementById("diremaulBuff").checked;
+  var diremaulBuff = document.getElementById("diremaulBuff").checked;*/
   
   var manaExtra = 1800*document.getElementById("manaPotion").checked + 1200*document.getElementById("demonicRune").checked + 100*document.getElementById("enchantMana").checked;
   ShP += SP + 150*document.getElementById("supremeFlask").checked + 60*document.getElementById("blessedOil").checked + 36*document.getElementById("brilliantOil").checked + 35*document.getElementById("arcaneElixir").checked + 40*document.getElementById("shadowElixir").checked + 23*document.getElementById("holiday").checked + 33*warlockAtiesh;
