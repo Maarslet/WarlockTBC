@@ -13,8 +13,11 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var haste = Number(document.getElementById("hasteRating").value);
   var pen  = Number(document.getElementById("spellPen").value);
   var mp5  = Number(document.getElementById("mp5").value);
-  var tailoring = document.getElementById("tailoring").checked;
+  var hp5  = Number(document.getElementById("hp5").value);
+  var health = 3310;
+  var mana = 2335;
   
+  var tailoring = document.getElementById("tailoring").checked;
   var fightStart = Number(document.getElementById("fightStart").value);
   var fightEnd = Number(document.getElementById("fightEnd").value);
   var timeVec = new Array;
@@ -71,20 +74,117 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   stam += 19*document.getElementById("markOfTheWild").checked;
   spirit += 50*document.getElementById("divineSpirit").checked + 19*document.getElementById("markOfTheWild").checked;
   mp5 += 49*document.getElementById("blessingOfWisdom").checked + 50*document.getElementById("manaSpringTotem").checked;
-  crit = 5*22*document.getElementById("moonkinAura").checked;
   var kings = document.getElementById("blessingOfKings").checked;
   
-  var warlockAtiesh = Number(document.getElementById("warlockAtiesh").value);
-  var mageAtiesh = Number(document.getElementById("mageAtiesh").value);
-  var druidAtiesh = Number(document.getElementById("druidAtiesh").value);
-  var felArmor = document.getElementById("felArmor").checked;
+  SP += 33*Number(document.getElementById("warlockAtiesh").value);
+  crit += 28*Number(document.getElementById("mageAtiesh").value) + 5*22.08*document.getElementById("moonkinAura").checked;
+  mp5 += 11*Number(document.getElementById("druidAtiesh").value);
   
+  var felArmor = document.getElementById("felArmor").checked; SP += 100*felArmor;
   var numPI = Number(document.getElementById("powerInfusion").value);
   var usePI = false;
   if (numPI > 0)
     usePI = true;
   
+  // Flasks and Elixirs
+  var flask = false, battle = false, guardian = false;
+  try {
+    flask = document.querySelector('input[name=flask]:checked').value;
+  }
+  catch {
+    try {
+      battle = document.querySelector('input[name=battleElixir]:checked').value;
+      guardian = document.querySelector('input[name=guardianElixir]:checked').value;
+    }
+    catch {}
+  }
   
+  if (flask == "pureDeath")
+    SP += 80;
+  else if (flask == "supremePower")
+    SP += 70;
+  else if (flask == "restoration")
+    mp5 += 25;
+  else if (flask == "distilledWisdom")
+    int += 65;
+  
+  if (battle == "adeptsElixir") {
+    SP += 24;
+    crit += 24;}
+  else if (battle == "shadowPower")
+    ShP += 55;
+  else if (battle == "firePower")
+    FiP += 55;
+  else if (battle == "greaterArcane")
+    SP += 35;
+  
+  if (guardian == "draenicWisdom") {
+    int += 30;
+    spirit += 30;}
+  else if (guardian == "empowerment")
+    pen += 30;
+  else if (guardian == "greaterIntellect")
+    int += 25;
+  else if (guardian == "mageblood")
+    mp5 += 16;
+  else if (guardian == "trollsblood")
+    hp5 += 20;
+  else if (guardian == "fortitude") {
+    health += 250;
+    hp5 += 10;}
+    
+  // Weapon Oil, food buff, potions, usables and extras
+  var oil = false, foodbuff = false, potion = false, usableItem = false;
+  try
+    oil = document.querySelector('input[name=weaponOil]:checked').value;
+  catch {}
+  try
+    foodbuff = document.querySelector('input[name=foodBuff]:checked').value;
+  catch {}
+  try
+    potion = document.querySelector('input[name=potion]:checked').value;
+  catch {}
+  try
+    usableItem = document.querySelector('input[name=usable]:checked').value;
+  catch {}
+  
+  if (oil == "blessed")
+    SP += 60;
+  else if (oil == "superior")
+    SP += 42;
+  else if (oil == "brilliant") {
+    SP += 36;
+    crit += 14;}
+  else if (oil == "manaOil")
+    mp5 += 14;
+  
+  if (foodbuff == "stamina") {
+    stam += 30;
+    spirit += 20;}
+  else if (foodbuff == "spellPower") {
+    SP += 23;
+    spirit += 20;}
+  else if (foodbuff == "spellCrit") {
+    crit += 20;
+    spirit += 20;}
+  
+  var rejuvenationPot = false, hastePot = false, destructionPot = false, manaPot = false;
+  if (potion == "rejuvenation")
+    rejuvenationPot = true;
+  else if (potion == "haste")
+    hastePot = true;
+  else if (potion == "destruction")
+    destructionPot = true;
+  else if (potion == "mana")
+    manaPot = true;
+  
+  var flameCap = false, demonicRune = false;
+  if (usableItem == "flameCap")
+    flameCap = true;
+  else if (usableItem == "demonicRune")
+    demonicRune = true;
+  
+  SP += 23*document.getElementById("holiday").checked;
   
   
   var classList = new Array;
@@ -137,7 +237,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var itemName1 = items[13].children[0].innerHTML;
     var itemName2 = items[14].children[0].innerHTML;
     var itemName3 = items[15].children[0].innerHTML;}
-  //console.log(iIndex + ": " + itemName1 + ", " + itemName2 + ", " + itemName3)
+
   var TREOS = false, ZHC = false, TOEP = false, HCOD = false, REEL = false, EOM = false, trinket1 = false, trinket2 = false;
   if (itemName1 == "The Restrained Essence of Sapphiron" || itemName2 == "The Restrained Essence of Sapphiron" || itemName3 == "The Restrained Essence of Sapphiron") {
     TREOS = true;
@@ -298,7 +398,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var diremaulBuff = document.getElementById("diremaulBuff").checked;*/
   
   var manaExtra = 1800*document.getElementById("manaPotion").checked + 1200*document.getElementById("demonicRune").checked + 100*document.getElementById("enchantMana").checked;
-  ShP += SP + 150*document.getElementById("supremeFlask").checked + 60*document.getElementById("blessedOil").checked + 36*document.getElementById("brilliantOil").checked + 35*document.getElementById("arcaneElixir").checked + 40*document.getElementById("shadowElixir").checked + 23*document.getElementById("holiday").checked + 33*warlockAtiesh;
+  ShP += SP + 150*document.getElementById("supremeFlask").checked + 60*document.getElementById("blessedOil").checked + 36*document.getElementById("brilliantOil").checked + 35*document.getElementById("arcaneElixir").checked + 40*document.getElementById("shadowElixir").checked + 33*warlockAtiesh;
   FiP += SP + 150*document.getElementById("supremeFlask").checked + 60*document.getElementById("blessedOil").checked + 36*document.getElementById("brilliantOil").checked + 35*document.getElementById("arcaneElixir").checked + 40*document.getElementById("fireElixir").checked + 23*document.getElementById("holiday").checked + 33*warlockAtiesh;
   var afflictionHit = hit + 2*document.getElementById("talentSuppression").parentNode.children[1].innerHTML;
   var afflictionChance = Math.min(99, baseHit+afflictionHit);
