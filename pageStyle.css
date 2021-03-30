@@ -30,8 +30,7 @@ tr:nth-child(even) /*{ background-color: #dddddd; }*/
 tr:nth-child(odd) /*{ background-color: #dddddd; }*/
 
 .finalStats, .finalStats td, .finalStats tr, .finalStats th {
-    padding-right: 2px;
-    border-bottom: 1px;
+    padding: 0px;
 }
 
 .gearTable {
