@@ -18,8 +18,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var pen  = Number(document.getElementById("spellPen").value);
   var mp5  = Number(document.getElementById("mp5").value);
   var hp5  = Number(document.getElementById("hp5").value);
-  var health = 3310;
-  var mana = 2335;
+  var healthBase = 3310;
+  var manaBase = 2335;
   
   var tailoring = document.getElementById("tailoring").checked;
   var fightStart = Number(document.getElementById("fightStart").value);
@@ -551,7 +551,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var critMultiplier = (1.5 + 0.5*talentRuin) * (1 + 0.02*UDC);
     
     var intel = Math.round(int*(1 + 0.1*kings)*(1 + 0.05*gnome));
-    var manaMain = mana + intel*15;
+    var manaMain = manaBase + intel*15;
     var tapGain = (424+ShP*0.8) * (1 + 0.1*talentLifeTap) * lifeTap;
     var avgNonCrit = (510+(ShP*6/7)) * shadowMultiplier;
     var avgBurn = (488+(ShP*3/7)) * shadowMultiplier * talentShadowburn;
