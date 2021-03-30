@@ -666,8 +666,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           fireRes = levelRes + Math.max(0, Number(document.getElementById("bossFireRes").value) - pen - 88*Boolean(CoE));
           shadowReduction = 1 - shadowRes/400;
           fireReduction = 1 - fireRes/400;
-          shadowMultiplier = (1 + piBonus*0.20) * shadowReduction * (1 + shadowDS*0.15*document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML) * (1 + 0.1*document.getElementById("curseShadow").checked) * (1 + 0.15*document.getElementById("shadowWeaving").checked) * (1 + 0.02*document.getElementById("talentShadowMastery").parentNode.children[1].innerHTML) * (1 + 0.10*document.getElementById("darkMoonFaire").checked) * (1 + 0.05*document.getElementById("tracesOfSilithus").checked); //DS, CoS, Weaving, SM
-          fireMultiplier = (1 + piBonus*0.20) * fireReduction * (1 + fireDS*0.15*document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML) * (1 + 0.1*document.getElementById("curseElements").checked) * (1 + 0.15*document.getElementById("Scorch").checked) * (1 + 0.02*document.getElementById("talentEmberstorm").parentNode.children[1].innerHTML) * (1 + 0.10*document.getElementById("darkMoonFaire").checked) * (1 + 0.05*document.getElementById("tracesOfSilithus").checked);; //DS, CoE, Scorch, Emberstorm
+          shadowMultiplier = (1 + piBonus*0.20) * shadowReduction * (1 + shadowDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + weaving) * (1 + 0.02*talentShadowMastery);
+          fireMultiplier = (1 + piBonus*0.20) * fireReduction * (1 + fireDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + scorch) * (1 + 0.02*talentEmberstorm);
           tapGain = (424+ShP*0.8) * (1 + 0.1*document.getElementById("talentLifeTap").parentNode.children[1].innerHTML) * lifeTap;
           avgNonCrit = (510+(ShP*6/7)) * shadowMultiplier;
           avgBurn = (488+(ShP*3/7)) * shadowMultiplier * document.getElementById("talentShadowburn").parentNode.children[1].innerHTML;
@@ -718,8 +718,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           fireRes = levelRes + Math.max(0, Number(document.getElementById("bossFireRes").value) - pen - 88*Boolean(CoE));
           shadowReduction = 1 - shadowRes/400;
           fireReduction = 1 - fireRes/400;
-          shadowMultiplier = (1 + piBonus*0.20) * shadowReduction * (1 + shadowDS*0.15*document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML) * (1 + 0.1*document.getElementById("curseShadow").checked) * (1 + 0.15*document.getElementById("shadowWeaving").checked) * (1 + 0.02*document.getElementById("talentShadowMastery").parentNode.children[1].innerHTML) * (1 + 0.10*document.getElementById("darkMoonFaire").checked) * (1 + 0.05*document.getElementById("tracesOfSilithus").checked); //DS, CoS, Weaving, SM
-          fireMultiplier = (1 + piBonus*0.20) * fireReduction * (1 + fireDS*0.15*document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML) * (1 + 0.1*document.getElementById("curseElements").checked) * (1 + 0.15*document.getElementById("Scorch").checked) * (1 + 0.02*document.getElementById("talentEmberstorm").parentNode.children[1].innerHTML) * (1 + 0.10*document.getElementById("darkMoonFaire").checked) * (1 + 0.05*document.getElementById("tracesOfSilithus").checked);; //DS, CoE, Scorch, Emberstorm
+          shadowMultiplier = (1 + piBonus*0.20) * shadowReduction * (1 + shadowDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + weaving) * (1 + 0.02*talentShadowMastery);
+          fireMultiplier = (1 + piBonus*0.20) * fireReduction * (1 + fireDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + scorch) * (1 + 0.02*talentEmberstorm);
           tapGain = (424+ShP*0.8) * (1 + 0.1*document.getElementById("talentLifeTap").parentNode.children[1].innerHTML) * lifeTap;
           avgNonCrit = (510+(ShP*6/7)) * shadowMultiplier;
           avgBurn = (488+(ShP*3/7)) * shadowMultiplier * document.getElementById("talentShadowburn").parentNode.children[1].innerHTML;
@@ -737,8 +737,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
         
         if (piBonus == true && piTime <= 0) {
           piBonus = false;
-          shadowMultiplier = (1 + piBonus*0.20) * shadowReduction * (1 + shadowDS*0.15*document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML) * (1 + 0.1*document.getElementById("curseShadow").checked) * (1 + 0.15*document.getElementById("shadowWeaving").checked) * (1 + 0.02*document.getElementById("talentShadowMastery").parentNode.children[1].innerHTML) * (1 + 0.10*document.getElementById("darkMoonFaire").checked) * (1 + 0.05*document.getElementById("tracesOfSilithus").checked); //DS, CoS, Weaving, SM
-          fireMultiplier = (1 + piBonus*0.20) * fireReduction * (1 + fireDS*0.15*document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML) * (1 + 0.1*document.getElementById("curseElements").checked) * (1 + 0.15*document.getElementById("Scorch").checked) * (1 + 0.02*document.getElementById("talentEmberstorm").parentNode.children[1].innerHTML) * (1 + 0.10*document.getElementById("darkMoonFaire").checked) * (1 + 0.05*document.getElementById("tracesOfSilithus").checked);; //DS, CoE, Scorch, Emberstorm
+          shadowMultiplier = (1 + piBonus*0.20) * shadowReduction * (1 + shadowDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + weaving) * (1 + 0.02*talentShadowMastery);
+          fireMultiplier = (1 + piBonus*0.20) * fireReduction * (1 + fireDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + scorch) * (1 + 0.02*talentEmberstorm);
           avgNonCrit = (510+(ShP*6/7)) * shadowMultiplier;
           avgBurn = (488+(ShP*3/7)) * shadowMultiplier * document.getElementById("talentShadowburn").parentNode.children[1].innerHTML;
           avgDeathCoil = (476+(ShP*1.5/7)) * shadowMultiplier;
@@ -795,8 +795,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
             fireRes = levelRes + Math.max(0, Number(document.getElementById("bossFireRes").value) - pen - 88*Boolean(CoE));
             shadowReduction = 1 - shadowRes/400;
             fireReduction = 1 - fireRes/400;
-            shadowMultiplier = (1 + piBonus*0.20) * shadowReduction * (1 + shadowDS*0.15*document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML) * (1 + 0.1*document.getElementById("curseShadow").checked) * (1 + 0.15*document.getElementById("shadowWeaving").checked) * (1 + 0.02*document.getElementById("talentShadowMastery").parentNode.children[1].innerHTML) * (1 + 0.10*document.getElementById("darkMoonFaire").checked) * (1 + 0.05*document.getElementById("tracesOfSilithus").checked); //DS, CoS, Weaving, SM
-            fireMultiplier = (1 + piBonus*0.20) * fireReduction * (1 + fireDS*0.15*document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML) * (1 + 0.1*document.getElementById("curseElements").checked) * (1 + 0.15*document.getElementById("Scorch").checked) * (1 + 0.02*document.getElementById("talentEmberstorm").parentNode.children[1].innerHTML) * (1 + 0.10*document.getElementById("darkMoonFaire").checked) * (1 + 0.05*document.getElementById("tracesOfSilithus").checked);; //DS, CoE, Scorch, Emberstorm
+            shadowMultiplier = (1 + piBonus*0.20) * shadowReduction * (1 + shadowDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + weaving) * (1 + 0.02*talentShadowMastery);
+            fireMultiplier = (1 + piBonus*0.20) * fireReduction * (1 + fireDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + scorch) * (1 + 0.02*talentEmberstorm);
             tapGain = (424+ShP*0.8) * (1 + 0.1*document.getElementById("talentLifeTap").parentNode.children[1].innerHTML) * lifeTap;
             avgNonCrit = (510+(ShP*6/7)) * shadowMultiplier;
             avgBurn = (488+(ShP*3/7)) * shadowMultiplier * document.getElementById("talentShadowburn").parentNode.children[1].innerHTML;
@@ -861,8 +861,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
             fireRes = levelRes + Math.max(0, Number(document.getElementById("bossFireRes").value) - pen - 88*Boolean(CoE));
             shadowReduction = 1 - shadowRes/400;
             fireReduction = 1 - fireRes/400;
-            shadowMultiplier = (1 + piBonus*0.20) * shadowReduction * (1 + shadowDS*0.15*document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML) * (1 + 0.1*document.getElementById("curseShadow").checked) * (1 + 0.15*document.getElementById("shadowWeaving").checked) * (1 + 0.02*document.getElementById("talentShadowMastery").parentNode.children[1].innerHTML) * (1 + 0.10*document.getElementById("darkMoonFaire").checked) * (1 + 0.05*document.getElementById("tracesOfSilithus").checked); //DS, CoS, Weaving, SM
-            fireMultiplier = (1 + piBonus*0.20) * fireReduction * (1 + fireDS*0.15*document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML) * (1 + 0.1*document.getElementById("curseElements").checked) * (1 + 0.15*document.getElementById("Scorch").checked) * (1 + 0.02*document.getElementById("talentEmberstorm").parentNode.children[1].innerHTML) * (1 + 0.10*document.getElementById("darkMoonFaire").checked) * (1 + 0.05*document.getElementById("tracesOfSilithus").checked);; //DS, CoE, Scorch, Emberstorm
+            shadowMultiplier = (1 + piBonus*0.20) * shadowReduction * (1 + shadowDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + weaving) * (1 + 0.02*talentShadowMastery);
+            fireMultiplier = (1 + piBonus*0.20) * fireReduction * (1 + fireDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + scorch) * (1 + 0.02*talentEmberstorm);
             tapGain = (424+ShP*0.8) * (1 + 0.1*document.getElementById("talentLifeTap").parentNode.children[1].innerHTML) * lifeTap;
             avgNonCrit = (510+(ShP*6/7)) * shadowMultiplier;
             avgBurn = (488+(ShP*3/7)) * shadowMultiplier * document.getElementById("talentShadowburn").parentNode.children[1].innerHTML;
@@ -884,8 +884,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
             piBonus = true;
             piTime = 15.1*numPI;
             piCD = 180;
-            shadowMultiplier = (1 + piBonus*0.20) * shadowReduction * (1 + shadowDS*0.15*document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML) * (1 + 0.1*document.getElementById("curseShadow").checked) * (1 + 0.15*document.getElementById("shadowWeaving").checked) * (1 + 0.02*document.getElementById("talentShadowMastery").parentNode.children[1].innerHTML) * (1 + 0.10*document.getElementById("darkMoonFaire").checked) * (1 + 0.05*document.getElementById("tracesOfSilithus").checked); //DS, CoS, Weaving, SM
-            fireMultiplier = (1 + piBonus*0.20) * fireReduction * (1 + fireDS*0.15*document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML) * (1 + 0.1*document.getElementById("curseElements").checked) * (1 + 0.15*document.getElementById("Scorch").checked) * (1 + 0.02*document.getElementById("talentEmberstorm").parentNode.children[1].innerHTML) * (1 + 0.10*document.getElementById("darkMoonFaire").checked) * (1 + 0.05*document.getElementById("tracesOfSilithus").checked);; //DS, CoE, Scorch, Emberstorm
+            shadowMultiplier = (1 + piBonus*0.20) * shadowReduction * (1 + shadowDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + weaving) * (1 + 0.02*talentShadowMastery);
+            fireMultiplier = (1 + piBonus*0.20) * fireReduction * (1 + fireDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + scorch) * (1 + 0.02*talentEmberstorm);
             avgNonCrit = (510+(ShP*6/7)) * shadowMultiplier;
             avgBurn = (488+(ShP*3/7)) * shadowMultiplier * document.getElementById("talentShadowburn").parentNode.children[1].innerHTML;
             avgDeathCoil = (476+(ShP*1.5/7)) * shadowMultiplier;
