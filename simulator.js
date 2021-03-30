@@ -146,17 +146,17 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     
   // Weapon Oil, food buff, potions, usables and extras
   var oil = false, foodbuff = false, potion = false, usableItem = false;
-  try
-    oil = document.querySelector('input[name=weaponOil]:checked').value;
+  try {
+    oil = document.querySelector('input[name=weaponOil]:checked').value;}
   catch {}
-  try
-    foodbuff = document.querySelector('input[name=foodBuff]:checked').value;
+  try {
+    foodbuff = document.querySelector('input[name=foodBuff]:checked').value;}
   catch {}
-  try
-    potion = document.querySelector('input[name=potion]:checked').value;
+  try {
+    potion = document.querySelector('input[name=potion]:checked').value;}
   catch {}
-  try
-    usableItem = document.querySelector('input[name=usable]:checked').value;
+  try {
+    usableItem = document.querySelector('input[name=usable]:checked').value;}
   catch {}
   
   if (oil == "blessed")
