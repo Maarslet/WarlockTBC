@@ -1,5 +1,4 @@
 function runSim(gearTable, baseLine, makeBaseLine) {
-  return
   console.time('Timer')
   
   // Left Panel & Advanced
