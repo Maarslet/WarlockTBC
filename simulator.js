@@ -451,7 +451,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var songflower = document.getElementById("songflower").checked;
   var diremaulBuff = document.getElementById("diremaulBuff").checked;*/
   
-  SP += 0.1*spirit*document.getElementById("divineSpirit").checked;
+  SP += Math.round(0.1*spirit*document.getElementById("divineSpirit").checked);
   ShP += SP;
   FiP += SP;
   crit = crit/22.08;
