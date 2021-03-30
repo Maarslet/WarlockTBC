@@ -278,7 +278,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
         SP   += Number(gearTable.children[4].innerHTML);
         ShP  += Number(gearTable.children[5].innerHTML);
         FiP  += Number(gearTable.children[6].innerHTML);
-        crit += Number(gearTable.children[8].innerHTML.slice(0,1));
+        crit += Number(gearTable.children[8].innerHTML.slice(0,1))*22;
         hit  += Number(gearTable.children[7].innerHTML.slice(0,1));
         int  += Number(gearTable.children[3].innerHTML);
         pen  += Number(gearTable.children[9].innerHTML);
@@ -290,7 +290,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
       SP   += Number(items[i].children[4].innerHTML);
       ShP  += Number(items[i].children[5].innerHTML);
       FiP  += Number(items[i].children[6].innerHTML);
-      crit += Number(items[i].children[8].innerHTML.slice(0,1));
+      crit += Number(items[i].children[8].innerHTML.slice(0,1))*22;
       hit  += Number(items[i].children[7].innerHTML.slice(0,1));
       int  += Number(items[i].children[3].innerHTML);
       pen  += Number(items[i].children[9].innerHTML);
@@ -451,6 +451,10 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var songflower = document.getElementById("songflower").checked;
   var diremaulBuff = document.getElementById("diremaulBuff").checked;*/
   
+  SP += 0.1*spirit*document.getElementById("divineSpirit").checked;
+  ShP += SP;
+  FiP += SP;
+  crit = crit/22.08;
   var afflictionHit = hit + 2*talentSuppression;
   var afflictionChance = Math.min(99, baseHit+afflictionHit);
    
