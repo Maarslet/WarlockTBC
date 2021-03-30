@@ -1057,11 +1057,11 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   //document.getElementById('defaultOpen').innerHTML = "Main: " + "<b><span style='font-size:20px'>" + formatNumber(math.sum(baseVec)/baseVec.length,2) + " </span><span style='font-size:14px'>DPS</span></b>";;
   document.getElementById("statWeights").innerHTML = statWeightOutput;
   //document.getElementById("finalStats").innerHTML = "<table class='finalStats' style=text-align:left><tr><th colspan=2>Stats</th></tr><tr><td>Shadow Power</td><td>&nbsp" + ShP + "</td></tr><tr><td>Fire Power</td><td>&nbsp" + FiP + "</td></tr><tr><td>Crit Chance</td><td>&nbsp" + formatNumber(critChance,2) + "%</td></tr><tr><td>Hit Chance</td><td>&nbsp" + Number(100-miss) + "%</td></tr><tr><td>Intellect</td><td>&nbsp" + intel + "</td></tr><tr><td>Spell Pen</td><td>&nbsp" + pen + "</td></tr><tr><td>Mana per 5</td><td>&nbsp" + mp5 + "</td></tr><tr><td>Total Mana</td><td>&nbsp" + manaMain + "</td></tr><tr><td>Shadow Multiplier</td><td>&nbsp" + formatNumber(shadowMultiplier,4) + "</td></tr><tr><td>Fire Multiplier</td><td>&nbsp" + formatNumber(fireMultiplier,4) + "</td></tr><tr><td>Shadow Vulnerability</td><td>&nbsp" + formatNumber(shadowVuln*100,2) + "%</td></tr></table>";
-  document.getElementById("statHealth").innerHTML       = "&nbsp&nbsp" + healthBase + 10*stam;
+  document.getElementById("statHealth").innerHTML       = "&nbsp&nbsp" + Number(healthBase + 10*stam);
   document.getElementById("statMana").innerHTML         = "&nbsp&nbsp" + manaMain;
   document.getElementById("statShadowPower").innerHTML  = "&nbsp&nbsp" + ShP;
   document.getElementById("statFirePower").innerHTML    = "&nbsp&nbsp" + FiP;
-  document.getElementById("statCritChance").innerHTML   = "&nbsp&nbsp" + formatNumber(critChance*100,2) + "%";
+  document.getElementById("statCritChance").innerHTML   = "&nbsp&nbsp" + formatNumber(critChance,2) + "%";
   document.getElementById("statHitChance").innerHTML    = "&nbsp&nbsp" + formatNumber(hit,2) + "%";
   document.getElementById("statHaste").innerHTML        = "&nbsp&nbsp" + haste;
   document.getElementById("statStam").innerHTML         = "&nbsp&nbsp" + stam;
