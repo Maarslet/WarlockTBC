@@ -141,7 +141,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   else if (guardian == "trollsblood")
     hp5 += 20;
   else if (guardian == "fortitude") {
-    health += 250;
+    healthBase += 250;
     hp5 += 10;}
     
   // Weapon Oil, food buff, potions, usables and extras
@@ -451,6 +451,10 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var songflower = document.getElementById("songflower").checked;
   var diremaulBuff = document.getElementById("diremaulBuff").checked;*/
   
+  // Final Touches on Stats
+  stam = stam * (1 + 0.1*kings) * (1 + 0.03*talentStamina);
+  int = int * (1 + 0.1*kings) * (1 + 0.05*gnome);
+  spirit = spirit * (1 + 0.1*kings) * (1 - 0.01*talentStamina);
   SP += Math.round(0.1*spirit*document.getElementById("divineSpirit").checked);
   ShP += SP;
   FiP += SP;
