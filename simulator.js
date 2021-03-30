@@ -2,6 +2,11 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   return
   console.time('Timer')
   
+  // Left Panel & Advanced
+  var lifeTap = document.getElementById("disableLifeTap").checked == false;
+  var warlockCount = Number(document.getElementById("warlockCount").value);
+  var threatTime = 0;
+  
   var int  = Number(document.getElementById("intellect").value);
   var stam = Number(document.getElementById("stamina").value);
   var spirit = Number(document.getElementById("spirit").value);
@@ -65,9 +70,16 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     stam    += 74;
     spirit  += 130;}
   
+  // Debuffs & Buffs
   var CoE = document.querySelector('input[name=curseElements]:checked').value;
-  var weaving = 1 + 0.10*document.getElementById("shadowWeaving").checked;
-  var scorch = 1 + 0.15*document.getElementById("scorch").checked;
+  if (CoE == "maxCoE")
+    CoE = 0.13;
+  else if (CoE == "minCoE")
+    CoE = 0.10;
+  else if (CoE == "noCoE")
+    CoE = 0;
+  var weaving = 0.10*document.getElementById("shadowWeaving").checked;
+  var scorch = 0.15*document.getElementById("scorch").checked;
   var judgementWisdom = document.getElementById("judgementWisdom").checked;
   
   int += 40*document.getElementById("arcaneIntellect").checked + 19*document.getElementById("markOfTheWild").checked;
@@ -241,12 +253,23 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var talentShadowFlame = Number(document.getElementById("talentShadowFlame").parentNode.children[1].innerHTML);
   var talentShadowfury = Number(document.getElementById("talentShadowfury").parentNode.children[1].innerHTML);
   
+  // Rotation
+  var curse = document.querySelector('input[name=curse]:checked').value;
+  var primary = document.querySelector('input[name=primary]:checked').value;
+  var finisher = document.querySelector('input[name=finisher]:checked').value;
+  var useAgony = false, useDoom = false;
+  if (curse == "debuff")
+    threatTime += 1.5;
+  else if (curse == "agony")
+    useAgony = true;
+  else if (curse == "doom")
+    useDoom = true;
   
+  var useCorruption = document.getElementById("rotationCorruption").checked;
+  var useImmolate = document.getElementById("rotationImmolate").checked;
+  var useSiphon = Boolean(document.getElementById("rotationSiphonLife").checked * talentSiphon);
   
-  
-  
-  
-  
+  // Gear
   var classList = new Array;
   var items = document.getElementsByName('activeItem');
   for (var i=0; i<items.length; i++) {
@@ -276,6 +299,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
       classList.push(items[i].classList[0]);
     }
   }
+  
+  // Trinkets
   var itemName1 = false, itemName2 = false, itemName3 = false;
   if (arguments.length == 3)
     var tempItem = "Nope";
@@ -341,8 +366,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     else if (TREOS+ZHC+TOEP+HCOD+REEL+EOM == 2)
       trinket2 = "EOM";
   }
-  //console.log("TREOS:"+TREOS+" ZHC:"+ZHC+" TEOP:"+TOEP+" HCOD:"+HCOD+" REEL:"+REEL+" EOM:"+EOM); 
-  //console.log(trinket1); console.log(trinket2)
+
+  // Set Bonuses
   var setT05 = 0, setT1 = 0, setT2 = 0, setT25 = 0, setT3 = 0, setZGRing = 0, setZG = 0, setAQ20 = 0, setPvPRare = 0, setPvPEpic = 0, setBV = 0, setUDC = 0;
   for (i=0; i<classList.length; i++) {
     if (classList[i] == "setT05")
@@ -419,73 +444,37 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   if (setUDC >= 3) {
     UDC = true;
     bonusList += "<tr><td>Undead Cleansing Set</td></tr>";}
-  
   if (arguments.length == 0)
     document.getElementById("setBonuses").innerHTML = "<table class='finalStats' style=text-align:left><tr><th>Set Bonuses Active</th></tr>" + bonusList + "</table>";
-
-  
-  
-  var curse = document.querySelector('input[name=curse]:checked').value;
-  var primary = document.querySelector('input[name=primary]:checked').value;
-  var finisher = document.querySelector('input[name=finisher]:checked').value;
-  if (curse == "debuff") {
-    var threatTime = 1.5;
-    var useAgony = false;
-    var useDoom = false;}
-  else if (curse == "agony") {
-    var threatTime = 0;
-    var useAgony = true;
-    var useDoom = false;}
-  else if (curse == "doom") {
-    var threatTime = 0;
-    var useAgony = false;
-    var useDoom = true;}
-  else {
-    var threatTime = 0;
-    var useAgony = false;
-    var useDoom = false;}
-  
-  var useCorruption = document.getElementById("rotationCorruption").checked;
-  var useImmolate = document.getElementById("rotationImmolate").checked;
-  var useSiphon = document.getElementById("rotationSiphonLife").checked;
-  
-  var lifeTap = document.getElementById("disableLifeTap").checked == false;
-  var warlockCount = Number(document.getElementById("warlockCount").value);
 
   /*var hakkarBuff = document.getElementById("hakkarBuff").checked;
   var onyxiaBuff = document.getElementById("onyxiaBuff").checked;
   var songflower = document.getElementById("songflower").checked;
   var diremaulBuff = document.getElementById("diremaulBuff").checked;*/
   
-  var manaExtra = 1800*document.getElementById("manaPotion").checked + 1200*document.getElementById("demonicRune").checked + 100*document.getElementById("enchantMana").checked;
-  ShP += SP + 150*document.getElementById("supremeFlask").checked + 60*document.getElementById("blessedOil").checked + 36*document.getElementById("brilliantOil").checked + 35*document.getElementById("arcaneElixir").checked + 40*document.getElementById("shadowElixir").checked + 33*warlockAtiesh;
-  FiP += SP + 150*document.getElementById("supremeFlask").checked + 60*document.getElementById("blessedOil").checked + 36*document.getElementById("brilliantOil").checked + 35*document.getElementById("arcaneElixir").checked + 40*document.getElementById("fireElixir").checked + 23*document.getElementById("holiday").checked + 33*warlockAtiesh;
-  var afflictionHit = hit + 2*document.getElementById("talentSuppression").parentNode.children[1].innerHTML;
+  var afflictionHit = hit + 2*talentSuppression;
   var afflictionChance = Math.min(99, baseHit+afflictionHit);
-  crit += 10*onyxiaBuff + 5*songflower + 3*diremaulBuff + 1*document.getElementById("brilliantOil").checked + 3*document.getElementById("moonkinAura").checked + 1*document.getElementById("talentDevastation").parentNode.children[1].innerHTML + 2*mageAtiesh;
-  int  += 31*document.getElementById("arcaneIntellect").checked + 16*document.getElementById("markOfTheWild").checked + 10*document.getElementById("runnTumTuber").checked + 15*songflower;
-  mp5  += 8*document.getElementById("nightfinSoup").checked + 12*document.getElementById("magebloodPotion").checked + 42*document.getElementById("blessingOfWisdom").checked + 25*document.getElementById("manaSpringTotem").checked + 11*druidAtiesh;
-  
-  var sbCost = 380 * (1 - 0.01*document.getElementById("talentCataclysm").parentNode.children[1].innerHTML) * (1-0.15*bonusShadowBoltCost) * (1-0.15*bonusShadowCost);
-  var sbTime = 3 - 0.1*document.getElementById("talentBane").parentNode.children[1].innerHTML;
-  var burnCost = 365 * (1 - 0.01*document.getElementById("talentCataclysm").parentNode.children[1].innerHTML) * (1-0.15*bonusShadowCost);
-  var searingCost = 168 * (1 - 0.01*document.getElementById("talentCataclysm").parentNode.children[1].innerHTML);
-  var deathCoilCost = 565 * (1-0.15*bonusShadowCost);
-  var drainLifeCost = 300 * (1-0.15*bonusShadowCost);
+   
+  var sbCost = 380 * (1 - 0.01*talentCataclysm) * (1 - 0.15*bonusShadowBoltCost) * (1 - 0.15*bonusShadowCost);
+  var sbTime = 3 - 0.1*talentBane;
+  var burnCost = 365 * (1 - 0.01*talentCataclysm) * (1 - 0.15*bonusShadowCost);
+  var searingCost = 168 * (1 - 0.01*talentCataclysm);
+  var deathCoilCost = 565 * (1 - 0.15*bonusShadowCost);
+  var drainLifeCost = 300 * (1 - 0.15*bonusShadowCost);
   var drainLifeTime = 5;
   var GCD = 1.5;
-  var corruptionCost = 340 * (1-0.15*bonusShadowCost);
+  var corruptionCost = 340 * (1 - 0.15*bonusShadowCost);
   var corruptionDuration = 18;
-  var corruptionTime = Math.max(GCD, 2 - 0.4*document.getElementById("talentCorruption").parentNode.children[1].innerHTML);
-  var agonyCost = 215 * (1-0.15*bonusShadowCost);
+  var corruptionTime = Math.max(GCD, 2 - 0.4*talentCorruption);
+  var agonyCost = 215 * (1 - 0.15*bonusShadowCost);
   var agonyDuration = 24;
-  var doomCost = 300 * (1-0.15*bonusShadowCost);
+  var doomCost = 300 * (1 - 0.15*bonusShadowCost);
   var doomDuration = 60;
-  var immolateCost = 380 * (1 - 0.01*document.getElementById("talentCataclysm").parentNode.children[1].innerHTML);
+  var immolateCost = 380 * (1 - 0.01*talentCataclysm);
   var immolateDuration = 15;
-  var immolateTime = 2 - 0.1*document.getElementById("talentBane").parentNode.children[1].innerHTML - 0.2*bonusImmolatePvP;
-  var immolateR7Cost = 370 * (1 - 0.01*document.getElementById("talentCataclysm").parentNode.children[1].innerHTML);
-  var siphonCost = 365 * (1-0.15*bonusShadowCost);
+  var immolateTime = 2 - 0.1*talentBane - 0.2*bonusImmolatePvP;
+  var immolateR7Cost = 370 * (1 - 0.01*talentCataclysm);
+  var siphonCost = 365 * (1 - 0.15*bonusShadowCost);
   var siphonDuration = 30;
   
   if (primary == "shadowBolt") {
@@ -550,30 +539,30 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     else if (q==7) {
       pen = pen - 1;}
     
-    var shadowRes = levelRes + Math.max(0, Number(document.getElementById("bossShadowRes").value) - pen - 75*document.getElementById("curseShadow").checked);
-    var fireRes = levelRes + Math.max(0, Number(document.getElementById("bossFireRes").value) - pen - 75*document.getElementById("curseElements").checked);
+    var shadowRes = levelRes + Math.max(0, Number(document.getElementById("bossShadowRes").value) - pen - 88*Boolean(CoE));
+    var fireRes = levelRes + Math.max(0, Number(document.getElementById("bossFireRes").value) - pen - 88*Boolean(CoE));
     var shadowReduction = 1 - shadowRes/400;
     var fireReduction = 1 - fireRes/400;
-    var shadowMultiplier = shadowReduction * (1 + shadowDS*0.15*document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML) * (1 + 0.1*document.getElementById("curseShadow").checked) * (1 + 0.15*document.getElementById("shadowWeaving").checked) * (1 + 0.02*document.getElementById("talentShadowMastery").parentNode.children[1].innerHTML) * (1 + 0.10*document.getElementById("darkMoonFaire").checked) * (1 + 0.05*document.getElementById("tracesOfSilithus").checked); //DS, CoS, Weaving, SM
-    var fireMultiplier = fireReduction * (1 + fireDS*0.15*document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML) * (1 + 0.1*document.getElementById("curseElements").checked) * (1 + 0.15*document.getElementById("Scorch").checked) * (1 + 0.02*document.getElementById("talentEmberstorm").parentNode.children[1].innerHTML) * (1 + 0.10*document.getElementById("darkMoonFaire").checked) * (1 + 0.05*document.getElementById("tracesOfSilithus").checked);; //DS, CoE, Scorch, Emberstorm
-    var critMultiplier = (1.5 + 0.5*document.getElementById("talentRuin").parentNode.children[1].innerHTML) * (1 + 0.02*UDC);
+    var shadowMultiplier = shadowReduction * (1 + shadowDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + weaving) * (1 + 0.02*talentShadowMastery); //DS, CoS, Weaving, SM
+    var fireMultiplier = fireReduction * (1 + fireDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + scorch) * (1 + 0.02*talentEmberstorm); //DS, CoE, Scorch, Emberstorm
+    var critMultiplier = (1.5 + 0.5*talentRuin) * (1 + 0.02*UDC);
     
-    var intel = Math.round(int*(1 + 0.1*document.getElementById("blessingOfKings").checked)*(1 + 0.05*gnome)*(1 + 0.15*hakkarBuff));
-    var manaMain = 1093 + intel*15 + manaExtra;
-    var tapGain = (424+ShP*0.8) * (1 + 0.1*document.getElementById("talentLifeTap").parentNode.children[1].innerHTML) * lifeTap;
+    var intel = Math.round(int*(1 + 0.1*kings)*(1 + 0.05*gnome));
+    var manaMain = mana + intel*15;
+    var tapGain = (424+ShP*0.8) * (1 + 0.1*talentLifeTap) * lifeTap;
     var avgNonCrit = (510+(ShP*6/7)) * shadowMultiplier;
-    var avgBurn = (488+(ShP*3/7)) * shadowMultiplier * document.getElementById("talentShadowburn").parentNode.children[1].innerHTML;
+    var avgBurn = (488+(ShP*3/7)) * shadowMultiplier * talentShadowburn;
     var avgDeathCoil = (476+(ShP*1.5/7)) * shadowMultiplier;
     var avgSearing = (226+(FiP*3/7)) * fireMultiplier;
-    var avgImmo = (279*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*document.getElementById("talentImmolate").parentNode.children[1].innerHTML);
-    var avgImmoR7 = (258*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*document.getElementById("talentImmolate").parentNode.children[1].innerHTML);
+    var avgImmo = (279*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*talentImmolate);
+    var avgImmoR7 = (258*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*talentImmolate);
     
     var miss = Math.max(1, 100 - baseHit - hit);
     var critChance = Math.min(100, (1.7 + crit + (intel/60.6)));
     var critFinal = critChance * (100-miss)/100;
-    var critSearing = Math.min(100, (1.7 + crit + (intel/60.6) + 2*document.getElementById("talentSearingPain").parentNode.children[1].innerHTML)) * (100-miss)/100;
+    var critSearing = Math.min(100, (1.7 + crit + (intel/60.6) + 2*talentSearingPain)) * (100-miss)/100;
     var regularHit = 100-miss-critFinal;
-    var shadowVuln = (1 - Math.pow(1 - critFinal/100*(1-miss/100), 4/(1-miss/100))) * 0.2*document.getElementById("talentShadowBolt").parentNode.children[1].innerHTML * (primary == "shadowBolt");
+    var shadowVuln = (1 - Math.pow(1 - critFinal/100*(1-miss/100), 4/(1-miss/100))) * 0.2*talentShadowBolt * (primary == "shadowBolt");
     
     var DPS = new Array;
     var lifeTaps = new Array;
@@ -1157,7 +1146,9 @@ function runSim(gearTable, baseLine, makeBaseLine) {
       maintainAspectRatio: false
     }
   });
-  //Cookie Time
+  
+  return
+  // Cookie Time
   setCookie("tailoring", tailoring);
   setCookie("fightStart", fightStart);
   setCookie("fightEnd", fightEnd);
@@ -1322,8 +1313,9 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   setCookie("warlockCount", warlockCount);
   
   console.timeEnd('Timer')
-} //Function
+} 
 
+// Functions
 function formatNumber(num, places) {
   return +(Math.round(num + "e+" + places)  + "e-" + places);
 }
