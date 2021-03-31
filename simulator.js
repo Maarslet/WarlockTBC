@@ -18,7 +18,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var pen  = Number(document.getElementById("spellPen").value);
   var mp5  = Number(document.getElementById("mp5").value);
   var hp5  = Number(document.getElementById("hp5").value);
-  var healthBase = 3310;
+  var healthMain = 3310;
   var manaBase = 2335;
   
   var tailoring = document.getElementById("tailoring").checked;
@@ -91,7 +91,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   crit += 28*Number(document.getElementById("mageAtiesh").value) + 5*22.08*document.getElementById("moonkinAura").checked;
   mp5 += 11*Number(document.getElementById("druidAtiesh").value);
   
-  var felArmor = document.getElementById("felArmor").checked; SP += 100*felArmor;
+  var felArmor = document.getElementById("felArmor").checked;
   var numPI = Number(document.getElementById("powerInfusion").value);
   var usePI = false;
   if (numPI > 0)
@@ -141,7 +141,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   else if (guardian == "trollsblood")
     hp5 += 20;
   else if (guardian == "fortitude") {
-    healthBase += 250;
+    healthMain += 250;
     hp5 += 10;}
     
   // Weapon Oil, food buff, potions, usables and extras
@@ -200,7 +200,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   // Affliction Talents
   var talentSuppression = Number(document.getElementById("talentSuppression").parentNode.children[1].innerHTML);
   var talentCorruption = Number(document.getElementById("talentCorruption").parentNode.children[1].innerHTML);
-  var talentDrainSoul = Number(document.getElementById("talentDrainSoul").parentNode.children[1].innerHTML); // Add with threat
+  var talentDrainSoul = Number(document.getElementById("talentDrainSoul").parentNode.children[1].innerHTML); // Add with threat calc
   var talentLifeTap = Number(document.getElementById("talentLifeTap").parentNode.children[1].innerHTML);
   var talentSoulSiphon = Number(document.getElementById("talentSoulSiphon").parentNode.children[1].innerHTML); // Not added
   var talentAgony = Number(document.getElementById("talentAgony").parentNode.children[1].innerHTML);
@@ -210,47 +210,47 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var talentSiphon = Number(document.getElementById("talentSiphon").parentNode.children[1].innerHTML);
   var talentShadowMastery = Number(document.getElementById("talentShadowMastery").parentNode.children[1].innerHTML);
   var talentContagion = Number(document.getElementById("talentContagion").parentNode.children[1].innerHTML);
-  var talentDarkPact = Number(document.getElementById("talentDarkPact").parentNode.children[1].innerHTML);
+  var talentDarkPact = Number(document.getElementById("talentDarkPact").parentNode.children[1].innerHTML); // Add with pet calc
   var talentUnstable = Number(document.getElementById("talentUnstable").parentNode.children[1].innerHTML);
   
   // Demonology Talents
-  var talentHealthstone = Number(document.getElementById("talentHealthstone").parentNode.children[1].innerHTML);
-  var talentImpImp = Number(document.getElementById("talentImpImp").parentNode.children[1].innerHTML);
+  var talentHealthstone = Number(document.getElementById("talentHealthstone").parentNode.children[1].innerHTML); // Add with health calc
+  var talentImpImp = Number(document.getElementById("talentImpImp").parentNode.children[1].innerHTML); // Add with pet calc
   var talentStamina = Number(document.getElementById("talentStamina").parentNode.children[1].innerHTML);
   var talentFelIntellect = Number(document.getElementById("talentFelIntellect").parentNode.children[1].innerHTML);
-  var talentImpSuccubus = Number(document.getElementById("talentImpSuccubus").parentNode.children[1].innerHTML);
-  var talentFelDomination = Number(document.getElementById("talentFelDomination").parentNode.children[1].innerHTML);
+  var talentImpSuccubus = Number(document.getElementById("talentImpSuccubus").parentNode.children[1].innerHTML); // Add with pet calc
+  var talentFelDomination = Number(document.getElementById("talentFelDomination").parentNode.children[1].innerHTML); // Add with pet calc
   var talentFelStamina = Number(document.getElementById("talentFelStamina").parentNode.children[1].innerHTML);
   var talentFelArmor = Number(document.getElementById("talentFelArmor").parentNode.children[1].innerHTML);
-  var talentMasterSummon = Number(document.getElementById("talentMasterSummon").parentNode.children[1].innerHTML);
-  var talentUnholyPower = Number(document.getElementById("talentUnholyPower").parentNode.children[1].innerHTML);
-  var talentDemonicSacrifice = Number(document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML);
-  var talentFirestone = Number(document.getElementById("talentFirestone").parentNode.children[1].innerHTML);
-  var talentManaFeed = Number(document.getElementById("talentManaFeed").parentNode.children[1].innerHTML);
-  var talentMasterDemon = Number(document.getElementById("talentMasterDemon").parentNode.children[1].innerHTML);
+  var talentMasterSummon = Number(document.getElementById("talentMasterSummon").parentNode.children[1].innerHTML); // Add with pet calc
+  var talentUnholyPower = Number(document.getElementById("talentUnholyPower").parentNode.children[1].innerHTML); // Add with pet calc
+  var talentDemonicSacrifice = Number(document.getElementById("talentDemonicSacrifice").parentNode.children[1].innerHTML); 
+  var talentFirestone = Number(document.getElementById("talentFirestone").parentNode.children[1].innerHTML); // Add with gear?
+  var talentManaFeed = Number(document.getElementById("talentManaFeed").parentNode.children[1].innerHTML); // Add with pet calc
+  var talentMasterDemon = Number(document.getElementById("talentMasterDemon").parentNode.children[1].innerHTML); // Add with rotation
   var talentSoulLink = Number(document.getElementById("talentSoulLink").parentNode.children[1].innerHTML);
-  var talentDemonicKnowledge = Number(document.getElementById("talentDemonicKnowledge").parentNode.children[1].innerHTML);
+  var talentDemonicKnowledge = Number(document.getElementById("talentDemonicKnowledge").parentNode.children[1].innerHTML); // Add with pet calc
   var talentDemonicTactics = Number(document.getElementById("talentDemonicTactics").parentNode.children[1].innerHTML);
-  var talentSummonFelguard = Number(document.getElementById("talentSummonFelguard").parentNode.children[1].innerHTML);
+  var talentSummonFelguard = Number(document.getElementById("talentSummonFelguard").parentNode.children[1].innerHTML); // Add with pet calc
   
   // Destruction Talents
   var talentShadowBolt = Number(document.getElementById("talentShadowBolt").parentNode.children[1].innerHTML);
   var talentCataclysm = Number(document.getElementById("talentCataclysm").parentNode.children[1].innerHTML);
   var talentBane = Number(document.getElementById("talentBane").parentNode.children[1].innerHTML);
-  var talentImpFirebolt = Number(document.getElementById("talentImpFirebolt").parentNode.children[1].innerHTML);
-  var talentImpLash = Number(document.getElementById("talentImpLash").parentNode.children[1].innerHTML);
+  var talentImpFirebolt = Number(document.getElementById("talentImpFirebolt").parentNode.children[1].innerHTML); // Add with pet calc
+  var talentImpLash = Number(document.getElementById("talentImpLash").parentNode.children[1].innerHTML); // Add with pet calc
   var talentDevastation = Number(document.getElementById("talentDevastation").parentNode.children[1].innerHTML);
   var talentShadowburn = Number(document.getElementById("talentShadowburn").parentNode.children[1].innerHTML);
-  var talentDestructiveReach = Number(document.getElementById("talentDestructiveReach").parentNode.children[1].innerHTML);
-  var talentSearingPain = Number(document.getElementById("talentSearingPain").parentNode.children[1].innerHTML);
+  var talentDestructiveReach = Number(document.getElementById("talentDestructiveReach").parentNode.children[1].innerHTML); // Add with threat calc
+  var talentSearingPain = Number(document.getElementById("talentSearingPain").parentNode.children[1].innerHTML); 
   var talentImmolate = Number(document.getElementById("talentImmolate").parentNode.children[1].innerHTML);
   var talentRuin = Number(document.getElementById("talentRuin").parentNode.children[1].innerHTML);
   var talentEmberstorm = Number(document.getElementById("talentEmberstorm").parentNode.children[1].innerHTML);
   var talentBacklash = Number(document.getElementById("talentBacklash").parentNode.children[1].innerHTML);
-  var talentConflagrate = Number(document.getElementById("talentConflagrate").parentNode.children[1].innerHTML);
-  var talentSoulLeech = Number(document.getElementById("talentSoulLeech").parentNode.children[1].innerHTML);
+  var talentConflagrate = Number(document.getElementById("talentConflagrate").parentNode.children[1].innerHTML); // Add with rotation
+  var talentSoulLeech = Number(document.getElementById("talentSoulLeech").parentNode.children[1].innerHTML); // Add with health calc
   var talentShadowFlame = Number(document.getElementById("talentShadowFlame").parentNode.children[1].innerHTML);
-  var talentShadowfury = Number(document.getElementById("talentShadowfury").parentNode.children[1].innerHTML);
+  var talentShadowfury = Number(document.getElementById("talentShadowfury").parentNode.children[1].innerHTML); // Add with rotation
   
   // Rotation
   var curse = document.querySelector('input[name=curse]:checked').value;
@@ -267,6 +267,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var useCorruption = document.getElementById("rotationCorruption").checked;
   var useImmolate = document.getElementById("rotationImmolate").checked;
   var useSiphon = Boolean(document.getElementById("rotationSiphonLife").checked * talentSiphon);
+  var useUnstable = Boolean(document.getElementById("rotationUnstableAffliction").checked * talentUnstable);
   
   // Gear
   var classList = new Array;
@@ -453,11 +454,12 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   
   // Final Touches on Stats
   stam = Math.round(stam * (1 + 0.1*kings) * (1 + 0.03*talentStamina));
+  healthMain = (healthMain + stam*10) * (1 + 0.01*talentFelStamina);
   spirit = Math.round(spirit * (1 + 0.1*kings) * (1 - 0.01*talentStamina));
-  SP += Math.round(0.1*spirit*document.getElementById("divineSpirit").checked);
+  SP += Math.round(0.1*spirit*document.getElementById("divineSpirit").checked) + 100*(1+0.1*talentFelArmor)*felArmor;
   ShP += SP;
   FiP += SP;
-  crit = crit/22.08;
+  crit = crit/22.08 + talentDemonicTactics + talentDevastation + talentBacklash;
   hit = hit/12.615;
   var afflictionHit = hit + 2*talentSuppression;
   var afflictionChance = Math.min(99, baseHit+afflictionHit);
@@ -483,6 +485,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var immolateR7Cost = 370 * (1 - 0.01*talentCataclysm);
   var siphonCost = 365 * (1 - 0.15*bonusShadowCost);
   var siphonDuration = 30;
+  var unstableCost = 400 * (1 - 0.15*bonusShadowCost);
+  var unstableDuration = 18;
   
   var fireDS = false, shadowDS = false;
   if (primary == "shadowBolt") {
@@ -543,14 +547,14 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var fireRes = levelRes + Math.max(0, Number(document.getElementById("bossFireRes").value) - pen - 88*Boolean(CoE));
     var shadowReduction = 1 - shadowRes/400;
     var fireReduction = 1 - fireRes/400;
-    var shadowMultiplier = shadowReduction * (1 + shadowDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + weaving) * (1 + 0.02*talentShadowMastery); //DS, CoS, Weaving, SM
-    var fireMultiplier = fireReduction * (1 + fireDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + scorch) * (1 + 0.02*talentEmberstorm); //DS, CoE, Scorch, Emberstorm
+    var shadowMultiplier = shadowReduction * (1 + shadowDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + weaving) * (1 + 0.02*talentShadowMastery) * (1 + 0.05*talentSoulLink); //DS, CoS, Weaving, SM, SL
+    var fireMultiplier = fireReduction * (1 + fireDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + scorch) * (1 + 0.02*talentEmberstorm) * (1 + 0.05*talentSoulLink); //DS, CoE, Scorch, Emberstorm, SL
     var critMultiplier = (1.5 + 0.5*talentRuin) * (1 + 0.02*UDC);
     
     var intel = Math.round(int*(1 + 0.1*kings)*(1 + 0.05*gnome));
-    var manaMain = manaBase + intel*15;
+    var manaMain = (manaBase + intel*15) * (1 + 0.01*talentFelIntellect);
     var tapGain = (424+ShP*0.8) * (1 + 0.1*talentLifeTap) * lifeTap;
-    var avgNonCrit = (510+(ShP*6/7)) * shadowMultiplier;
+    var avgNonCrit = (510+(ShP*(6/7+0.04*talentShadowFlame))) * shadowMultiplier;
     var avgBurn = (488+(ShP*3/7)) * shadowMultiplier * talentShadowburn;
     var avgDeathCoil = (476+(ShP*1.5/7)) * shadowMultiplier;
     var avgSearing = (226+(FiP*3/7)) * fireMultiplier;
@@ -560,7 +564,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var miss = Math.max(1, 100 - baseHit - hit);
     var critChance = Math.min(100, (1.7 + crit + (intel/60.6)));
     var critFinal = critChance * (100-miss)/100;
-    var critSearing = Math.min(100, (1.7 + crit + (intel/60.6) + 2*talentSearingPain)) * (100-miss)/100;
+    var critSearing = Math.min(100, (1.7 + crit + (intel/60.6) + 3*talentSearingPain + 1*Boolean(talentSearingPain))) * (100-miss)/100;
     var regularHit = 100-miss-critFinal;
     var shadowVuln = (1 - Math.pow(1 - critFinal/100*(1-miss/100), 4/(1-miss/100))) * 0.2*talentShadowBolt * (primary == "shadowBolt");
     
@@ -570,7 +574,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var updateStuff = false;
     var ShPOld = ShP, FiPOld = FiP, critOld = crit, hitOld = hit, penOld = pen;
     for (var i=0; i<timeVec.length; i++) {
-      var doom = false, agony = false, corruption = false, immolate = false, siphon = false, time = threatTime, damage = 0, mana = manaMain, timePast = 0, SBC = 0, trinketTime = 0, trinket2Time, trinket1CD = 0, trinket2CD = 0, trinket1Bonus = false, trinket2Bonus = false, piTime = 0, piCD = 0, ZHCStacks = 0, piBonus = false;
+      var doom = false, agony = false, corruption = false, immolate = false, siphon = false, unstable = false, time = threatTime, damage = 0, mana = manaMain, timePast = 0, SBC = 0, trinketTime = 0, trinket2Time, trinket1CD = 0, trinket2CD = 0, trinket1Bonus = false, trinket2Bonus = false, piTime = 0, piCD = 0, ZHCStacks = 0, piBonus = false;
       ShP = ShPOld, FiP = FiPOld, crit = critOld, hit = hitOld, pen = penOld;
       if (useDoom == true)
         var doomUse = 0;
@@ -597,6 +601,11 @@ function runSim(gearTable, baseLine, makeBaseLine) {
       else {
         var siphonUse = Infinity;
         siphon = true;}
+      if (useUnstable == true)
+        var unstableUse = 0;
+      else {
+        var unstableUse = Infinity;
+        unstable = true;}
       
       while (time <= timeVec[i]) {
         var timeLeft = timeVec[i]-time;
@@ -619,6 +628,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           immolate = false;
         if (siphon == true && time>=siphonUse+siphonDuration)
           siphon = false;
+        if (unstable == true && time>=unstableUse+unstableDuration)
+          unstable = false;
         
         if (ZHCStacks > 0) {
           ZHCStacks--;
@@ -837,21 +848,21 @@ function runSim(gearTable, baseLine, makeBaseLine) {
         else if (doom == false && doomDuration <= timeLeft) {
           doom = true;
           doomUse = time;
-          damage += (3200 + ShP) * shadowMultiplier * ((shadowVuln*0.2)+1) * (afflictionChance/100);
+          damage += (3200 + ShP*2) * shadowMultiplier * ((shadowVuln*0.2)+1) * (afflictionChance/100);
           mana -= doomCost;
           time += GCD;}
         
         else if (agony == false && agonyDuration <= timeLeft) {
           agony = true; 
           agonyUse = time;
-          damage += (1044 * (1+0.05*talentAgony) * (1+Math.abs(Math.sign(Math.max(0,time-15))-1)*0.5*talentAmpCurse) * (1+0.2*document.getElementById("talentShadowMastery").parentNode.children[1].innerHTML) + ShP) * shadowMultiplier * ((shadowVuln*0.2)+1)/(1+0.2*document.getElementById("talentShadowMastery").parentNode.children[1].innerHTML);
+          damage += (1044 * (1+0.05*talentAgony) * (1+Math.abs(Math.sign(Math.max(0,time-15))-1)*0.5*talentAmpCurse) * (1+0.2*talentShadowMastery) + ShP*1.2) * (1 + 0.01*talentContagion) * shadowMultiplier * ((shadowVuln*0.2)+1)/(1+0.2*talentShadowMastery);
           mana -= agonyCost/(afflictionChance/100);
           time += GCD/(afflictionChance/100);}
         
         else if (corruption == false && corruptionDuration <= timeLeft) {
-          corruption = true; 
+          corruption = true;
           corruptionUse = time;
-          damage += (822+ShP) * shadowMultiplier * ((shadowVuln*0.2)+1) * (1+0.12*bonusCorruption) * (1+0.02*bonusCorruptionZG);
+          damage += (822 + ShP*(0.936+0.12*talentEmpCorr)) * (1 + 0.01*talentContagion) * shadowMultiplier * ((shadowVuln*0.2)+1) * (1+0.12*bonusCorruption) * (1+0.02*bonusCorruptionZG);
           mana -= corruptionCost/(afflictionChance/100);
           time += corruptionTime/(afflictionChance/100);
           damage += (avgNonCrit*critFinal*critMultiplier + avgNonCrit*regularHit)/100 * ((shadowVuln*0.2)+1) * 6*0.02*document.getElementById("talentNightfall").parentNode.children[1].innerHTML;
@@ -869,8 +880,15 @@ function runSim(gearTable, baseLine, makeBaseLine) {
         else if (siphon == false && siphonDuration <= timeLeft) {
           siphon = true;
           siphonUse = time;
-          damage += (450 + ShP*0.5) * shadowMultiplier * ((shadowVuln*0.2)+1) * document.getElementById("talentShadowburn").parentNode.children[1].innerHTML;
+          damage += (450 + ShP) * shadowMultiplier * ((shadowVuln*0.2)+1);
           mana -= siphonCost/(afflictionChance/100);
+          time += GCD/(afflictionChance/100);}
+        
+        else if (unstable == false && unstableDuration <= timeLeft) {
+          unstable = true;
+          unstableUse = time;
+          damage += (1050 + ShP*1.2) * shadowMultiplier * ((shadowVuln*0.2)+1);
+          mana -= unstableCost/(afflictionChance/100);
           time += GCD/(afflictionChance/100);}
         
         else if (primary == "shadowBolt" && sbTime <= timeLeft) {
@@ -986,7 +1004,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   //document.getElementById('defaultOpen').innerHTML = "Main: " + "<b><span style='font-size:20px'>" + formatNumber(math.sum(baseVec)/baseVec.length,2) + " </span><span style='font-size:14px'>DPS</span></b>";;
   document.getElementById("statWeights").innerHTML = statWeightOutput;
   //document.getElementById("finalStats").innerHTML = "<table class='finalStats' style=text-align:left><tr><th colspan=2>Stats</th></tr><tr><td>Shadow Power</td><td>&nbsp" + ShP + "</td></tr><tr><td>Fire Power</td><td>&nbsp" + FiP + "</td></tr><tr><td>Crit Chance</td><td>&nbsp" + formatNumber(critChance,2) + "%</td></tr><tr><td>Hit Chance</td><td>&nbsp" + Number(100-miss) + "%</td></tr><tr><td>Intellect</td><td>&nbsp" + intel + "</td></tr><tr><td>Spell Pen</td><td>&nbsp" + pen + "</td></tr><tr><td>Mana per 5</td><td>&nbsp" + mp5 + "</td></tr><tr><td>Total Mana</td><td>&nbsp" + manaMain + "</td></tr><tr><td>Shadow Multiplier</td><td>&nbsp" + formatNumber(shadowMultiplier,4) + "</td></tr><tr><td>Fire Multiplier</td><td>&nbsp" + formatNumber(fireMultiplier,4) + "</td></tr><tr><td>Shadow Vulnerability</td><td>&nbsp" + formatNumber(shadowVuln*100,2) + "%</td></tr></table>";
-  document.getElementById("statHealth").innerHTML       = "&nbsp&nbsp" + Number(healthBase + 10*stam);
+  document.getElementById("statHealth").innerHTML       = "&nbsp&nbsp" + healthMain;
   document.getElementById("statMana").innerHTML         = "&nbsp&nbsp" + manaMain;
   document.getElementById("statShadowPower").innerHTML  = "&nbsp&nbsp" + ShP;
   document.getElementById("statFirePower").innerHTML    = "&nbsp&nbsp" + FiP;
