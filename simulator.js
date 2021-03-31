@@ -1024,7 +1024,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   document.getElementById("statFirePower").innerHTML    = "&nbsp&nbsp" + FiP;
   document.getElementById("statCritChance").innerHTML   = "&nbsp&nbsp" + formatNumber(critChance,2) + "%";
   document.getElementById("statHitChance").innerHTML    = "&nbsp&nbsp" + formatNumber(Number(100-miss),2) + "%";
-  document.getElementById("statHaste").innerHTML        = "&nbsp&nbsp" + haste;
+  document.getElementById("statHaste").innerHTML        = "&nbsp&nbsp" + formatNumber(haste,2) + "%";
   document.getElementById("statStam").innerHTML         = "&nbsp&nbsp" + stam;
   document.getElementById("statInt").innerHTML          = "&nbsp&nbsp" + intel;
   document.getElementById("statSpirit").innerHTML       = "&nbsp&nbsp" + spirit;
