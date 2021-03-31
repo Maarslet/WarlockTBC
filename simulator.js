@@ -991,7 +991,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var mp5Val  = (mp5DPS-baseDPS)/3;
 
   var dpsOutput = "<br><br><b><span style='font-size:22px'>&nbsp;" + formatNumber(math.sum(baseVec)/baseVec.length,2) + " <span style='font-size:14px'>DPS</span></b>";
-  var statWeightOutput = "<br><b><span style='font-size:18px'>Crit Rating = " + formatNumber(critVal/SPVal,2) + " </span><span style='font-size:14px'>SP</span><br><span style='font-size:18px'>&#8287;Hit&#8287; Rating = " + formatNumber(hitVal/SPVal,2) + " </span><span style='font-size:14px'>SP</span></b>";
+  var statWeightOutput = "<br><b><span style='font-size:18px'>Crit Rating = " + formatNumber(critVal/SPVal,2) + " </span><span style='font-size:14px'>SP</span><br><span style='font-size:18px'>Hit&nbsp Rating = " + formatNumber(hitVal/SPVal,2) + " </span><span style='font-size:14px'>SP</span></b>";
   if (arguments.length == 3) {
     console.timeEnd('Timer')
     return formatNumber(math.sum(baseVec)/baseVec.length,2);
