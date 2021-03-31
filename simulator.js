@@ -924,7 +924,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           time += immolateTime;}
         
         else if (primary == "drainLife" && drainLifeTime <= timeLeft) {
-          damage += Math.min(5, Math.floor(timeLeft))*(108+ShP*0.143) * afflictionChance/100 * shadowMultiplier * (1+0.02*document.getElementById("talentDrainLife").parentNode.children[1].innerHTML) * (1+0.15*bonusDrainLife);
+          damage += Math.min(5, Math.floor(timeLeft))*(108+ShP*0.143) * afflictionChance/100 * shadowMultiplier * (1+0.15*bonusDrainLife);
           mana -= drainLifeCost;
           time += drainLifeTime;
           damage += (avgNonCrit*critFinal*critMultiplier + avgNonCrit*regularHit)/100 * ((shadowVuln*0.2)+1) * 5*0.02*document.getElementById("talentNightfall").parentNode.children[1].innerHTML;
