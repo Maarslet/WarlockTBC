@@ -465,26 +465,26 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var afflictionHit = hit + 2*talentSuppression;
   var afflictionChance = Math.min(99, baseHit+afflictionHit);
    
-  var sbCost = 380 * (1 - 0.01*talentCataclysm) * (1 - 0.15*bonusShadowBoltCost) * (1 - 0.15*bonusShadowCost);
+  var sbCost = 420 * (1 - 0.01*talentCataclysm) * (1 - 0.15*bonusShadowBoltCost) * (1 - 0.15*bonusShadowCost);
   var sbTime = 3 - 0.1*talentBane;
-  var burnCost = 365 * (1 - 0.01*talentCataclysm) * (1 - 0.15*bonusShadowCost);
-  var searingCost = 168 * (1 - 0.01*talentCataclysm);
-  var deathCoilCost = 565 * (1 - 0.15*bonusShadowCost);
-  var drainLifeCost = 300 * (1 - 0.15*bonusShadowCost);
+  var burnCost = 515 * (1 - 0.01*talentCataclysm) * (1 - 0.15*bonusShadowCost);
+  var searingCost = 205 * (1 - 0.01*talentCataclysm);
+  var deathCoilCost = 600 * (1 - 0.15*bonusShadowCost);
+  var drainLifeCost = 425 * (1 - 0.15*bonusShadowCost);
   var drainLifeTime = 5;
   var GCD = 1.5;
-  var corruptionCost = 340 * (1 - 0.15*bonusShadowCost);
+  var corruptionCost = 370 * (1 - 0.15*bonusShadowCost);
   var corruptionDuration = 18;
   var corruptionTime = Math.max(GCD, 2 - 0.4*talentCorruption);
-  var agonyCost = 215 * (1 - 0.15*bonusShadowCost);
+  var agonyCost = 265 * (1 - 0.15*bonusShadowCost);
   var agonyDuration = 24;
-  var doomCost = 300 * (1 - 0.15*bonusShadowCost);
+  var doomCost = 380 * (1 - 0.15*bonusShadowCost);
   var doomDuration = 60;
-  var immolateCost = 380 * (1 - 0.01*talentCataclysm);
+  var immolateCost = 445 * (1 - 0.01*talentCataclysm);
   var immolateDuration = 15;
   var immolateTime = 2 - 0.1*talentBane - 0.2*bonusImmolatePvP;
-  var immolateR7Cost = 370 * (1 - 0.01*talentCataclysm);
-  var siphonCost = 365 * (1 - 0.15*bonusShadowCost);
+  var immolateR7Cost = 380 * (1 - 0.01*talentCataclysm);
+  var siphonCost = 410 * (1 - 0.15*bonusShadowCost);
   var siphonDuration = 30;
   var unstableCost = 400 * (1 - 0.15*bonusShadowCost);
   var unstableDuration = 18;
@@ -498,11 +498,11 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var primaryCost = searingCost;
     var primaryTime = GCD;
     var fireDS = true;}
-  else if (primary == "immolateR7") {
+  else if (primary == "immolateR8") {
     var primaryCost = immolateR7Cost;
     var primaryTime = immolateTime;
     var fireDS = true;}
-  else if (primary == "immolateR8") {
+  else if (primary == "immolateR9") {
     var primaryCost = immolateCost;
     var primaryTime = immolateTime;
     var fireDS = true;}
@@ -555,12 +555,11 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var intel = Math.round(int*(1 + 0.1*kings)*(1 + 0.05*gnome));
     var manaMain = (manaBase + intel*15) * (1 + 0.01*talentFelIntellect);
     var tapGain = (424+ShP*0.8) * (1 + 0.1*talentLifeTap) * lifeTap;
-    var avgNonCrit = (510+(ShP*(6/7+0.04*talentShadowFlame))) * shadowMultiplier;
-    var avgBurn = (488+(ShP*3/7)) * shadowMultiplier * talentShadowburn;
-    var avgDeathCoil = (476+(ShP*1.5/7)) * shadowMultiplier;
-    var avgSearing = (226+(FiP*3/7)) * fireMultiplier;
-    var avgImmo = (279*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*talentImmolate);
-    var avgImmoR7 = (258*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*talentImmolate);
+    var avgNonCrit = (575.5+(ShP*(6/7+0.04*talentShadowFlame))) * shadowMultiplier;
+    var avgBurn = (631+(ShP*3/7)) * shadowMultiplier * talentShadowburn;
+    var avgSearing = (295+(FiP*3/7)) * fireMultiplier;
+    var avgImmo = (332*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*talentImmolate);
+    var avgImmoR7 = (279*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*talentImmolate);
     
     var miss = Math.max(1, 100 - baseHit - hit);
     var critChance = Math.min(100, (1.7 + crit + (intel/60.6)));
@@ -828,10 +827,9 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           tapGain = (424+ShP*0.8) * (1 + 0.1*document.getElementById("talentLifeTap").parentNode.children[1].innerHTML) * lifeTap;
           avgNonCrit = (510+(ShP*6/7)) * shadowMultiplier;
           avgBurn = (488+(ShP*3/7)) * shadowMultiplier * document.getElementById("talentShadowburn").parentNode.children[1].innerHTML;
-          avgDeathCoil = (476+(ShP*1.5/7)) * shadowMultiplier;
           avgSearing = (226+(FiP*3/7)) * fireMultiplier;
-          avgImmo = (279*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*document.getElementById("talentImmolate").parentNode.children[1].innerHTML);
-          avgImmoR7 = (258*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*document.getElementById("talentImmolate").parentNode.children[1].innerHTML);
+          avgImmo = (332*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*document.getElementById("talentImmolate").parentNode.children[1].innerHTML);
+          avgImmoR7 = (279*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*document.getElementById("talentImmolate").parentNode.children[1].innerHTML);
           miss = Math.max(1, 100 - baseHit - hit);
           critChance = Math.min(100, (1.7 + crit + (intel/60.6)));
           critFinal = critChance * (100-miss)/100;
@@ -849,39 +847,39 @@ function runSim(gearTable, baseLine, makeBaseLine) {
         else if (doom == false && doomDuration <= timeLeft) {
           doom = true;
           doomUse = time;
-          damage += (3200 + ShP*2) * shadowMultiplier * ((shadowVuln*0.2)+1) * (afflictionChance/100);
+          damage += (4200 + ShP*2) * shadowMultiplier * ((shadowVuln*0.2)+1) * (afflictionChance/100);
           mana -= doomCost;
           time += GCD;}
         
         else if (agony == false && agonyDuration <= timeLeft) {
           agony = true; 
           agonyUse = time;
-          damage += (1044 * (1+0.05*talentAgony) * (1+Math.abs(Math.sign(Math.max(0,time-15))-1)*0.5*talentAmpCurse) * (1+0.2*talentShadowMastery) + ShP*1.2) * (1 + 0.01*talentContagion) * shadowMultiplier * ((shadowVuln*0.2)+1)/(1+0.2*talentShadowMastery);
+          damage += (1356 * (1+0.05*talentAgony) * (1+Math.abs(Math.sign(Math.max(0,time-15))-1)*0.5*talentAmpCurse) * (1+0.2*talentShadowMastery) + ShP*1.2) * (1 + 0.01*talentContagion) * shadowMultiplier * ((shadowVuln*0.2)+1)/(1+0.2*talentShadowMastery);
           mana -= agonyCost/(afflictionChance/100);
           time += GCD/(afflictionChance/100);}
         
         else if (corruption == false && corruptionDuration <= timeLeft) {
           corruption = true;
           corruptionUse = time;
-          damage += (822 + ShP*(0.936+0.12*talentEmpCorr)) * (1 + 0.01*talentContagion) * shadowMultiplier * ((shadowVuln*0.2)+1) * (1+0.12*bonusCorruption) * (1+0.02*bonusCorruptionZG);
+          damage += (900 + ShP*(0.936+0.12*talentEmpCorr)) * (1 + 0.01*talentContagion) * shadowMultiplier * ((shadowVuln*0.2)+1) * (1+0.12*bonusCorruption) * (1+0.02*bonusCorruptionZG);
           mana -= corruptionCost/(afflictionChance/100);
           time += corruptionTime/(afflictionChance/100);
           damage += (avgNonCrit*critFinal*critMultiplier + avgNonCrit*regularHit)/100 * ((shadowVuln*0.2)+1) * 6*0.02*document.getElementById("talentNightfall").parentNode.children[1].innerHTML;
           mana -= sbCost * 6*0.02*document.getElementById("talentNightfall").parentNode.children[1].innerHTML;
           time += GCD * 6*0.02*document.getElementById("talentNightfall").parentNode.children[1].innerHTML;}
         
-        else if (immolate == false && immolateDuration <= timeLeft && primary !== "immolateR8") {
+        else if (immolate == false && immolateDuration <= timeLeft && primary !== "immolateR9") {
           immolate = true; 
           immolateUse = time;
           damage += (avgImmo*critFinal*critMultiplier + avgImmo*regularHit)/100;
-          damage += (510 + FiP*0.65) * fireMultiplier * Number(100-miss)/100;
+          damage += (615 + FiP*0.65) * fireMultiplier * Number(100-miss)/100;
           mana -= immolateCost;
           time += GCD;}
         
         else if (siphon == false && siphonDuration <= timeLeft) {
           siphon = true;
           siphonUse = time;
-          damage += (450 + ShP) * shadowMultiplier * ((shadowVuln*0.2)+1);
+          damage += (630 + ShP) * shadowMultiplier * ((shadowVuln*0.2)+1);
           mana -= siphonCost/(afflictionChance/100);
           time += GCD/(afflictionChance/100);}
         
@@ -915,18 +913,18 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           mana -= searingCost;
           time += GCD;}
         
-        else if (primary == "immolateR7" && immolateTime <= timeLeft) {
+        else if (primary == "immolateR8" && immolateTime <= timeLeft) {
           damage += (avgImmoR7*critFinal*critMultiplier + avgImmoR7*regularHit)/100;
           mana -= immolateR7Cost;
           time += immolateTime;}
         
-        else if (primary == "immolateR8" && immolateTime <= timeLeft) {
+        else if (primary == "immolateR9" && immolateTime <= timeLeft) {
           damage += (avgImmo*critFinal*critMultiplier + avgImmo*regularHit)/100;
           mana -= immolateCost;
           time += immolateTime;}
         
         else if (primary == "drainLife" && drainLifeTime <= timeLeft) {
-          damage += Math.min(5, Math.floor(timeLeft))*(71+ShP*0.1) * afflictionChance/100 * shadowMultiplier * (1+0.02*document.getElementById("talentDrainLife").parentNode.children[1].innerHTML) * (1+0.15*bonusDrainLife);
+          damage += Math.min(5, Math.floor(timeLeft))*(108+ShP*0.143) * afflictionChance/100 * shadowMultiplier * (1+0.02*document.getElementById("talentDrainLife").parentNode.children[1].innerHTML) * (1+0.15*bonusDrainLife);
           mana -= drainLifeCost;
           time += drainLifeTime;
           damage += (avgNonCrit*critFinal*critMultiplier + avgNonCrit*regularHit)/100 * ((shadowVuln*0.2)+1) * 5*0.02*document.getElementById("talentNightfall").parentNode.children[1].innerHTML;
@@ -939,7 +937,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           time += GCD*2;}
         
         else if (finisher == "deathCoil" && sbTime > timeLeft && mana>=deathCoilCost) {
-          damage += avgDeathCoil*afflictionChance/100 * ((shadowVuln*0.2)+1);
+          damage += (526+(ShP*1.5/7)) * shadowMultiplier * afflictionChance/100 * ((shadowVuln*0.2)+1);
           mana -= deathCoilCost;
           time += GCD*2;}
         
