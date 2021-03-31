@@ -27,7 +27,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var timeVec = new Array;
   timeVec[0] = fightStart;
   if (arguments.length > 0) {
-    for (var i=fightStart+5; i<=fightEnd; i=i+5)
+    for (var i=fightStart+0.5; i<=fightEnd; i=i+0.5)
       timeVec[timeVec.length] = i;
   }
   else {
@@ -522,6 +522,11 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   
   // Q For Loop Starting
   for (var q=1; q<=7; q++) {
+    if (arguments.length > 0 && q>1) {
+      q = 99;
+      ShP = ShP - 1;
+      FiP = FiP - 1;
+    }
     if (q==1) {
       ShP = ShP + 1;
       FiP = FiP + 1;}
@@ -974,7 +979,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     else if (q==6) {
       var penDPS  = math.sum(DPS)/DPS.length;
       var penVec  = DPS;}
-    else if (q==7) {
+    else {
       var baseDPS = math.sum(DPS)/DPS.length;
       var baseVec = DPS;}
   } //Loop with q
