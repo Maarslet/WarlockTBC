@@ -455,7 +455,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   
   // Final Touches on Stats
   stam = Math.round(stam * (1 + 0.1*kings) * (1 + 0.03*talentStamina));
-  healthMain = (healthMain + stam*10) * (1 + 0.01*talentFelStamina);
+  healthMain = Math.round((healthMain + stam*10) * (1 + 0.01*talentFelStamina));
   spirit = Math.round(spirit * (1 + 0.1*kings) * (1 - 0.01*talentStamina));
   SP += Math.round(0.1*spirit*document.getElementById("divineSpirit").checked) + 100*(1+0.1*talentFelArmor)*felArmor;
   ShP += SP;
@@ -553,7 +553,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var critMultiplier = (1.5 + 0.5*talentRuin) * (1 + 0.02*UDC);
     
     var intel = Math.round(int*(1 + 0.1*kings)*(1 + 0.05*gnome));
-    var manaMain = (manaBase + intel*15) * (1 + 0.01*talentFelIntellect);
+    var manaMain = Math.round((manaBase + intel*15) * (1 + 0.01*talentFelIntellect));
     var tapGain = (424+ShP*0.8) * (1 + 0.1*talentLifeTap) * lifeTap;
     var avgNonCrit = (575.5+(ShP*(6/7+0.04*talentShadowFlame))) * shadowMultiplier;
     var avgBurn = (631+(ShP*3/7)) * shadowMultiplier * talentShadowburn;
