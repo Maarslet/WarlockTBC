@@ -522,7 +522,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     finisherTime = GCD;}
   
   // Q For Loop Starting
-  for (var q=1; q<=7; q++) {
+  for (var q=1; q<=8; q++) {
     if (arguments.length > 0 && q>1) {
       q = 99;
       ShP = ShP - 1;
