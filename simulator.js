@@ -207,6 +207,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var talentAmpCurse = Number(document.getElementById("talentAmpCurse").parentNode.children[1].innerHTML);
   var talentNightfall = Number(document.getElementById("talentNightfall").parentNode.children[1].innerHTML);
   var talentEmpCorr = Number(document.getElementById("talentEmpCorr").parentNode.children[1].innerHTML);
+  var talentShadowEmbrace = Number(document.getElementById("talentShadowEmbrace").parentNode.children[1].innerHTML); // Add with Soul Siphon
   var talentSiphon = Number(document.getElementById("talentSiphon").parentNode.children[1].innerHTML);
   var talentShadowMastery = Number(document.getElementById("talentShadowMastery").parentNode.children[1].innerHTML);
   var talentContagion = Number(document.getElementById("talentContagion").parentNode.children[1].innerHTML);
