@@ -575,8 +575,14 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var critFinal = critChance * (100-miss)/100;
     var critSearing = Math.min(100, (1.7 + crit + (intel/60.6) + 3*talentSearingPain + 1*Boolean(talentSearingPain))) * (100-miss)/100;
     var regularHit = 100-miss-critFinal;
-    var castSpeed = 1 + haste/100;
     var shadowVuln = (1 - Math.pow(1 - critFinal/100*(1-miss/100), 4/(1-miss/100))) * 0.2*talentShadowBolt * (primary == "shadowBolt");
+    
+    var castSpeed = 1 + haste/100;
+    GCD = 1.5/castSpeed;
+    sbTime = (3 - 0.1*talentBane)/castSpeed;
+    drainLifeTime = 5/castSpeed;
+    corruptionTime = Math.max(GCD, 2 - 0.4*talentCorruption)/castSpeed;
+    immolateTime = (2 - 0.1*talentBane - 0.2*bonusImmolatePvP)/castSpeed;
     
     // Time For Loop Starting
     var DPS = new Array;
@@ -847,6 +853,12 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           critSearing = Math.min(100, (1.7 + crit + (intel/60.6) + 3*talentSearingPain + 1*Boolean(talentSearingPain))) * (100-miss)/100;
           regularHit = 100-miss-critFinal;
           shadowVuln = (1 - Math.pow(1 - critFinal/100*(1-miss/100), 4/(1-miss/100))) * 0.2*talentShadowBolt * (primary == "shadowBolt");
+          castSpeed = 1 + haste/100;
+          GCD = 1.5/castSpeed;
+          sbTime = (3 - 0.1*talentBane)/castSpeed;
+          drainLifeTime = 5/castSpeed;
+          corruptionTime = Math.max(GCD, 2 - 0.4*talentCorruption)/castSpeed;
+          immolateTime = (2 - 0.1*talentBane - 0.2*bonusImmolatePvP)/castSpeed;
         }
         
         // If statement that adds time
@@ -855,6 +867,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           lifeTaps[i]++;
           time += GCD;}
         
+        // DoTs and Abilities with CD
         else if (doom == false && doomDuration <= timeLeft) {
           doom = true;
           doomUse = time;
@@ -901,6 +914,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           mana -= unstableCost/(afflictionChance/100);
           time += GCD/(afflictionChance/100);}
         
+        // Primary Ability
         else if (primary == "shadowBolt" && sbTime <= timeLeft) {
           damage += (avgNonCrit*critFinal*critMultiplier + avgNonCrit*regularHit)/100;// * ((shadowVuln*0.2)+1);
           if (SBC == 0)
@@ -942,6 +956,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           mana -= sbCost * 5*0.02*document.getElementById("talentNightfall").parentNode.children[1].innerHTML;
           time += GCD * 5*0.02*document.getElementById("talentNightfall").parentNode.children[1].innerHTML;}
         
+        // Finisher
         else if (finisher == "shadowburn" && sbTime > timeLeft) {
           damage += (avgBurn*critFinal*critMultiplier + avgBurn*regularHit)/100 * ((shadowVuln*0.2)+1);
           mana -= burnCost;
