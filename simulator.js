@@ -462,6 +462,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   FiP += SP;
   crit = crit/22.08 + talentDemonicTactics + talentDevastation + talentBacklash;
   hit = hit/12.615;
+  haste = haste/15.77;
   var afflictionHit = hit + 2*talentSuppression;
   var afflictionChance = Math.min(99, baseHit+afflictionHit);
    
@@ -547,7 +548,10 @@ function runSim(gearTable, baseLine, makeBaseLine) {
       mp5 = mp5 - 3;
       pen = pen + 1;}
     else if (q==7) {
-      pen = pen - 1;}
+      pen = pen - 1;
+      haste = haste + 1/15.77;}
+    else if (q==8) {
+      haste = haste - 1/15.77;}
     
     var shadowRes = levelRes + Math.max(0, Number(document.getElementById("bossShadowRes").value) - pen - 88*Boolean(CoE));
     var fireRes = levelRes + Math.max(0, Number(document.getElementById("bossFireRes").value) - pen - 88*Boolean(CoE));
@@ -571,6 +575,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var critFinal = critChance * (100-miss)/100;
     var critSearing = Math.min(100, (1.7 + crit + (intel/60.6) + 3*talentSearingPain + 1*Boolean(talentSearingPain))) * (100-miss)/100;
     var regularHit = 100-miss-critFinal;
+    var castSpeed = 1 + haste/100;
     var shadowVuln = (1 - Math.pow(1 - critFinal/100*(1-miss/100), 4/(1-miss/100))) * 0.2*talentShadowBolt * (primary == "shadowBolt");
     
     // Time For Loop Starting
@@ -979,19 +984,23 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     else if (q==6) {
       var penDPS  = math.sum(DPS)/DPS.length;
       var penVec  = DPS;}
+    else if (q==7) {
+      var hasteDPS = math.sum(DPS)/DPS.length;
+      var hasteVec = DPS;}
     else {
       var baseDPS = math.sum(DPS)/DPS.length;
       var baseVec = DPS;}
   } //Loop with q
-  var SPVal   = (SPDPS-baseDPS);
-  var intVal  = (intDPS-baseDPS)/10;
-  var critVal = (critDPS-baseDPS);
-  var hitVal  = (hitDPS-baseDPS);
-  var penVal  = (penDPS-baseDPS);
-  var mp5Val  = (mp5DPS-baseDPS)/3;
+  var SPVal    = (SPDPS-baseDPS);
+  var intVal   = (intDPS-baseDPS)/10;
+  var critVal  = (critDPS-baseDPS);
+  var hitVal   = (hitDPS-baseDPS);
+  var penVal   = (penDPS-baseDPS);
+  var mp5Val   = (mp5DPS-baseDPS)/3;
+  var hasteVal = (hasteDPS-baseDPS);
 
   var dpsOutput = "<br><br><b><span style='font-size:22px'>&nbsp;" + formatNumber(math.sum(baseVec)/baseVec.length,2) + " <span style='font-size:14px'>DPS</span></b>";
-  var statWeightOutput = "<br><b><span style='font-size:18px'>Crit Rating = " + formatNumber(critVal/SPVal,2) + " </span><span style='font-size:14px'>SP</span><br><span style='font-size:18px'>Hit&nbsp Rating = " + formatNumber(hitVal/SPVal,2) + " </span><span style='font-size:14px'>SP</span></b>";
+  var statWeightOutput = "<br><b><span style='font-size:18px'>Crit&nbsp Rating = " + formatNumber(critVal/SPVal,2) + " </span><span style='font-size:14px'>SP</span><br><span style='font-size:18px'>Hit&nbsp&nbsp Rating = " + formatNumber(hitVal/SPVal,2) + " </span><span style='font-size:14px'>SP</span><br><span style='font-size:18px'>Haste Rating = " + formatNumber(hasteVal/SPVal,2) + " </span><span style='font-size:14px'>SP</span></b>";
   if (arguments.length == 3) {
     console.timeEnd('Timer')
     return formatNumber(math.sum(baseVec)/baseVec.length,2);
@@ -1057,6 +1066,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   intVec = math.divide(math.subtract(intVec,baseVec),10);
   mp5Vec = math.divide(math.subtract(mp5Vec,baseVec),3);
   penVec = math.subtract(penVec,baseVec);
+  hasteVec = math.subtract(hasteVec,baseVec);
   
   document.getElementById('statWeightCanvas').remove();
   document.getElementById('statWeightWrapper').innerHTML = '<canvas id="statWeightCanvas" style="background-color:#999999;" width=300px height=200px></canvas>';
@@ -1100,6 +1110,13 @@ function runSim(gearTable, baseLine, makeBaseLine) {
         lineTension: 0,
         backgroundColor: 'rgba(255, 128, 0, 0.4)',
         borderColor: 'rgba(255, 128, 0, 0.3)'},
+                 {
+        label: "Haste Value",
+        data: math.dotDivide(hasteVec,SPVec),
+        fill: false,
+        lineTension: 0,
+        backgroundColor: 'rgba(0, 100, 0, 0.4)',
+        borderColor: 'rgba(0, 100, 0, 0.3)'},
                  {
         label: "DPS per SP",
         data: SPVec,
