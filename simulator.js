@@ -520,7 +520,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     finisherCost = searingCost;
     finisherTime = GCD;}
   
-  // For Loop Starting
+  // Q For Loop Starting
   for (var q=1; q<=7; q++) {
     if (q==1) {
       ShP = ShP + 1;
@@ -531,12 +531,12 @@ function runSim(gearTable, baseLine, makeBaseLine) {
       int = int + 10;}
     else if (q==3) {
       int = int - 10;
-      crit = crit + 1;}
+      crit = crit + 1/22.08;}
     else if (q==4) {
-      crit = crit - 1;
-      hit = hit + 1;}
+      crit = crit - 1/22.08;
+      hit = hit + 1/12.615;}
     else if (q==5) {
-      hit = hit - 1;
+      hit = hit - 1/12.615;
       mp5 = mp5 + 3;}
     else if (q==6) {
       mp5 = mp5 - 3;
@@ -554,7 +554,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     
     var intel = Math.round(int*(1 + 0.1*kings)*(1 + 0.05*gnome));
     var manaMain = Math.round((manaBase + intel*15) * (1 + 0.01*talentFelIntellect));
-    var tapGain = (424+ShP*0.8) * (1 + 0.1*talentLifeTap) * lifeTap;
+    var tapGain = (582+ShP*0.8) * (1 + 0.1*talentLifeTap) * lifeTap;
     var avgNonCrit = (575.5+(ShP*(6/7+0.04*talentShadowFlame))) * shadowMultiplier;
     var avgBurn = (631+(ShP*3/7)) * shadowMultiplier * talentShadowburn;
     var avgSearing = (295+(FiP*3/7)) * fireMultiplier;
@@ -568,6 +568,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var regularHit = 100-miss-critFinal;
     var shadowVuln = (1 - Math.pow(1 - critFinal/100*(1-miss/100), 4/(1-miss/100))) * 0.2*talentShadowBolt * (primary == "shadowBolt");
     
+    // Time For Loop Starting
     var DPS = new Array;
     var lifeTaps = new Array;
     var manaLeft = new Array;
@@ -822,20 +823,20 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           fireRes = levelRes + Math.max(0, Number(document.getElementById("bossFireRes").value) - pen - 88*Boolean(CoE));
           shadowReduction = 1 - shadowRes/400;
           fireReduction = 1 - fireRes/400;
-          shadowMultiplier = (1 + piBonus*0.20) * shadowReduction * (1 + shadowDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + weaving) * (1 + 0.02*talentShadowMastery);
-          fireMultiplier = (1 + piBonus*0.20) * fireReduction * (1 + fireDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + scorch) * (1 + 0.02*talentEmberstorm);
-          tapGain = (424+ShP*0.8) * (1 + 0.1*document.getElementById("talentLifeTap").parentNode.children[1].innerHTML) * lifeTap;
-          avgNonCrit = (510+(ShP*6/7)) * shadowMultiplier;
-          avgBurn = (488+(ShP*3/7)) * shadowMultiplier * document.getElementById("talentShadowburn").parentNode.children[1].innerHTML;
-          avgSearing = (226+(FiP*3/7)) * fireMultiplier;
-          avgImmo = (332*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*document.getElementById("talentImmolate").parentNode.children[1].innerHTML);
-          avgImmoR7 = (279*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*document.getElementById("talentImmolate").parentNode.children[1].innerHTML);
+          shadowMultiplier = (1 + piBonus*0.20) * shadowReduction * (1 + shadowDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + weaving) * (1 + 0.02*talentShadowMastery) * (1 + 0.05*talentSoulLink);;
+          fireMultiplier = (1 + piBonus*0.20) * fireReduction * (1 + fireDS*0.15*talentDemonicSacrifice) * (1 + CoE) * (1 + scorch) * (1 + 0.02*talentEmberstorm) * (1 + 0.05*talentSoulLink);;
+          tapGain = (582+ShP*0.8) * (1 + 0.1*talentLifeTap) * lifeTap;
+          avgNonCrit = (575.5+(ShP*(6/7+0.04*talentShadowFlame))) * shadowMultiplier;
+          avgBurn = (631+(ShP*3/7)) * shadowMultiplier * talentShadowburn;
+          avgSearing = (295+(FiP*3/7)) * fireMultiplier;
+          avgImmo = (332*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*talentImmolate);
+          avgImmoR7 = (279*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*talentImmolate);
           miss = Math.max(1, 100 - baseHit - hit);
           critChance = Math.min(100, (1.7 + crit + (intel/60.6)));
           critFinal = critChance * (100-miss)/100;
-          critSearing = Math.min(100, (1.7 + crit + (intel/60.6) + 2*document.getElementById("talentSearingPain").parentNode.children[1].innerHTML)) * (100-miss)/100;
+          critSearing = Math.min(100, (1.7 + crit + (intel/60.6) + 3*talentSearingPain + 1*Boolean(talentSearingPain))) * (100-miss)/100;
           regularHit = 100-miss-critFinal;
-          shadowVuln = (1 - Math.pow(1 - critFinal/100*(1-miss/100), 4/(1-miss/100))) * 0.2*document.getElementById("talentShadowBolt").parentNode.children[1].innerHTML * (primary == "shadowBolt");
+          shadowVuln = (1 - Math.pow(1 - critFinal/100*(1-miss/100), 4/(1-miss/100))) * 0.2*talentShadowBolt * (primary == "shadowBolt");
         }
         
         // If statement that adds time
