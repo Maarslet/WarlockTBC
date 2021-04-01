@@ -521,6 +521,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     finisherCost = searingCost;
     finisherTime = GCD;}
   
+  var timeLeft, timeDif, timePast
   // Q For Loop Starting
   for (var q=1; q<=8; q++) {
     if (arguments.length > 0 && q>1) {
@@ -591,7 +592,9 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var updateStuff = false;
     var ShPOld = ShP, FiPOld = FiP, critOld = crit, hitOld = hit, penOld = pen;
     for (var i=0; i<timeVec.length; i++) {
-      var doom = false, agony = false, corruption = false, immolate = false, siphon = false, unstable = false, time = threatTime, damage = 0, mana = manaMain, timePast = 0, SBC = 0, trinketTime = 0, trinket2Time, trinket1CD = 0, trinket2CD = 0, trinket1Bonus = false, trinket2Bonus = false, piTime = 0, piCD = 0, ZHCStacks = 0, piBonus = false;
+      var doom = false, agony = false, corruption = false, immolate = false, siphon = false, unstable = false, time = threatTime, damage = 0, mana = manaMain;
+      var timePast = 0, SBC = 0, trinketTime = 0, trinket2Time, trinket1CD = 0, trinket2CD = 0, trinket1Bonus = false, trinket2Bonus = false, piTime = 0, piCD = 0; 
+      var ZHCStacks = 0, piBonus = false, potionTime = 0, potionCD = 0, potionBonus = false;
       ShP = ShPOld, FiP = FiPOld, crit = critOld, hit = hitOld, pen = penOld;
       if (useDoom == true)
         var doomUse = 0;
@@ -625,7 +628,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
         unstable = true;}
       
       while (time <= timeVec[i]) {
-        var timeLeft = timeVec[i]-time;
+        timeLeft = timeVec[i]-time;
         mana += (time-timePast) * mp5/5;
         trinketTime -= time-timePast;
         trinket2Time -= time-timePast;
@@ -633,6 +636,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
         trinket2CD -= time-timePast;
         piTime -= time-timePast;
         piCD -= time-timePast;
+        potionTime -= time-timePast;
+        potionCD -= time-timePast;
         timePast = time;
         
         if (doom == true && time>=doomUse+doomDuration)
@@ -648,6 +653,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
         if (unstable == true && time>=unstableUse+unstableDuration)
           unstable = false;
         
+        // Removal of effects
         if (ZHCStacks > 0) {
           ZHCStacks--;
           ShP -= 17;
@@ -727,6 +733,20 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           piBonus = false;
           updateStuff = true;
         }
+        
+        if (potionBonus == true && potionTime <= 0) {
+          if (potion == "haste") {
+            potionBonus = false;
+            haste -= 400/15.77;
+          }
+          else if (potion == "destruction") {
+            potionBonus = false;
+            crit -= 2;
+            ShP -= 120;
+            FiP -= 120;
+          }
+        }
+        
         
         if (TREOS+ZHC+TOEP+HCOD+REEL+EOM > 0 && trinketTime <= 0 && trinket1CD <= 0) {
           if ((primary == "shadowBolt")+(SBC > 4) == 2 || primary !== "shadowBolt") {
@@ -829,6 +849,35 @@ function runSim(gearTable, baseLine, makeBaseLine) {
             piBonus = true;
             piTime = 15.1*numPI;
             piCD = 180;
+            updateStuff = true;
+          }
+        }
+        
+        // Potions
+        if (potionCD <= 0 && ["rejuvenation", "haste", "destruction", "mana"].includes(potion)) {
+          if ((primary == "shadowBolt")+(SBC > 4) == 2 || primary !== "shadowBolt") {
+            if (potion == "rejuvenation") {
+              mana += 2200;
+              potionCD = 120;
+            }
+            else if (potion == "haste") {
+              haste += 400/15.77;
+              potionCD = 120;
+              potionTime = 14.9;
+              potionBonus = true;
+            }
+            else if (potion == "destruction") {
+              crit += 2;
+              ShP += 120;
+              FiP += 120;
+              potionCD = 120;
+              potionTime = 14.9;
+              potionBonus = true;
+            }
+            else if (potion == "mana") {
+              mana += 2400;
+              potionCD = 120;
+            }
             updateStuff = true;
           }
         }
