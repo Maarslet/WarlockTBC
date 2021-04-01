@@ -1140,7 +1140,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
       }]
     },
     options: {
-      scales: {xAxes: [{ticks: {autoSkipPadding: 2}, scaleLabel: {display: true, labelString: "Fight Duration", padding: 0}}], yAxes: [{ticks: {beginAtZero: true, max: 1600}, scaleLabel: {display: true, labelString: "DPS", padding: 0}}] },
+      scales: {xAxes: [{ticks: {autoSkipPadding: 2}, scaleLabel: {display: true, labelString: "Fight Duration", padding: 0}}], yAxes: [{ticks: {beginAtZero: true}, scaleLabel: {display: true, labelString: "DPS", padding: 0}}] },
       animation: {duration: 0},
       //events: ['click'],
       title: {display: true, fontSize: 20, text: "DPS Graph"},
