@@ -83,7 +83,9 @@
       }
       
       function radioClick(element) {
-        element.checked = false;
+        setTimeout(function() { 
+          element.checked = false;
+          }, 30);
       }
       
       $.extend( $.fn.dataTable.defaults, {
