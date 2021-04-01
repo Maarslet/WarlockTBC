@@ -892,7 +892,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           }
         }
         
-        if (potionCD <= 0 && ["flameCap", "demonicRune"].includes(usableItem)) {
+        if (usableCD <= 0 && ["flameCap", "demonicRune"].includes(usableItem)) {
           if ((primary == "shadowBolt")+(SBC > 4) == 2 || primary !== "shadowBolt") {
             if (usableItem == "flameCap") {
               FiP += 80;
