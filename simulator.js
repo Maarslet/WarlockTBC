@@ -550,9 +550,9 @@ function runSim(gearTable, baseLine, makeBaseLine) {
       pen = pen + 1;}
     else if (q==7) {
       pen = pen - 1;
-      haste = haste + 1/15.77;}
+      haste = haste + 100/15.77;}
     else if (q==8) {
-      haste = haste - 1/15.77;}
+      haste = haste - 100/15.77;}
     
     var shadowRes = levelRes + Math.max(0, Number(document.getElementById("bossShadowRes").value) - pen - 88*Boolean(CoE));
     var fireRes = levelRes + Math.max(0, Number(document.getElementById("bossFireRes").value) - pen - 88*Boolean(CoE));
@@ -1086,7 +1086,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var hitVal   = (hitDPS-baseDPS);
   var penVal   = (penDPS-baseDPS);
   var mp5Val   = (mp5DPS-baseDPS)/3;
-  var hasteVal = (hasteDPS-baseDPS);
+  var hasteVal = (hasteDPS-baseDPS)/100;
 
   var dpsOutput = "<br><br><b><span style='font-size:22px'>&nbsp;" + formatNumber(math.sum(baseVec)/baseVec.length,2) + " <span style='font-size:14px'>DPS</span></b>";
   var statWeightOutput = "<br><b><span style='font-size:18px'>Crit&nbsp Rating = " + formatNumber(critVal/SPVal,2) + " </span><span style='font-size:14px'>SP</span><br><span style='font-size:18px'>Hit&nbsp&nbsp Rating = " + formatNumber(hitVal/SPVal,2) + " </span><span style='font-size:14px'>SP</span><br><span style='font-size:18px'>Haste Rating = " + formatNumber(hasteVal/SPVal,2) + " </span><span style='font-size:14px'>SP</span></b>";
@@ -1155,7 +1155,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   intVec = math.divide(math.subtract(intVec,baseVec),10);
   mp5Vec = math.divide(math.subtract(mp5Vec,baseVec),3);
   penVec = math.subtract(penVec,baseVec);
-  hasteVec = math.subtract(hasteVec,baseVec);
+  hasteVec = math.divide(math.subtract(hasteVec,baseVec),100);
   
   document.getElementById('statWeightCanvas').remove();
   document.getElementById('statWeightWrapper').innerHTML = '<canvas id="statWeightCanvas" style="background-color:#999999;" width=300px height=200px></canvas>';
