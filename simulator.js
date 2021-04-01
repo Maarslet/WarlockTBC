@@ -594,7 +594,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     for (var i=0; i<timeVec.length; i++) {
       var doom = false, agony = false, corruption = false, immolate = false, siphon = false, unstable = false, time = threatTime, damage = 0, mana = manaMain;
       var timePast = 0, SBC = 0, trinketTime = 0, trinket2Time, trinket1CD = 0, trinket2CD = 0, trinket1Bonus = false, trinket2Bonus = false, piTime = 0, piCD = 0; 
-      var ZHCStacks = 0, piBonus = false, potionTime = 0, potionCD = 0, potionBonus = false;
+      var ZHCStacks = 0, piBonus = false, potionTime = 0, potionCD = 0, potionBonus = false, usableTime = 0, usableCD = 0, usableBonus = false;
       ShP = ShPOld, FiP = FiPOld, crit = critOld, hit = hitOld, pen = penOld;
       if (useDoom == true)
         var doomUse = 0;
@@ -629,15 +629,18 @@ function runSim(gearTable, baseLine, makeBaseLine) {
       
       while (time <= timeVec[i]) {
         timeLeft = timeVec[i]-time;
-        mana += (time-timePast) * mp5/5;
-        trinketTime -= time-timePast;
-        trinket2Time -= time-timePast;
-        trinket1CD -= time-timePast;
-        trinket2CD -= time-timePast;
-        piTime -= time-timePast;
-        piCD -= time-timePast;
-        potionTime -= time-timePast;
-        potionCD -= time-timePast;
+        timeDif = time-timePast;
+        mana += timeDif * mp5/5;
+        trinketTime -= timeDif;
+        trinket2Time -= timeDif;
+        trinket1CD -= timeDif;
+        trinket2CD -= timeDif;
+        piTime -= timeDif;
+        piCD -= timeDif;
+        potionTime -= timeDif;
+        potionCD -= timeDif;
+        usableTime -= timeDif;
+        usableCD -= timeDif;
         timePast = time;
         
         if (doom == true && time>=doomUse+doomDuration)
@@ -747,7 +750,14 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           }
         }
         
+        if (usableBonus == true && usableTime <= 0) {
+          if (usableItem = "flameCap") {
+            usableBonus = false;
+            FiP -= 80;
+          }
+        }
         
+        // Trinkets, Potions, and non-GCD cooldowns in general
         if (TREOS+ZHC+TOEP+HCOD+REEL+EOM > 0 && trinketTime <= 0 && trinket1CD <= 0) {
           if ((primary == "shadowBolt")+(SBC > 4) == 2 || primary !== "shadowBolt") {
             if (trinket1 == "TREOS") {
@@ -879,6 +889,21 @@ function runSim(gearTable, baseLine, makeBaseLine) {
               potionCD = 120;
             }
             updateStuff = true;
+          }
+        }
+        
+        if (potionCD <= 0 && ["flameCap", "demonicRune"].includes(usableItem)) {
+          if ((primary == "shadowBolt")+(SBC > 4) == 2 || primary !== "shadowBolt") {
+            if (usableItem == "flameCap") {
+              FiP += 80;
+              usableCD = 180;
+              usableTime = 59.9;
+              usableBonus = true;
+            }
+            else if (usableItem == "demonicRune") {
+              mana += 1200;
+              usableCD = 120;
+            }
           }
         }
         
