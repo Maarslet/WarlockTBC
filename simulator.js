@@ -514,7 +514,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var primaryCost = drainLifeCost;
     var primaryTime = drainLifeTime;
     var shadowDS = true;}
-  eæse if (primary == "incinerate") {
+  else if (primary == "incinerate") {
     var primaryCost = incinerateCost;
     var primaryTime = incinerateTime;
     var fireDS = true;}
