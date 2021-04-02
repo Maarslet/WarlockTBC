@@ -473,6 +473,9 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var deathCoilCost = 600 * (1 - 0.15*bonusShadowCost);
   var drainLifeCost = 425 * (1 - 0.15*bonusShadowCost);
   var drainLifeTime = 5;
+  var incinerateCost = 355 * (1 - 0.01*talentCataclysm);
+  var incinerateTime = 2.5 * (1 - 0.02*talentEmberstorm);
+  
   var GCD = 1.5;
   var corruptionCost = 370 * (1 - 0.15*bonusShadowCost);
   var corruptionDuration = 18;
@@ -570,6 +573,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var avgSearing = (295+(FiP*3/7)) * fireMultiplier;
     var avgImmo = (332*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*talentImmolate);
     var avgImmoR7 = (279*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*talentImmolate);
+    var avgIncinerate = (479+(ShP*(5/7+0.04*talentShadowFlame)) + 119.5*useImmolate) * fireMultiplier;
     
     var miss = Math.max(1, 100 - baseHit - hit);
     var critChance = Math.min(100, (1.7 + crit + (intel/60.6)));
@@ -584,6 +588,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     drainLifeTime = 5/castSpeed;
     corruptionTime = Math.max(GCD, 2 - 0.4*talentCorruption)/castSpeed;
     immolateTime = (2 - 0.1*talentBane - 0.2*bonusImmolatePvP)/castSpeed;
+    incinerateTime = (2.5 * (1 - 0.02*talentEmberstorm))/castSpeed;
     
     // Time For Loop Starting
     var DPS = new Array;
@@ -1006,6 +1011,11 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           mana -= sbCost;
           time += sbTime;
           SBC += warlockCount;}
+        
+        else if (primary == "incinerate" && incinerateTime <= timeLeft) {
+          damage += (avgIncinerate*critFinal*critMultiplier + avgIncinerate*regularHit)/100;
+          mana -= incinerateCost;
+          time += incinerateTime;}
         
         else if (primary == "searingPain" && GCD <= timeLeft) {
           damage += (avgSearing*critSearing*critMultiplier + avgSearing*(100-miss-critSearing))/100;
