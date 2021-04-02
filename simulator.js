@@ -511,9 +511,13 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var primaryTime = immolateTime;
     var fireDS = true;}
   else if (primary == "drainLife") {
-    var primaryCost = drainLifeTime;
+    var primaryCost = drainLifeCost;
     var primaryTime = drainLifeTime;
     var shadowDS = true;}
+  eæse if (primary == "incinerate") {
+    var primaryCost = incinerateCost;
+    var primaryTime = incinerateTime;
+    var fireDS = true;}
   
   var finisherCost = 0, finisherTime = 0;
   if (finisher == "shadowburn") {
@@ -573,7 +577,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var avgSearing = (295+(FiP*3/7)) * fireMultiplier;
     var avgImmo = (332*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*talentImmolate);
     var avgImmoR7 = (279*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*talentImmolate);
-    var avgIncinerate = (479+(ShP*(5/7+0.04*talentShadowFlame)) + 119.5*useImmolate) * fireMultiplier;
+    var avgIncinerate = (479+(FiP*(5/7+0.04*talentShadowFlame)) + 119.5*useImmolate) * fireMultiplier;
     
     var miss = Math.max(1, 100 - baseHit - hit);
     var critChance = Math.min(100, (1.7 + crit + (intel/60.6)));
@@ -926,6 +930,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           avgSearing = (295+(FiP*3/7)) * fireMultiplier;
           avgImmo = (332*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*talentImmolate);
           avgImmoR7 = (279*(1+0.05*bonusImmolateDMG) + (FiP*0.2)) * fireMultiplier * (1 + 0.05*talentImmolate);
+          avgIncinerate = (479+(FiP*(5/7+0.04*talentShadowFlame)) + 119.5*useImmolate) * fireMultiplier;
           miss = Math.max(1, 100 - baseHit - hit);
           critChance = Math.min(100, (1.7 + crit + (intel/60.6)));
           critFinal = critChance * (100-miss)/100;
@@ -938,6 +943,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
           drainLifeTime = 5/castSpeed;
           corruptionTime = Math.max(GCD, 2 - 0.4*talentCorruption)/castSpeed;
           immolateTime = (2 - 0.1*talentBane - 0.2*bonusImmolatePvP)/castSpeed;
+          incinerateTime = (2.5 * (1 - 0.02*talentEmberstorm))/castSpeed;
         }
         
         // If statement that adds time
