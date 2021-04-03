@@ -614,11 +614,452 @@ function createGear() {
       SP: 15,
       id: 22657
     }, {
+      name: "Jeklik's Opaline Talisman",
+      source: "ZG",
+      SP: 22,
+      mp5: 3,
+      id: 19923
+    }, {
+      name: "Orb of the Darkmoon",
+      source: "Vanilla Quest",
+      sta: 11,
+      spi: 8,
+      SP: 22,
+      id: 19426
+    }, {
+      name: "Kezan's Unstoppable Taint",
+      source: "ZG",
+      sta: 13,
+      int: 8,
+      SP: 14,
+      set: "ZG",
+      id: 19605
+    }, {
+      name: "Anastari Heirloom",
+      source: "Stratholme",
+      sta: 15,
+      ShP: 13,
+      id: 18728
+    }],
+    
+    shoulder: [{
+      name: "Plagueheart Shoulderpads",
+      source: "Naxx",
+      armor: 111,
+      sta: 22,
+      int: 12,
+      SP: 36,
+      hit: 8,
+      set: "T3",
+      id: 22507
+    }, {
+      name: "Rime Covered Mantle",
+      source: "Naxx",
+      armor: 108,
+      sta: 12,
+      int: 12,
+      SP: 39,
+      crit: 14,
+      id: 22983
+    }, {
+      name: "Doomcaller's Mantle",
+      source: "AQ40",
+      armor: 102,
+      sta: 20,
+      int: 11,
+      spi: 4,
+      SP: 28,
+      hit: 8,
+      pen: 10,
+      set: "T2.5",
+      id: 21335
+    }, {
+      name: "Mantle of the Blackwing Cabal",
+      source: "BWL",
+      armor: 96,
+      sta: 12,
+      int: 16,
+      SP: 34,
+      id: 19370
+    }, {
+      name: "Field Marshal's Dreadweave Shoulders",
+      source: "Vanilla PvP",
+      armor: 115,
+      sta: 24,
+      int: 17,
+      SP: 25,
+      set: "PvPEpic",
+      id: 17580
+    }, {
+      name: "Lieutenant Commander's Dreadweave Spaulders",
+      source: "Vanilla PvP",
+      armor: 75,
+      sta: 17,
+      int: 13,
+      SP: 12,
+      crit: 14,
+      set: "PvPRare",
+      id: 23311
+    }, {
+      name: "Nemesis Spaulders",
+      source: "BWL",
+      armor: 99,
+      sta: 20,
+      int: 13,
+      spi: 6,
+      SP: 23,
+      hp5: 4,
+      set: "T2",
+      id: 16932
+    }, {
+      name: "Mantle of Maz'Nadir",
+      source: "AQ20",
+      armor: 78,
+      sta: 11,
+      int: 15,
+      spi: 7,
+      SP: 21,
+      id: 21468
+    }, {
+      name: "Burial Shawl",
+      source: "Scholomance",
+      armor: 65,
+      int: 16,
+      SP: 20,
+      id: 18681
+    }, {
+      name: "Felcloth Shoulders",
+      source: "Vanilla Crafting",
+      armor: 60,
+      spi: 5,
+      ShP: 26,
+      id: 14112
+    }, {
+      name: "Zandalar Demoniac's Mantle",
+      source: "ZG",
+      armor: 81,
+      sta: 23,
+      int: 19,
+      SP: 12,
+      set: "ZG",
+      id: 19849
+    }, {
+      name: "Felheart Shoulder Pads",
+      source: "MC",
+      armor: 87,
+      sta: 25,
+      int: 17,
+      spi: 7,
+      SP: 9,
+      set: "T1",
+      id: 16807
+    }, {
+      name: "Mantle of Phrenic Power",
+      source: "AQ40",
+      armor: 99,
+      sta: 20,
+      int: 20,
+      FiP: 33,
+      id: 21686
+    }],
+    
+    back: [{
+      name: "Cloak of the Necropolis",
+      source: "Naxx",
+      armor: 77,
+      sta: 12,
+      int: 11,
+      SP: 26,
+      hit: 8,
+      crit: 14,
+      id: 23050
+    }, {
+      name: "Cloak of the Devoured",
+      source: "AQ40",
+      armor: 76,
+      sta: 11,
+      int: 10,
+      SP: 30,
+      hit: 8,
+      id: 22731
+    }, {
+      name: "Cloak of Consumption",
+      source: "ZG",
+      armor: 60,
+      int: 10,
+      SP: 23,
+      hit: 8,
+      id: 19857
+    }, {
+      name: "Cloak of the Brood Lord",
+      source: "BWL",
+      armor: 72,
+      sta: 10,
+      int: 14,
+      SP: 28,
+      id: 19378
+    }, {
+      name: "Veil of Eclipse",
+      source: "Naxx",
+      armor: 72,
+      sta: 10,
+      int: 10,
+      SP: 28,
+      pen: 10,
+      id: 23017
+    }, {
+      name: "Cape of the Trinity",
+      source: "AQ40",
+      armor: 65,
+      sta: 17,
+      int: 12,
+      SP: 21,
+      id: 21697
+    }, {
+      name: "Cloak of the Hakkari Worshippers",
+      source: "ZG",
+      armor: 48,
+      sta: 6,
+      int: 6,
+      SP: 23,
+      id: 22711
+    }, {
+      name: "Sapphiron Drape",
+      source: "Onyxia",
+      armor: 63,
+      sta: 10,
+      int: 17,
+      SP: 14,
+      id: 17078
+    }, {
+      name: "Shroud of Unspoken Names",
+      source: "AQ20",
+      armor: 59,
+      sta: 16,
+      int: 9,
+      SP: 18,
+      set: "AQ20",
+      id: 21418
+    }, {
+    }],
+    
+    chest: [{
+      name: "Plagueheart Robe",
+      source: "Naxx",
+      armor: 158,
+      sta: 27,
+      int: 22,
+      SP: 51,
+      hit: 8,
+      crit: 14,
+      set: "T3",
+      id: 22504
+    }, {
+      name: "Bloodvine Vest",
+      source: "Vanilla Crafting",
+      armor: 92,
+      int: 13,
+      SP: 27,
+      hit: 16,
+      set: "Bloodvine",
+      id: 19682
+    }, {
+      name: "Garb of Royal Ascension",
+      source: "AQ40",
+      armor: 124,
+      sta: 21,
+      SP: 30,
+      hit: 16,
+      id: 21838
+    }, {
+      name: "Crystal Webbed Robe",
+      source: "Naxx",
+      armor: 147,
+      sta: 25,
+      int: 19,
+      SP: 53,
+      id: 23220
+    }, {
+      name: "Doomcaller's Robes",
+      source: "AQ40",
+      armor: 151,
+      sta: 23,
+      int: 17,
+      spi: 7,
+      SP: 41,
+      crit: 14,
+      pen: 20,
+      set: "T2.5",
+      id: 21334
+    }, {
+      name: "Robe of Volatile Power",
+      source: "MC",
+      armor: 116,
+      sta: 10,
+      int: 15,
+      spi: 10,
+      SP: 23,
+      crit: 28,
+      id: 19145
+    }, {
+      name: "Robe of Undead Cleansing",
+      source: "Vanilla Quest",
+      armor: 89,
+      sta: 12,
+      int: 13,
+      SP: 48,
+      set: "UDC",
+      id: 23085
+    }, {
+      name: "Nemesis Robes",
+      source: "BWL",
+      armor: 132,
+      sta: 26,
+      int: 16,
+      spi: 8,
+      SP: 32,
+      crit: 14,
+      set: "T2",
+      id: 16931
+    }, {
+      name: "Vestments of the Shifting Sands",
+      source: "AQ20",
+      armor: 116,
+      sta: 20,
+      int: 14,
+      spi: 8,
+      SP: 32,
+      crit: 14,
+      id: 21499
+    }, {
+      name: "Robe of the Void",
+      source: "Vanilla Crafting",
+      armor: 109,
+      sta: 14,
+      SP: 46,
+      id: 14153
+    }, {
+      name: "Field Marshal's Dreadweave Robe",
+      source: "Vanilla PvP",
+      armor: 169,
+      sta: 30,
+      int: 24,
+      SP: 32,
+      set: "PvPEpic",
+      id: 17581
+    }, {
+      name: "Knight-Captain's Dreadweave Tunic",
+      source: "Vanilla PvP",
+      armor: 96,
+      sta: 20,
+      int: 20,
+      SP: 25,
+      set: "PvPRare",
+      id: 23297
+    }, {
+      name: "Robes of the Battleguard",
+      source: "AQ40",
+      armor: 132,
+      sta: 23,
+      int: 17,
+      spi: 8,
+      SP: 36,
+      pen: 20,
+      id: 21671
+    }, {
+      name: "Zandalar Demoniac's Robe",
+      source: "ZG",
+      armor: 114,
+      sta: 35,
+      SP: 27,
+      hit: 8,
+      set: "ZG",
+      id: 20033
+    }, {
+      name: "Felheart Robes",
+      source: "MC",
+      armor: 116,
+      sta: 31,
+      int: 20,
+      SP: 13,
+      hit: 8,
+      set: "T1",
+      id: 16809
+    }, {
+      name: "Deathmist Robe",
+      source: "Vanilla Quest",
+      armor: 106,
+      sta: 27,
+      int: 22,
+      SP: 12,
+      crit: 14,
+      set: "T0.5",
+      id: 22075
+    }, {
+      name: "Dreamweave Vest",
+      source: "Vanilla Crafting",
+      armor: 65,
+      int: 9,
+      spi: 14,
+      SP: 18,
+      id: 10021
+    }, {
+      name: "Flarecore Robe",
+      source: "Vanilla Crafting",
+      armor: 116,
+      sta: 35,
+      SP: 23,
+      id: 19156
+    }],
+    
+    wrist: [{
+      name: "Rockfury Bracers",
+      source: "Vanilla Quest",
+      armor: 48,
+      sta: 7,
+      SP: 27,
+      hit: 8,
+      id: 21186
+    }, {
+      name: "Bracers of Arcane Accuracy",
+      source: "BWL",
+      armor: 57,
+      sta: 9,
+      int: 12,
+      SP: 21,
+      hit: 8,
+      id: 19374
+    }, {
+      name: "The Soul Harvester's Bindings",
+      source: "Naxx",
+      armor: 63,
+      sta: 14,
+      int: 11,
+      SP: 21,
+      crit: 14,
+      id: 23021
+    }, {
+      name: "Burrower Bracers",
+      source: "AQ40",
+      armor: 61,
+      sta: 10,
+      int: 13,
+      SP: 28,
+      id: 21611
+    }, {
+      name: "Plagueheart Bindings",
+      source: "Naxx",
+      armor: 66,
+      sta: 23,
+      int: 14,
+      SP: 23,
+      set: "T3",
+      id: 22511
+    }, {
       
       
       
-      
-    }]
+    }],
   };
   return gear
 }
