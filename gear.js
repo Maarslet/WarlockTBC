@@ -1,1 +1,7 @@
-function(
+function loadGear() {
+  
+}
+
+function createGear() {
+  
+}
