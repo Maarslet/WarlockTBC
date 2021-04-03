@@ -1056,7 +1056,680 @@ function createGear() {
       set: "T3",
       id: 22511
     }, {
-      
+      name: "Bracers of Undead Cleansing",
+      source: "Vanilla Quest",
+      armor: 39,
+      sta: 6,
+      int: 7,
+      SP: 26,
+      set: "UDC",
+      id: 23091
+    }, {
+      name: "Shackles of the Unscarred",
+      source: "AQ20",
+      armor: 55,
+      sta: 9,
+      int: 12,
+      SP: 21,
+      pen: 10,
+      id: 21464
+    }, {
+      name: "Dryad's Wrist Bindings",
+      source: "Vanilla PvP",
+      armor: 50,
+      sta: 8,
+      int: 8,
+      spi: 7,
+      SP: 22,
+      id: 19595
+    }, {
+      name: "Zandalar Demoniac's Wraps",
+      source: "ZG",
+      armor: 47,
+      sta: 15,
+      int: 8,
+      SP: 16,
+      set: "ZG",
+      id: 19848
+    }, {
+      name: "Nemesis Bracers",
+      source: "BWL",
+      armor: 58,
+      sta: 21,
+      int: 11,
+      spi: 6,
+      SP: 15,
+      set: "T2",
+      id: 16934
+    }, {
+      name: "Felheart Bracers",
+      source: "MC",
+      armor: 51,
+      sta: 18,
+      int: 11,
+      spi: 8,
+      SP: 13,
+      set: "T1",
+      id: 16804
+    }, {
+      name: "Sublime Wristguards",
+      source: "Dire Maul",
+      armor: 37,
+      sta: 6,
+      int: 10,
+      spi: 6,
+      SP: 12,
+      id: 18497
+    }, {
+      name: "Deathmist Bracers",
+      source: "Vanilla Quest",
+      armor: 40,
+      sta: 12,
+      int: 12,
+      SP: 8,
+      set: "T0.5",
+      id: 22071
+    }],
+    
+    hands: [{                         // Hands
+      name: "Dark Storm Gauntlets",
+      source: "AQ40",
+      armor: 95,
+      sta: 19,
+      int: 15,
+      SP: 37,
+      hit: 8,
+      id: 21585
+    }, {
+      name: "Ebony Flame Gloves",
+      source: "BWL",
+      armor: 82,
+      sta: 17,
+      int: 12,
+      ShP: 43,
+      id: 19407
+    }, {
+      name: "Plagueheart Gloves",
+      source: "Naxx",
+      armor: 95,
+      sta: 25,
+      int: 17,
+      SP: 26,
+      crit: 14,
+      set: "T3",
+      id: 22509
+    }, {
+      name: "Bloodtinged Gloves",
+      source: "ZG",
+      armor: 62,
+      sta: 10,
+      int: 10,
+      spi: 10,
+      SP: 19,
+      hit: 8,
+      id: 19929
+    }, {
+      name: "Gloves of Undead Cleansing",
+      source: "Vanilla Quest",
+      armor: 56,
+      sta: 10,
+      int: 10,
+      SP: 35,
+      set: "UDC",
+      id: 23084
+    }, {
+      name: "Deathmist Wraps",
+      source: "Vanilla Quest",
+      armor: 61,
+      sta: 16,
+      int: 13,
+      SP: 13,
+      hit: 8,
+      set: "T0.5",
+      id: 22077
+    }, {
+      name: "Nemesis Gloves",
+      source: "BWL",
+      armor: 83,
+      sta: 17,
+      int: 15,
+      SP: 15,
+      crit: 14,
+      hp5: 4,
+      set: "T2",
+      id: 16928
+    }, {
+      name: "Felcloth Gloves",
+      source: "Vanilla Crafting",
+      armor: 55,
+      sta: 9,
+      ShP: 33,
+      id: 18407
+    }, {
+      name: "Hands of Power",
+      source: "LBRS",
+      armor: 53,
+      int: 6,
+      spi: 6,
+      SP: 26,
+      id: 13253
+    }, {
+      name: "Felheart Gloves",
+      source: "MC",
+      armor: 72,
+      sta: 18,
+      int: 15,
+      spi: 8,
+      SP: 9,
+      crit: 14,
+      set: "T1",
+      id: 16805
+    }, {
+      name: "Marshal's Dreadweave Gloves",
+      source: "Vanilla PvP",
+      armor: 78,
+      sta: 20,
+      int: 6,
+      SP: 30,
+      set: "PvPEpic",
+      id: 17584
+    }, {
+      name: "Knight-Lieutenant's Dreadweave Handwraps",
+      source: "Vanilla PvP",
+      armor: 58,
+      sta: 14,
+      int: 4,
+      SP: 21,
+      set: "PvPRare",
+      id: 23282
+    }, {
+      name: "Dreamweave Gloves",
+      source: "Vanilla Crafting",
+      armor: 41,
+      int: 4,
+      spi: 7,
+      SP: 18,
+      id: 10019
+    }, {
+      name: "Gloves of the Hypnotic Flame",
+      source: "MC",
+      armor: 77,
+      sta: 18,
+      int: 19,
+      spi: 8,
+      SP: 9,
+      FiP: 23,
+      id: 18808
+    }, {
+      name: "Inferno Gloves",
+      source: "Vanilla Crafting",
+      armor: 55,
+      int: 9,
+      FiP: 33,
+      id: 18408
+    }],
+    
+    waist: [{                         // Waist
+      name: "Eyestalk Waist Cord",
+      source: "AQ40",
+      armor: 85,
+      sta: 10,
+      int: 9,
+      SP: 41,
+      crit: 14,
+      id: 22730
+    }, {
+      name: "Plagueheart Belt",
+      source: "Naxx",
+      armor: 85,
+      sta: 23,
+      int: 12,
+      SP: 34,
+      crit: 14,
+      set: "T3",
+      id: 22510
+    }, {
+      name: "Mana Igniting Cord",
+      source: "MC",
+      armor: 70,
+      sta: 12,
+      int: 16,
+      SP: 25,
+      crit: 14,
+      id: 19136
+    }, {
+      name: "Angelista's Grasp",
+      source: "BWL",
+      armor: 75,
+      sta: 17,
+      int: 20,
+      spi: 13,
+      hit: 16,
+      id: 19388
+    }, {
+      name: "Firemaw's Clutch",
+      source: "BWL",
+      armor: 74,
+      sta: 12,
+      int: 12,
+      SP: 35,
+      mp5: 5,
+      id: 19400
+    }, {
+      name: "Nemesis Belt",
+      source: "BWL",
+      armor: 74,
+      sta: 18,
+      int: 8,
+      spi: 6,
+      SP: 25,
+      crit: 14,
+      set: "T2",
+      id: 16933
+    }, {
+      name: "Ban'thok Sash",
+      source: "BRD",
+      armor: 43,
+      sta: 10,
+      int: 11,
+      SP: 12,
+      hit: 8,
+      id: 11622
+    }, {
+      name: "Sash of Whispered Secrets",
+      source: "MC",
+      armor: 70,
+      sta: 20,
+      ShP: 33,
+      hp5: 6,
+      id: 18809
+    }, {
+      name: "Belt of Untapped Power",
+      source: "ZG",
+      armor: 54,
+      sta: 6,
+      int: 7,
+      SP: 29,
+      id: 22716
+    }, {
+      name: "Felheart Belt",
+      source: "MC",
+      armor: 65,
+      sta: 18,
+      int: 15,
+      spi: 8,
+      SP: 20,
+      set: "T1",
+      id: 16806
+    }, {
+      name: "Clutch of Andros",
+      source: "Scholomance",
+      armor: 49,
+      sta: 9,
+      int: 19,
+      hit: 8,
+      id: 13956
+    }, {
+      name: "Deathmist Belt",
+      source: "Vanilla Quest",
+      armor: 52,
+      sta: 16,
+      int: 16,
+      SP: 12,
+      set: "T0.5",
+      id: 22070
+    }],
+    
+    legs: [{                    // Legs
+      name: "Leggings of Polarity",
+      source: "Naxx",
+      armor: 128,
+      sta: 20,
+      int: 14,
+      SP: 44,
+      crit: 28,
+      id: 23070
+    }, {
+      name: "Plagueheart Leggings",
+      source: "Naxx",
+      armor: 133,
+      sta: 30,
+      int: 25,
+      SP: 37,
+      crit: 14,
+      pen: 10,
+      set: "T3",
+      id: 22505
+    }, {
+      name: "Fel Infused Leggings",
+      source: "Vanilla Kazzak",
+      armor: 109,
+      sta: 21,
+      ShP: 64,
+      id: 19133
+    }, {
+      name: "Leggings of the Black Blizzard",
+      source: "AQ20",
+      armor: 110,
+      sta: 14,
+      int: 16,
+      spi: 8,
+      SP: 41,
+      crit: 14,
+      id: 21461
+    }, {
+      name: "Doomcaller's Trousers",
+      source: "AQ40",
+      armor: 123,
+      sta: 28,
+      int: 24,
+      spi: 9,
+      SP: 34,
+      crit: 14,
+      set: "T2.5",
+      id: 21336
+    }, {
+      name: "Bloodvine Leggings",
+      source: "Vanilla Crafting",
+      armor: 80,
+      int: 6,
+      SP: 37,
+      hit: 8,
+      set: "Bloodvine",
+      id: 19683
+    }, {
+      name: "Marshal's Dreadweave Leggings",
+      source: "Vanilla PvP",
+      armor: 149,
+      sta: 28,
+      int: 19,
+      SP: 37,
+      set: "PvPEpic",
+      id: 17579
+    }, {
+      name: "Knight-Captain's Dreadweave Legguards",
+      source: "Vanilla PvP",
+      armor: 84,
+      sta: 21,
+      int: 13,
+      SP: 28,
+      set: "PvPRare",
+      id: 23296
+    }, {
+      name: "Nemesis Leggings",
+      source: "MC",
+      armor: 116,
+      sta: 23,
+      int: 16,
+      spi: 4,
+      SP: 39,
+      set: "T2",
+      id: 16930
+    }, {
+      name: "Flarecore Leggings",
+      source: "Vanilla Crafting",
+      armor: 107,
+      sta: 21,
+      SP: 43,
+      id: 19165
+    }, {
+      name: "Leggings of Torment",
+      source: "UBRS",
+      armor: 78,
+      sta: 16,
+      int: 16,
+      ShP: 34,
+      id: 22342
+    }, {
+      name: "Skyshroud Leggings",
+      source: "LBRS",
+      armor: 75,
+      sta: 8,
+      int: 8,
+      SP: 34,
+      id: 13170
+    }, {
+      name: "Felheart Pants",
+      source: "MC",
+      armor: 101,
+      sta: 20,
+      int: 19,
+      spi: 10,
+      SP: 30,
+      set: "T1",
+      id: 16810
+    }, {
+      name: "Bloodtinged Kilt",
+      source: "ZG",
+      armor: 87,
+      sta: 20,
+      int: 20,
+      SP: 28,
+      id: 19895
+    }, {
+      name: "Spiritshroud Leggings",
+      source: "UBRS",
+      armor: 78,
+      sta: 13,
+      int: 16,
+      spi: 16,
+      SP: 19,
+      id: 12965
+    }, {
+      name: "Deathmist Leggings",
+      source: "Vanilla Quest",
+      armor: 81,
+      sta: 22,
+      int: 21,
+      SP: 16,
+      set: "T0.5",
+      id: 22072
+    }, {
+      name: "Leggings of the Festering Swarm",
+      source: "AQ40",
+      armor: 116,
+      sta: 17,
+      int: 23,
+      FiP: 57,
+      id: 21676
+    }],
+    
+    feet: [{                        // Feet
+      name: "Plagueheart Sandals",
+      source: "Naxx",
+      armor: 102,
+      sta: 20,
+      int: 16,
+      SP: 32,
+      crit: 14,
+      set: "T3",
+      id: 22508
+    }, {
+      name: "Boots of Epiphany",
+      source: "AQ40",
+      armor: 96,
+      sta: 18,
+      int: 19,
+      SP: 34,
+      id: 21600
+    }, {
+      name: "Bloodvine Boots",
+      source: "Vanilla Crafting",
+      armor: 63,
+      int: 16,
+      SP: 19,
+      hit: 8,
+      set: "Bloodvine",
+      id: 19684
+    }, {
+      name: "Snowblind Shoes",
+      source: "Azuregos",
+      armor: 83,
+      sta: 10,
+      int: 10,
+      SP: 32,
+      mp5: 5,
+      id: 19131
+    }, {
+      name: "Doomcaller's Footwraps",
+      source: "AQ40",
+      armor: 93,
+      sta: 20,
+      int: 16,
+      spi: 3,
+      SP: 28,
+      pen: 10,
+      set: "T2.5",
+      id: 21338
+    }, {
+      name: "Betrayer's Boots",
+      source: "ZG",
+      armor: 79,
+      sta: 8,
+      int: 12,
+      spi: 12,
+      SP: 30,
+      id: 19897
+    }, {
+      name: "Marshal's Dreadweave Boots",
+      source: "Vanilla PvP",
+      armor: 145,
+      sta: 22,
+      int: 13,
+      SP: 26,
+      set: "PvPEpic",
+      id: 17583
+    }, {
+      name: "Knight-Lieutenant's Dreadweave Walkers",
+      source: "Vanilla PvP",
+      armor: 64,
+      sta: 17,
+      int: 13,
+      SP: 18,
+      set: "PvPRare",
+      id: 23283
+    }, {
+      name: "Nemesis Boots",
+      source: "BWL",
+      armor: 91,
+      sta: 20,
+      int: 17,
+      spi: 6,
+      SP: 23,
+      set: "T2",
+      id: 16927
+    }, {
+      name: "Maleki's Footwraps",
+      source: "Stratholme",
+      armor: 60,
+      sta: 9,
+      int: 9,
+      ShP: 27,
+      id: 18735
+    }, {
+      name: "Omnicast Boots",
+      source: "BRD",
+      armor: 58,
+      sta: 6,
+      int: 9,
+      SP: 22,
+      id: 11822
+    }, {
+      name: "Dragonrider Boots",
+      source: "UBRS",
+      armor: 61,
+      sta: 5,
+      int: 16,
+      SP: 18,
+      id: 18102
+    }, {
+      name: "Recomposed Boots",
+      source: "AQ40",
+      armor: 91,
+      sta: 21,
+      int: 13,
+      SP: 20,
+      id: 21648
+    }, {
+      name: "Felheart Slippers",
+      source: "MC",
+      armor: 80,
+      sta: 23,
+      int: 11,
+      SP: 18,
+      set: "T1",
+      id: 16803
+    }, {
+      name: "Deathmist Sandals",
+      source: "Vanilla Quest",
+      armor: 73,
+      sta: 24,
+      int: 14,
+      SP: 12,
+      set: "T0.5",
+      id: 22076
+    }, {
+      name: "Fire Striders",
+      source: "Stratholme",
+      armor: 61,
+      spi: 5,
+      FiP: 29,
+      id: 13369
+    }],
+    
+    ring: [{                      // Ring
+      name: "Ring of the Fallen God",
+      source: "AQ40",
+      sta: 5,
+      int: 6,
+      SP: 37,
+      hit: 8,
+      id: 21709
+    }, {
+      name: "Band of the Inevitable",
+      source: "Naxx",
+      SP: 36,
+      hit: 8,
+      id: 23031
+    }, {
+      name: "Seal of the Damned",
+      source: "Naxx",
+      sta: 17,
+      SP: 21,
+      hit: 8,
+      crit: 14,
+    }, {
+      name: "Band of Forced Concentration",
+      source: "BWL",
+      sta: 9,
+      int: 12,
+      SP: 21,
+      hit: 8,
+      id: 19403
+    }, {
+      name: "Ring of Unspoken Names",
+      source: "AQ20",
+      sta: 12,
+      SP: 14,
+      hit: 8,
+      crit: 14,
+      set: "AQ20",
+      id: 21417
+    }, {
+      name: "Ritssyn's Ring of Chaos",
+      source: "AQ40",
+      sta: 6,
+      SP: 25,
+      crit: 14,
+      id: 21836
+    }, {
+      name: "Band of Dark Dominion",
+      source: "BWL",
+      sta: 12,
+      int: 6,
+      ShP: 33,
+      id: 19434
+    }, {
       
       
     }],
