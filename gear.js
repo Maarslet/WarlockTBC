@@ -2,6 +2,7 @@ function loadGear() {
   var gear = createGear();
   var i, info, item
   
+  // Main Hand
   document.getElementById("tableMainHand").children[1].innerHTML = "";
   info = "";
   for (i=0; i<gear.mainhand.length; i++) {
@@ -9,6 +10,9 @@ function loadGear() {
     info += "<tr onclick=clickTable('tableMainHand',this); clickTable('tableStaff')><td>" + item.name + "</td><td>" + item.source + "</td><td>" + item.sta + "</td><td>" + item.int + "</td><td>" + item.spi + "</td><td>" + item.SP + "</td><td>" + item.ShP + "</td><td>" + item.FiP + "</td><td>" + item.hit + "</td><td>" + item.crit + "</td><td>" + item.haste + "</td><td>" + item.pen + "</td><td>" + item.hp5 + "</td><td>" + item.mp5 + "</td><td></td><td></td></tr>";
   }
   document.getElementById("tableMainHand").children[1].innerHTML = info.replaceAll("undefined","");
+  $('#tableMainHand').DataTable();
+  
+  
 }
 
 function createGear() {
