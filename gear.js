@@ -1730,9 +1730,241 @@ function createGear() {
       ShP: 33,
       id: 19434
     }, {
-      
-      
+      name: "Zanzil's Seal",
+      source: "ZG",
+      sta: 10,
+      int: 10,
+      SP: 11,
+      hit: 8,
+      set: "Zanzil",
+      id: 19893
+    }, {
+      name: "Signet of the Bronze Dragonflight",
+      source: "Vanilla Quest",
+      sta: 8,
+      int: 9,
+      SP: 28,
+      mp5: 5,
+      id: 21210
+    }, {
+      name: "Rune Band of Wizardry",
+      source: "UBRS",
+      sta: 7,
+      SP: 16,
+      hit: 8,
+      id: 22339
+    }, {
+      name: "Ring of Spell Power",
+      source: "MC",
+      SP: 33,
+      id: 19147
+    }, {
+      name: "Plagueheart Ring",
+      source: "Naxx",
+      sta: 24,
+      SP: 29,
+      set: "T3",
+      id: 23063
+    }, {
+      name: "Band of Servitude",
+      source: "ZG",
+      sta: 8,
+      int: 9,
+      SP: 23,
+      id: 22721
+    }, {
+      name: "Ring of the Desert Winds",
+      source: "AQ20",
+      int: 9,
+      SP: 9,
+      crit: 14,
+      mp5: 3,
+      id: 21483
+    }, {
+      name: "Ring of Swarming Thought",
+      source: "AQ40",
+      SP: 26,
+      pen: 20,
+      id: 21707
+    }, {
+      name: "Zanzil's Band",
+      source: "ZG",
+      int: 13,
+      hit: 8,
+      mp5: 4,
+      set: "Zanzil",
+      id: 19905
+    }, {
+      name: "Songstone of Ironforge",
+      source: "Vanilla Quest",
+      int: 7,
+      spi: 4,
+      SP: 18,
+      id: 12543
+    }, {
+      name: "Ring of Blackrock",
+      source: "BWL",
+      SP: 19,
+      mp5: 9,
+      id: 19397
+    }, {
+      name: "Dragonslayer's Signet",
+      source: "Onyxia",
+      sta: 12,
+      int: 12,
+      spi: 6,
+      crit: 14,
+      id: 18403
+    }, {
+      name: "Ring of Eternal Flame",
+      source: "Naxx",
+      int: 10,
+      FiP: 34,
+      crit: 14,
+      id: 23237
+    }, {
+      name: "Don Rodrigo's Band",
+      source: "Vanilla PvP",
+      sta: 7,
+      crit: 14,
+      pen: 20,
+      id: 21563
     }],
+    
+    trinket: [{                             // Trinket
+      name: "Mark of the Champion",
+      source: "Naxx",
+      SP: 85,
+      id: 23207
+    },{
+      name: "Neltharion's Tear",
+      source: "BWL",
+      SP: 44,
+      hit: 16,
+      id: 19379
+    }, {
+      name: "The Restrained Essence of Sapphiron",
+      source: "Naxx",
+      SP: 40,
+      id: 23046
+    }, {
+      name: "Rune of the Dawn",
+      source: "Vanilla Quest",
+      SP: 48,
+      id: 19812
+    }, {
+      name: "Talisman of Ephemeral Power",
+      source: "MC",
+      id: 18820
+    }, {
+      name: "Zandalarian Hero Charm",
+      source: "ZG",
+      id: 19950
+    }, {
+      name: "Hazza'rah's Charm of Destruction",
+      source: "ZG",
+      set: "ZG",
+      id: 19957
+    }, {
+      name: "Briarwood Reed",
+      source: "UBRS",
+      SP: 29,
+      id: 12930
+    }, {
+      name: "Eye of the Beast",
+      source: "Vanilla Quest",
+      crit: 28,
+      id: 13968
+    }, {
+      name: "Eye of Diminution",
+      source: "Naxx",
+      crit: 28,
+      id: 23001
+    }, {
+      name: "Royal Seal of Eldre'Thalas",
+      source: "Vanilla Quest",
+      SP: 23,
+      id: 18467
+    }, {
+      name: "Nat Pagle's Broken Reel",
+      source: "ZG",
+      id: 19947
+    }, {
+      name: "Eye of Moam",
+      source: "AQ20",
+      id: 21473
+    }, {
+      name: "Fetish of the Sand Reaver",
+      source: "AQ40",
+      id: 21647
+    }],
+    
+    wand: [{                                // Wand
+      name: "Wand of Fates",
+      source: "Naxx",
+      sta: 7,
+      int: 7,
+      SP: 12,
+      hit: 8,
+      id: 22820
+    }, {
+      name: "Doomfinger",
+      source: "Naxx",
+      SP: 16,
+      crit: 14,
+      id: 22821
+    }, {
+      name: "Wand of Qiraji Nobility",
+      source: "AQ40",
+      sta: 5,
+      SP: 19,
+      id: 21603
+    }, {
+      name: "Touch of Chaos",
+      source: "ZG",
+      SP: 18,
+      id: 19861
+    }, {
+      name: "Dragon's Touch",
+      source: "BWL",
+      sta: 7,
+      int: 12,
+      SP: 6,
+      id: 19367
+    }, {
+      name: "Skul's Ghastly Touch",
+      source: "Stratholme",
+      ShP: 14,
+      id: 13396
+    }, {
+      name: "Bonecreeper Stylus",
+      source: "Scholomance",
+      int: 4,
+      SP: 11,
+      id: 13938
+    }, {
+      name: "Ritssyn's Wand of Bad Mojo",
+      source: "Stratholme",
+      sta: 4,
+      SP: 11,
+      id: 22408
+    }, {
+      name: "Lethtendris's Wand",
+      source: "Dire Maul",
+      SP: 9,
+      id: 18301
+    }, {
+      name: "Stormrager",
+      source: "Vanilla Quest",
+      sta: 8,
+      int: 5,
+      id: 16997
+    }, {
+      name: "Pyric Caduceus",
+      source: "BRD",
+      FiP: 13,
+      id: 11748
+    }]
   };
   return gear
 }
