@@ -32,25 +32,6 @@ function loadGear() {
     document.getElementById(slot).children[1].innerHTML = info.replaceAll("undefined","");
     $('#' + slot).DataTable();
   }
-  
-  /*$('#tableMainHand').DataTable();
-  $('#tableOffHand').DataTable();
-  $('#tableStaff').DataTable();
-  $('#tableHelmet').DataTable();
-  $('#tableNeck').DataTable();
-  $('#tableShoulders').DataTable();
-  $('#tableBack').DataTable();
-  $('#tableChest').DataTable();
-  $('#tableWrists').DataTable();
-  $('#tableHands').DataTable();
-  $('#tableWaist').DataTable();
-  $('#tableLegs').DataTable();
-  $('#tableFeet').DataTable();
-  $('#tableRing1').DataTable();
-  $('#tableRing2').DataTable();
-  $('#tableTrinket1').DataTable();
-  $('#tableTrinket2').DataTable();
-  $('#tableWand').DataTable();*/
 }
 
 function createFilter() {
