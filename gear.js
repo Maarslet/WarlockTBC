@@ -1,19 +1,26 @@
 function loadGear() {
   var gear = createGear();
-  var i, j, info, item, slot, list
+  var i, j, info, item, slot, list, extra, count
   
   var slotArray = ['tableMainHand', 'tableOffHand', 'tableStaff', 'tableHelmet', 'tableNeck', 'tableShoulders', 'tableBack', 'tableChest', 'tableWrists', 
                    'tableHands', 'tableWaist', 'tableLegs', 'tableFeet', 'tableRing1', 'tableRing2', 'tableTrinket1', 'tableTrinket2', 'tableWand'];
   var listArray = ['mainhand', 'offhand', 'staff', 'helmet', 'neck', 'shoulder', 'back', 'chest', 'wrist',
                    'hands', 'waist', 'legs', 'feet', 'ring', 'ring', 'trinket', 'trinket', 'wand'];
+  var activeItem = " style='background-color:#AAAAAA' name='activeItem'";
   for (i=0; i<slotArray.length; i++) {
     slot = slotArray[i];
     list = listArray[i];
     document.getElementById(slot).children[1].innerHTML = "";
     info = "";
+    count = 0;
     for (j=0; j<gear[list].length; j++) {
       item = gear[list][j];
-      info += "<tr onclick=clickTable('" + slot + "',this);><td>" + item.name + "</td><td>" + item.source + "</td><td>" + item.sta + "</td><td>" + item.int + "</td><td>" + item.spi + "</td><td>" + item.SP + "</td><td>" + item.ShP + "</td><td>" + item.FiP + "</td><td>" + item.hit + "</td><td>" + item.crit + "</td><td>" + item.haste + "</td><td>" + item.pen + "</td><td>" + item.hp5 + "</td><td>" + item.mp5 + "</td><td></td><td></td></tr>";
+      extra = "";
+      if (item.set !== undefined) {
+        extra = " class='" + item.set + "'";}
+      
+      info += "<tr onclick=clickTable('" + slot + "',this);" + extra + "><td>" + item.name + "</td><td>" + item.source + "</td><td>" + item.sta + "</td><td>" + item.int + "</td><td>" + item.spi + "</td><td>" + item.SP + "</td><td>" + item.ShP + "</td><td>" + item.FiP + "</td><td>" + item.hit + "</td><td>" + item.crit + "</td><td>" + item.haste + "</td><td>" + item.pen + "</td><td>" + item.hp5 + "</td><td>" + item.mp5 + "</td><td></td><td></td></tr>";
+      count++;
     }
     document.getElementById(slot).children[1].innerHTML = info.replaceAll("undefined","");
   }
