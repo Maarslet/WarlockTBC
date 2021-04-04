@@ -786,7 +786,7 @@ function createGear() {
       id: 21686
     }],
     
-    back: [{
+    back: [{                                          // Back
       name: "Cloak of the Necropolis",
       source: "Naxx",
       armor: 77,
@@ -863,7 +863,6 @@ function createGear() {
       SP: 18,
       set: "AQ20",
       id: 21418
-    }, {
     }],
     
     chest: [{
