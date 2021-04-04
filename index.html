@@ -60,6 +60,27 @@
           document.getElementById(tableName).children[1].children[i].style.backgroundColor = "#FFF";
           document.getElementById(tableName).children[1].children[i].setAttribute('name', tableName + 'Inactive');
         }
+        
+        if (tableName == "tableMainHand" || tableName == "tableOffHand") {
+          tableContent = document.getElementById("tableStaff").children[1].children;
+          for (i = 0; i < tableContent.length; i++) {
+            document.getElementById(tableName).children[1].children[i].style.backgroundColor = "#FFF";
+            document.getElementById(tableName).children[1].children[i].setAttribute('name', tableName + 'Inactive');
+          }
+        }
+        else if (tableName == "tableStaff") {
+          tableContent = document.getElementById("tableMainHand").children[1].children;
+          for (i = 0; i < tableContent.length; i++) {
+            document.getElementById(tableName).children[1].children[i].style.backgroundColor = "#FFF";
+            document.getElementById(tableName).children[1].children[i].setAttribute('name', tableName + 'Inactive');
+          }
+          tableContent = document.getElementById("tableOffHand").children[1].children;
+          for (i = 0; i < tableContent.length; i++) {
+            document.getElementById(tableName).children[1].children[i].style.backgroundColor = "#FFF";
+            document.getElementById(tableName).children[1].children[i].setAttribute('name', tableName + 'Inactive');
+          }
+        }
+        
         if (arguments.length >= 2) {
           element.style.backgroundColor = "#9482C9";
           element.setAttribute('name', 'activeItem');
@@ -91,26 +112,7 @@
         order: [[12, 'desc']]
       } );
       $(document).ready( function () {
-        $('#tableOffHand').DataTable();
-        $('#tableStaff').DataTable();
-        $('#tableHelmet').DataTable();
-        $('#tableNeck').DataTable();
-        $('#tableShoulders').DataTable();
-        $('#tableBack').DataTable();
-        $('#tableChest').DataTable();
-        $('#tableWrists').DataTable();
-        $('#tableHands').DataTable();
-        $('#tableWaist').DataTable();
-        $('#tableLegs').DataTable();
-        $('#tableFeet').DataTable();
-        $('#tableRing1').DataTable();
-        $('#tableRing2').DataTable();
-        $('#tableTrinket1').DataTable();
-        $('#tableTrinket2').DataTable();
-        $('#tableWand').DataTable();
         Chart.defaults.global.defaultFontColor = 'black';
-        
-        //document.getElementById("DSRuin").click();
         setTalents('DS/Ruin');
         loadGear();
         loadCookie();
