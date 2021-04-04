@@ -277,7 +277,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     if (arguments.length > 0 && gearTable.parentNode.parentNode.id === items[i].parentNode.parentNode.id) {
       var iIndex = i;
       if (arguments.length < 3) {
-        stam += Number(gearTable.children[2].innerHTML);
+        //stam += Number(gearTable.children[2].innerHTML);
         int  += Number(gearTable.children[3].innerHTML);
         spirit+= Number(gearTable.children[4].innerHTML);
         SP   += Number(gearTable.children[5].innerHTML);
@@ -293,7 +293,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
       }
     }
     else {
-      stam += Number(gearTable.children[2].innerHTML);
+      //stam += Number(gearTable.children[2].innerHTML);
       int  += Number(gearTable.children[3].innerHTML);
       spirit+= Number(gearTable.children[4].innerHTML);
       SP   += Number(gearTable.children[5].innerHTML);
