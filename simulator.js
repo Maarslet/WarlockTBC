@@ -599,6 +599,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
       var timePast = 0, SBC = 0, trinketTime = 0, trinket2Time, trinket1CD = 0, trinket2CD = 0, trinket1Bonus = false, trinket2Bonus = false, piTime = 0, piCD = 0; 
       var ZHCStacks = 0, piBonus = false, potionTime = 0, potionCD = 0, potionBonus = false, usableTime = 0, usableCD = 0, usableBonus = false;
       ShP = ShPOld, FiP = FiPOld, crit = critOld, hit = hitOld, pen = penOld;
+      
       if (useDoom == true)
         var doomUse = 0;
       else {
