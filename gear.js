@@ -12,8 +12,8 @@ function loadGear() {
   for (i=0; i<slotArray.length; i++) {
     slot = slotArray[i];
     list = listArray[i];
-    document.getElementById(slot).children[1].innerHTML = "";
     $('#' + slot).DataTable().destroy();
+    document.getElementById(slot).children[1].innerHTML = "";
     info = "";
     count = 0;
     for (j=0; j<gear[list].length; j++) {
