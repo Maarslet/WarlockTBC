@@ -1,5 +1,6 @@
 function loadGear() {
   var gear = createGear();
+  var filter = createFilter();
   var i, j, info, item, slot, list, extra, count
   
   var slotArray = ['tableMainHand', 'tableOffHand', 'tableStaff', 'tableHelmet', 'tableNeck', 'tableShoulders', 'tableBack', 'tableChest', 'tableWrists', 
@@ -17,10 +18,12 @@ function loadGear() {
       item = gear[list][j];
       extra = "";
       if (item.set !== undefined) {
-        extra = " class='" + item.set + "'";}
-      
-      info += "<tr onclick=clickTable('" + slot + "',this);" + extra + "><td>" + item.name + "</td><td>" + item.source + "</td><td>" + item.sta + "</td><td>" + item.int + "</td><td>" + item.spi + "</td><td>" + item.SP + "</td><td>" + item.ShP + "</td><td>" + item.FiP + "</td><td>" + item.hit + "</td><td>" + item.crit + "</td><td>" + item.haste + "</td><td>" + item.pen + "</td><td>" + item.hp5 + "</td><td>" + item.mp5 + "</td><td></td><td></td></tr>";
-      count++;
+        extra = " class='" + item.set + "'";
+      }
+      if (filter.includes(item.source)) {
+        info += "<tr onclick=clickTable('" + slot + "',this);" + extra + "><td>" + item.name + "</td><td>" + item.source + "</td><td>" + item.sta + "</td><td>" + item.int + "</td><td>" + item.spi + "</td><td>" + item.SP + "</td><td>" + item.ShP + "</td><td>" + item.FiP + "</td><td>" + item.hit + "</td><td>" + item.crit + "</td><td>" + item.haste + "</td><td>" + item.pen + "</td><td>" + item.hp5 + "</td><td>" + item.mp5 + "</td><td></td><td></td></tr>";
+        count++;
+      }
     }
     document.getElementById(slot).children[1].innerHTML = info.replaceAll("undefined","");
   }
@@ -43,6 +46,39 @@ function loadGear() {
   $('#tableTrinket1').DataTable();
   $('#tableTrinket2').DataTable();
   $('#tableWand').DataTable();
+}
+
+function createFilter() {
+  var filter = new Array;
+  if (document.getElementById("filterNaxx").checked == true)
+    filter.push("Naxx");
+  if (document.getElementById("filterAQ40").checked == true)
+    filter.push("AQ40");
+  if (document.getElementById("filterBWL").checked == true)
+    filter.push("BWL");
+  if (document.getElementById("filterMC").checked == true)
+    filter.push("MC");
+  if (document.getElementById("filterAQ20").checked == true)
+    filter.push("AQ20");
+  if (document.getElementById("filterZG").checked == true)
+    filter.push("ZG");
+  if (document.getElementById("filterOny").checked == true)
+    filter.push("Onyxia");
+  if (document.getElementById("filterVPvP").checked == true)
+    filter.push("Vanilla PvP");
+  if (document.getElementById("filterVDung").checked == true) {
+    filter.push("Stratholme");
+    filter.push("Scholomance");
+    filter.push("UBRS");
+    filter.push("LBRS");
+    filter.push("BRD");
+  }
+  if (document.getElementById("filterVQuest").checked == true)
+    filter.push("Vanilla Quest");
+  if (document.getElementById("filterVBoE").checked == true)
+    filter.push("Vanilla BoE");
+  
+  return filter
 }
 
 function createGear() {
