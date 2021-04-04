@@ -312,7 +312,9 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   // Trinkets
   var itemNames = new Array;
   for (i=0; i<items.length; i++) {
-    if (arguments.length > 0 && iIndex==i)
+    if (arguments.length == 3 && iIndex==i)
+      itemNames.push("NoItem");
+    else if (arguments.length > 0 && iIndex==i)
       itemNames.push(gearTable.children[0].innerHTML);
     else
       itemNames.push(items[i].children[0].innerHTML);
