@@ -1105,7 +1105,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var statWeightOutput = "<br><b><span style='font-size:18px'>Crit&nbsp Rating = " + formatNumber(critVal/SPVal,2) + " </span><span style='font-size:14px'>SP</span><br><span style='font-size:18px'>Hit&nbsp&nbsp Rating = " + formatNumber(hitVal/SPVal,2) + " </span><span style='font-size:14px'>SP</span><br><span style='font-size:18px'>Haste Rating = " + formatNumber(hasteVal/SPVal,2) + " </span><span style='font-size:14px'>SP</span></b>";
   if (arguments.length == 3) {
     console.timeEnd('Timer')
-    return formatNumber(math.sum(baseVec)/baseVec.length,2);
+    return math.sum(baseVec)/baseVec.length;
   }
   if (arguments.length == 2) {
     gearTable.children[15].innerHTML = Number(formatNumber(math.sum(baseVec)/baseVec.length,2));
