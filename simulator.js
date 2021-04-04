@@ -310,6 +310,14 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   }
   
   // Trinkets
+  var itemNames = new Array;
+  for (i=0; i<items.length; i++) {
+    if (arguments.length > 0 && iIndex==i)
+      itemNames.push(gearTable.children[0].innerHTML);
+    else
+      itemNames.push(items[i].children[0].innerHTML);
+  }
+  console.log(itemNames);
   var itemName1 = false, itemName2 = false, itemName3 = false;
   if (arguments.length == 3)
     var tempItem = "Nope";
@@ -331,6 +339,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     var itemName1 = items[13].children[0].innerHTML;
     var itemName2 = items[14].children[0].innerHTML;
     var itemName3 = items[15].children[0].innerHTML;}
+  
+  
 
   var TREOS = false, ZHC = false, TOEP = false, HCOD = false, REEL = false, EOM = false, trinket1 = false, trinket2 = false;
   if (itemName1 == "The Restrained Essence of Sapphiron" || itemName2 == "The Restrained Essence of Sapphiron" || itemName3 == "The Restrained Essence of Sapphiron") {
@@ -379,29 +389,29 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   // Set Bonuses
   var setT05 = 0, setT1 = 0, setT2 = 0, setT25 = 0, setT3 = 0, setZGRing = 0, setZG = 0, setAQ20 = 0, setPvPRare = 0, setPvPEpic = 0, setBV = 0, setUDC = 0;
   for (i=0; i<classList.length; i++) {
-    if (classList[i] == "setT05")
+    if (classList[i] == "T0.5")
       setT05++
-    else if (classList[i] == "setT1")
+    else if (classList[i] == "T1")
       setT1++
-    else if (classList[i] == "setT2")
+    else if (classList[i] == "T2")
       setT2++
-    else if (classList[i] == "setT25")
+    else if (classList[i] == "T2.5")
       setT25++
-    else if (classList[i] == "setT3")
+    else if (classList[i] == "T3")
       setT3++
-    else if (classList[i] == "setZGRing")
+    else if (classList[i] == "Zanzil")
       setZGRing++
-    else if (classList[i] == "setZG")
+    else if (classList[i] == "ZG")
       setZG++
-    else if (classList[i] == "setAQ20")
+    else if (classList[i] == "AQ20")
       setAQ20++
-    else if (classList[i] == "setPvPRare")
+    else if (classList[i] == "PvPRare")
       setPvPRare++
-    else if (classList[i] == "setPvPEpic")
+    else if (classList[i] == "PvPEpic")
       setPvPEpic++
-    else if (classList[i] == "setBV")
+    else if (classList[i] == "Bloodvine")
       setBV++
-    else if (classList[i] == "setUDC")
+    else if (classList[i] == "UDC")
       setUDC++
   }
   var bonusList = "", bonusDrainLife = false, bonusShadowCost = false, bonusImmolateDMG = false, bonusShadowBoltCost = false, bonusCorruption = false, bonusCorruptionZG = false, bonusImmolatePvP = false, UDC = false;
