@@ -26,6 +26,8 @@ function loadGear() {
         info += "<tr onclick=clickTable('" + slot + "',this);" + extra + "><td>" + item.name + "</td><td>" + item.source + "</td><td>" + item.sta + "</td><td>" + item.int + "</td><td>" + item.spi + "</td><td>" + item.SP + "</td><td>" + item.ShP + "</td><td>" + item.FiP + "</td><td>" + item.hit + "</td><td>" + item.crit + "</td><td>" + item.haste + "</td><td>" + item.pen + "</td><td>" + item.hp5 + "</td><td>" + item.mp5 + "</td><td></td><td></td></tr>";
         count++;
       }
+      if (count == 0)
+        info = "<tr onclick=clickTable('" + slot + "',this);><td>No items found, check your filter in the Advanced Tab</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
     }
     document.getElementById(slot).children[1].innerHTML = info.replaceAll("undefined","");
     $('#' + slot).DataTable();
