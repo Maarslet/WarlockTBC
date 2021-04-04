@@ -317,6 +317,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     else
       itemNames.push(items[i].children[0].innerHTML);
   }
+  console.log(itemNames)
   
   var TREOS = false, ZHC = false, TOEP = false, HCOD = false, REEL = false, EOM = false, trinket1 = false, trinket2 = false;
   if (itemNames.includes("The Restrained Essence of Sapphiron")) {
