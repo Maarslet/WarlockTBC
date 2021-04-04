@@ -1,15 +1,23 @@
 function loadGear() {
   var gear = createGear();
-  var i, info, item
+  var i, j, info, item, slot, list
   
-  // Main Hand
-  document.getElementById("tableMainHand").children[1].innerHTML = "";
-  info = "";
-  for (i=0; i<gear.mainhand.length; i++) {
-    item = gear.mainhand[i];
-    info += "<tr onclick=clickTable('tableMainHand',this);><td>" + item.name + "</td><td>" + item.source + "</td><td>" + item.sta + "</td><td>" + item.int + "</td><td>" + item.spi + "</td><td>" + item.SP + "</td><td>" + item.ShP + "</td><td>" + item.FiP + "</td><td>" + item.hit + "</td><td>" + item.crit + "</td><td>" + item.haste + "</td><td>" + item.pen + "</td><td>" + item.hp5 + "</td><td>" + item.mp5 + "</td><td></td><td></td></tr>";
+  var slotArray = ['tableMainHand', 'tableOffHand', 'tableStaff', 'tableHelmet', 'tableNeck', 'tableShoulders', 'tableBack', 'tableChest', 'tableWrists', 
+                   'tableHands', 'tableWaist', 'tableLegs', 'tableFeet', 'tableRing1', 'tableRing2', 'tableTrinket1', 'tableTrinket2', 'tableWand'];
+  var listArray = ['mainhand', 'offhand', 'staff', 'helmet', 'neck', 'shoulder', 'back', 'chest', 'wrist',
+                   'hands', 'waist', 'legs', 'feet', 'ring', 'ring', 'trinket', 'trinket', 'wand'];
+  for (i=0; i<slotArray.length; i++) {
+    slot = slotArray[i];
+    list = listArray[i];
+    document.getElementById(slot).children[1].innerHTML = "";
+    info = "";
+    for (j=0; j<gear[list].length; j++) {
+      item = gear[list][j];
+      info += "<tr onclick=clickTable(" + slot + ",this);><td>" + item.name + "</td><td>" + item.source + "</td><td>" + item.sta + "</td><td>" + item.int + "</td><td>" + item.spi + "</td><td>" + item.SP + "</td><td>" + item.ShP + "</td><td>" + item.FiP + "</td><td>" + item.hit + "</td><td>" + item.crit + "</td><td>" + item.haste + "</td><td>" + item.pen + "</td><td>" + item.hp5 + "</td><td>" + item.mp5 + "</td><td></td><td></td></tr>";
+    }
+    document.getElementById(slot).children[1].innerHTML = info.replaceAll("undefined","");
   }
-  document.getElementById("tableMainHand").children[1].innerHTML = info.replaceAll("undefined","");
+  
   $('#tableMainHand').DataTable();
   $('#tableOffHand').DataTable();
   $('#tableStaff').DataTable();
@@ -657,7 +665,7 @@ function createGear() {
       id: 18728
     }],
     
-    shoulder: [{
+    shoulder: [{                                            // Shoulder
       name: "Plagueheart Shoulderpads",
       source: "Naxx",
       armor: 111,
