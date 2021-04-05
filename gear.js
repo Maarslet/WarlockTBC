@@ -95,8 +95,10 @@ function createFilter() {
     filter.push("TBC PvP S2");
   if (document.getElementById("filterPvP1").checked == true)
     filter.push("TBC PvP S1");
-  if (document.getElementById("filterBCRep").checked == true)
+  if (document.getElementById("filterBCRep").checked == true) {
     filter.push("TBC Reputation");
+    filter.push("Exalted Rep");
+  }
   if (document.getElementById("filterBCDung").checked == true) {
     filter.push("TBC Dungeon");
     // Specifics here
