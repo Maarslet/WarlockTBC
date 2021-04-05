@@ -37,6 +37,7 @@ function loadGear() {
 
 function createFilter() {
   var filter = new Array;
+  // Vanilla
   if (document.getElementById("filterNaxx").checked == true)
     filter.push("Naxx");
   if (document.getElementById("filterAQ40").checked == true)
@@ -62,8 +63,51 @@ function createFilter() {
   }
   if (document.getElementById("filterVQuest").checked == true)
     filter.push("Vanilla Quest");
+  if (document.getElementById("filterVCraft").checked == true)
+    filter.push("Vanilla Crafting");
   if (document.getElementById("filterVBoE").checked == true)
     filter.push("Vanilla BoE");
+  
+  // TBC
+  if (document.getElementById("filterSWP").checked == true)
+    filter.push("Sunwell Plateau");
+  if (document.getElementById("filterBT").checked == true)
+    filter.push("The Black Temple");
+  if (document.getElementById("filterHyjal").checked == true)
+    filter.push("Mount Hyjal");
+  if (document.getElementById("filterTK").checked == true)
+    filter.push("Tempest Keep");
+  if (document.getElementById("filterSerp").checked == true)
+    filter.push("Serpentshrine Cavern");
+  if (document.getElementById("filterML").checked == true)
+    filter.push("Magtheridon's Lair");
+  if (document.getElementById("filterGL").checked == true)
+    filter.push("Gruul's Lair");
+  if (document.getElementById("filterZulA").checked == true)
+    filter.push("Zul'Aman");
+  if (document.getElementById("filterKara").checked == true)
+    filter.push("Karazhan");
+  if (document.getElementById("filterPvP4").checked == true)
+    filter.push("TBC PvP S4");
+  if (document.getElementById("filterPvP3").checked == true)
+    filter.push("TBC PvP S3");
+  if (document.getElementById("filterPvP2").checked == true)
+    filter.push("TBC PvP S2");
+  if (document.getElementById("filterPvP1").checked == true)
+    filter.push("TBC PvP S1");
+  if (document.getElementById("filterBCRep").checked == true)
+    filter.push("TBC Reputation");
+  if (document.getElementById("filterBCDung").checked == true) {
+    filter.push("TBC Dungeon");
+    // Specifics here
+    filter.push("Shadow Labyrinth");
+  }
+  if (document.getElementById("filterBCQ").checked == true)
+    filter.push("TBC Quest");
+  if (document.getElementById("filterBCraft").checked == true)
+    filter.push("TBC Crafting");
+  if (document.getElementById("filterBCBoE").checked == true)
+    filter.push("TBC BoE");
   
   return filter
 }
@@ -206,6 +250,42 @@ function createGear() {
       int: 8,
       SP: 14,
       id: 13964
+    }, {
+      name: "Gladiator's Spellblade",
+      source: "TBC PvP S1",
+      sta: 28,
+      int: 18,
+      SP: 199,
+      resil: 18,
+      id: 28297
+    }, {
+      name: "Eternium Runed Blade",
+      source: "TBC Crafting",
+      int: 19,
+      SP: 168,
+      crit: 21,
+      id: 23554
+    }, {
+      name: "Blade of the Archmage",
+      source: "Exalted Rep",
+      sta: 13,
+      int: 11,
+      SP: 159,
+      crit: 21,
+      id: 29153
+    }, {
+      name: "Blade of Wizardry (No Proc)",
+      source: "TBC BoE",
+      SP: 159,
+      id: 31336
+    }, {
+      name: "Greatsword of Horrid Dreams",
+      source: "Shadow Labyrinth",
+      sta: 15,
+      int: 14,
+      SP: 130,
+      hit: 14,
+      id: 27905
     }],
     
     offhand: [{                     // Off Hand
