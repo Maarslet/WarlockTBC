@@ -38,77 +38,86 @@ function loadGear() {
 function createFilter() {
   var filter = new Array;
   // Vanilla
-  if (document.getElementById("filterNaxx").checked == true)
+  if (document.getElementById("filterNaxx").checked == false)
     filter.push("Naxx");
-  if (document.getElementById("filterAQ40").checked == true)
+  if (document.getElementById("filterAQ40").checked == false)
     filter.push("AQ40");
-  if (document.getElementById("filterBWL").checked == true)
+  if (document.getElementById("filterBWL").checked == false)
     filter.push("BWL");
-  if (document.getElementById("filterMC").checked == true)
+  if (document.getElementById("filterMC").checked == false)
     filter.push("MC");
-  if (document.getElementById("filterAQ20").checked == true)
+  if (document.getElementById("filterAQ20").checked == false)
     filter.push("AQ20");
-  if (document.getElementById("filterZG").checked == true)
+  if (document.getElementById("filterZG").checked == false)
     filter.push("ZG");
-  if (document.getElementById("filterOny").checked == true)
+  if (document.getElementById("filterOny").checked == false)
     filter.push("Onyxia");
-  if (document.getElementById("filterVPvP").checked == true)
+  if (document.getElementById("filterVPvP").checked == false)
     filter.push("Vanilla PvP");
-  if (document.getElementById("filterVDung").checked == true) {
+  if (document.getElementById("filterVBoss").checked == false) {
+    filter.push("Azuregos");
+    filter.push("Vanilla Kazzak");
+  }
+  if (document.getElementById("filterVDung").checked == false) {
     filter.push("Stratholme");
     filter.push("Scholomance");
     filter.push("UBRS");
     filter.push("LBRS");
     filter.push("BRD");
+    filter.push("Dire Maul");
   }
-  if (document.getElementById("filterVQuest").checked == true)
+  if (document.getElementById("filterVQuest").checked == false)
     filter.push("Vanilla Quest");
-  if (document.getElementById("filterVCraft").checked == true)
+  if (document.getElementById("filterVCraft").checked == false)
     filter.push("Vanilla Crafting");
-  if (document.getElementById("filterVBoE").checked == true)
+  if (document.getElementById("filterVBoE").checked == false)
     filter.push("Vanilla BoE");
   
   // TBC
-  if (document.getElementById("filterSWP").checked == true)
+  if (document.getElementById("filterSWP").checked == false)
     filter.push("Sunwell Plateau");
-  if (document.getElementById("filterBT").checked == true)
+  if (document.getElementById("filterBT").checked == false)
     filter.push("The Black Temple");
-  if (document.getElementById("filterHyjal").checked == true)
+  if (document.getElementById("filterHyjal").checked == false)
     filter.push("Mount Hyjal");
-  if (document.getElementById("filterTK").checked == true)
+  if (document.getElementById("filterTK").checked == false)
     filter.push("Tempest Keep");
-  if (document.getElementById("filterSerp").checked == true)
+  if (document.getElementById("filterSerp").checked == false)
     filter.push("Serpentshrine Cavern");
-  if (document.getElementById("filterML").checked == true)
+  if (document.getElementById("filterML").checked == false)
     filter.push("Magtheridon's Lair");
-  if (document.getElementById("filterGL").checked == true)
+  if (document.getElementById("filterGL").checked == false)
     filter.push("Gruul's Lair");
-  if (document.getElementById("filterZulA").checked == true)
+  if (document.getElementById("filterZulA").checked == false)
     filter.push("Zul'Aman");
-  if (document.getElementById("filterKara").checked == true)
+  if (document.getElementById("filterKara").checked == false)
     filter.push("Karazhan");
-  if (document.getElementById("filterPvP4").checked == true)
+  if (document.getElementById("filterPvP4").checked == false)
     filter.push("TBC PvP S4");
-  if (document.getElementById("filterPvP3").checked == true)
+  if (document.getElementById("filterPvP3").checked == false)
     filter.push("TBC PvP S3");
-  if (document.getElementById("filterPvP2").checked == true)
+  if (document.getElementById("filterPvP2").checked == false)
     filter.push("TBC PvP S2");
-  if (document.getElementById("filterPvP1").checked == true)
+  if (document.getElementById("filterPvP1").checked == false)
     filter.push("TBC PvP S1");
-  if (document.getElementById("filterBCRep").checked == true) {
+  if (document.getElementById("filterBCRep").checked == false) {
     filter.push("TBC Reputation");
     filter.push("Exalted Rep");
   }
-  if (document.getElementById("filterBCDung").checked == true) {
+  if (document.getElementById("filterBCBoss").checked == false) {
+//     filter.push("TBC Reputation");
+//     filter.push("Exalted Rep");
+  }
+  if (document.getElementById("filterBCDung").checked == false) {
     filter.push("TBC Dungeon");
     // Specifics here
     filter.push("Shadow Labyrinth");
   }
-  if (document.getElementById("filterBCQ").checked == true)
+  if (document.getElementById("filterBCQ").checked == false)
     filter.push("TBC Quest");
-  if (document.getElementById("filterBCraft").checked == true)
+  if (document.getElementById("filterBCraft").checked == false)
     filter.push("TBC Crafting");
-  if (document.getElementById("filterBCBoE").checked == true)
+  if (document.getElementById("filterBCBoE").checked == false)
     filter.push("TBC BoE");
   
   return filter
@@ -234,7 +243,7 @@ function createGear() {
       id: 21802
     }, {
       name: "Sageblade",
-      source: "Vanilla Crafted",
+      source: "Vanilla Crafting",
       sta: 14,
       int: 6,
       SP: 20,
@@ -565,7 +574,7 @@ function createGear() {
       id: 22267
     }, {
       name: "Bloodvine Goggles",
-      source: "Vanilla Crafted",
+      source: "Vanilla Crafting",
       armor: 75,
       hit: 16,
       crit: 14,
