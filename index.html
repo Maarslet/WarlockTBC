@@ -741,58 +741,64 @@
         
         <!--Advanced tab-->
         <div id="advanced" class="tabcontent" name="advanced" oninput="runSim();" style="background-color:#555555">
-          <h3>Don't change these settings unless you know what you are doing</h3>
-          <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="disableLifeTap">    Disable Life Tap</label><span class="tooltiptext"><span class="tooltipgeneric">For curiosity purposes</span></span></div><br><br>
-          <div class="tooltip"><label style=color:#9482C9> <input type="number" id="warlockCount" value="3" min="1" style="width:40px"> Warlock Count</label><span class="tooltiptext"><span class="tooltipgeneric">The amount of *identical* warlocks in raid</span></span></div><br><br>
-          
-          <b>Custom Stats Modifications</b><br>
-          <label style=color:#9482C9> <input type="number" id="spellPower" value="0">     Spell Power</label><br>
-          <label style=color:#9482C9> <input type="number" id="shadowPower" value="0">    Shadow Power</label><br>
-          <label style=color:#f20000> <input type="number" id="firePower" value="0">      Fire Power</label><br>
-          <label style=color:#9482C9> <input type="number" id="critRating" value="0">     Spell Crit Rating</label><br>
-          <label style=color:#9482C9> <input type="number" id="hitRating" value="0">      Spell Hit Rating</label><br>
-          <label style=color:#9482C9> <input type="number" id="hasteRating" value="0">    Spell Haste Rating</label><br>
-          <label style=color:#9482C9> <input type="number" id="spellPen" value="0">       Spell Penetration</label><br>
-          <label style=color:#9482C9> <input type="number" id="intellect" value="0">      Intellect</label><br>
-          <label style=color:#9482C9> <input type="number" id="stamina" value="0">        Stamina</label><br>
-          <label style=color:#9482C9> <input type="number" id="spirit" value="0">         Spirit</label><br>
-          <label style=color:#9482C9> <input type="number" id="hp5" value="0">            Health per 5</label><br>
-          <label style=color:#9482C9> <input type="number" id="mp5" value="0">            Mana per 5</label><br>
-          <br>
-          
-          <b>Gear Filter</b><br>
-          <div oninput="loadGear(); loadCookie();">
-            <label style=color:#9482C9> <input type="checkbox" id="filterSWP" checked>    Sunwell Plateau</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterBT" checked>     The Black Temple</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterHyjal" checked>  Mount Hyjal</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterTK" checked>     Tempest Keep</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterSerp" checked>   Serpentshrine Cavern</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterML" checked>     Magtheridon's Lair</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterGL" checked>     Gruul's Lair</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterZulA" checked>   Zul'Aman</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterKara" checked>   Karazhan</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterPvP4" checked>   TBC PvP S4</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterPvP3" checked>   TBC PvP S3</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterPvP2" checked>   TBC PvP S2</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterPvP1" checked>   TBC PvP S1</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterBCRep" checked>  TBC Reputation</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterBCDung" checked> TBC Dungeons</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterBCQ" checked>    TBC Quests</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterBCraft" checked> TBC Crafting</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterBCBoE" checked>  TBC BoEs</label><br>
-            <br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterNaxx" checked>   Naxxramas</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterAQ40" checked>   AQ40</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterBWL" checked>    Blackwing Lair</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterMC" checked>     Molten Core</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterAQ20" checked>   AQ20</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterZG" checked>     Zul'Gurub</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterOny" checked>    Onyxia</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterVPvP">   Vanilla PvP</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterVDung">  Vanilla Dungeons</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterVQuest"> Vanilla Quests</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterVCraft"> Vanilla Crafting</label><br>
-            <label style=color:#9482C9> <input type="checkbox" id="filterVBoE">   Vanilla BoEs</label><br>
+          <div class="row">
+            <div class="column buffs" style="background-color:#555555;">
+              <h3>Don't change these settings unless you know what you are doing</h3>
+              <div class="tooltip"><label style=color:#9482C9> <input type="checkbox" id="disableLifeTap">    Disable Life Tap</label><span class="tooltiptext"><span class="tooltipgeneric">For curiosity purposes</span></span></div><br><br>
+              <div class="tooltip"><label style=color:#9482C9> <input type="number" id="warlockCount" value="3" min="1" style="width:40px"> Warlock Count</label><span class="tooltiptext"><span class="tooltipgeneric">The amount of *identical* warlocks in raid</span></span></div><br><br>
+
+              <b>Custom Stats Modifications</b><br>
+              <label style=color:#9482C9> <input type="number" id="spellPower" value="0">     Spell Power</label><br>
+              <label style=color:#9482C9> <input type="number" id="shadowPower" value="0">    Shadow Power</label><br>
+              <label style=color:#f20000> <input type="number" id="firePower" value="0">      Fire Power</label><br>
+              <label style=color:#9482C9> <input type="number" id="critRating" value="0">     Spell Crit Rating</label><br>
+              <label style=color:#9482C9> <input type="number" id="hitRating" value="0">      Spell Hit Rating</label><br>
+              <label style=color:#9482C9> <input type="number" id="hasteRating" value="0">    Spell Haste Rating</label><br>
+              <label style=color:#9482C9> <input type="number" id="spellPen" value="0">       Spell Penetration</label><br>
+              <label style=color:#9482C9> <input type="number" id="intellect" value="0">      Intellect</label><br>
+              <label style=color:#9482C9> <input type="number" id="stamina" value="0">        Stamina</label><br>
+              <label style=color:#9482C9> <input type="number" id="spirit" value="0">         Spirit</label><br>
+              <label style=color:#9482C9> <input type="number" id="hp5" value="0">            Health per 5</label><br>
+              <label style=color:#9482C9> <input type="number" id="mp5" value="0">            Mana per 5</label><br>
+              <br>
+            </div>
+            
+            <div class="column buffs" style="background-color:#555555;">
+              <b>Gear Filter</b><br>
+              <div oninput="loadGear(); loadCookie();">
+                <label style=color:#9482C9> <input type="checkbox" id="filterSWP" checked>    Sunwell Plateau</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterBT" checked>     The Black Temple</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterHyjal" checked>  Mount Hyjal</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterTK" checked>     Tempest Keep</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterSerp" checked>   Serpentshrine Cavern</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterML" checked>     Magtheridon's Lair</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterGL" checked>     Gruul's Lair</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterZulA" checked>   Zul'Aman</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterKara" checked>   Karazhan</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterPvP4" checked>   TBC PvP S4</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterPvP3" checked>   TBC PvP S3</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterPvP2" checked>   TBC PvP S2</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterPvP1" checked>   TBC PvP S1</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterBCRep" checked>  TBC Reputation</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterBCDung" checked> TBC Dungeons</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterBCQ" checked>    TBC Quests</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterBCraft" checked> TBC Crafting</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterBCBoE" checked>  TBC BoEs</label><br>
+                <br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterNaxx" checked>   Naxxramas</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterAQ40" checked>   AQ40</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterBWL" checked>    Blackwing Lair</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterMC" checked>     Molten Core</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterAQ20" checked>   AQ20</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterZG" checked>     Zul'Gurub</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterOny" checked>    Onyxia</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterVPvP">   Vanilla PvP</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterVDung">  Vanilla Dungeons</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterVQuest"> Vanilla Quests</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterVCraft"> Vanilla Crafting</label><br>
+                <label style=color:#9482C9> <input type="checkbox" id="filterVBoE">   Vanilla BoEs</label><br>
+              </div>
+            </div>
           </div>
         </div>
       </div>
