@@ -795,6 +795,56 @@ function createGear() {
     }],
     
     neck: [{                    // Neck
+      name: "Brooch of Heightened Potential",
+      source: "Shadow Labyrinth",
+      sta: 15,
+      int: 14,
+      SP: 22,
+      hit: 9,
+      crit: 14,
+      id: 28134
+    }, {
+      name: "Hydra-fang Necklace",
+      source: "Underbog (HC)",
+      sta: 17,
+      int: 16,
+      SP: 19,
+      hit: 16,
+      id: 27758
+    }, {
+      name: "Eye of the Night",
+      source: "TBC Crafting",
+      SP: 34,
+      hit: 16,
+      crit: 26,
+      pen: 15,
+      id: 24116
+    }, {
+      name: "Natasha's Ember Necklace",
+      source: "TBC Quest",
+      int: 15,
+      SP: 29,
+      crit: 10,
+      id: 31692
+    }, {
+      name: "Torc of the Sethekk Prophet",
+      source: "TBC Quest",
+      int: 18,
+      SP: 19,
+      crit: 21,
+      id: 29333
+    }, {
+      name: "Pendant of Dominance",
+      source: "TBC PvP S1",
+      sta: 31,
+      int: 12,
+      SP: 26,
+      resil: 16,
+      gems: 1,
+      gem1: "yellow",
+      gemB: "crit: 2",
+      id: 28245
+    }, {
       name: "Gem of Trapped Innocents",
       source: "Naxx",
       sta: 9,
@@ -908,6 +958,82 @@ function createGear() {
     }],
     
     shoulder: [{                                            // Shoulder
+      name: "Mana-Etched Spaulders",
+      source: "Slave Pens (HC)",
+      armor: 117,
+      sta: 25,
+      int: 17,
+      SP: 20,
+      crit: 16,
+      set: "Mana-Etched",
+      gems: 2,
+      gem1: "yellow",
+      gem2: "red",
+      gemB: "resil: 3",
+      id: 27796
+    }, {
+      name: "Gladiator's Dreadweave Mantle",
+      source: "TBC PvP S1",
+      armor: 155,
+      sta: 42,
+      int: 14,
+      SP: 32,
+      hit: 12,
+      resil: 21,
+      set: "Gladiator",
+      gems: 2,
+      gem1: "blue",
+      gem2: "yellow",
+      gemB: "resil: 3",
+      id: 24554
+    }, {
+      name: "Frozen Shadoweave Shoulders",
+      source: "TBC Crafting",
+      armor: 133,
+      sta: 21,
+      int: 15,
+      ShP: 50,
+      set: "Shadow's Embrace",
+      gems: 2,
+      gem1: "yellow",
+      gem2: "blue",
+      gemB: "hit: 3",
+      id: 21869
+    }, {
+      name: "Grand Marshal's Dreadweave Mantle",
+      source: "TBC PvP S1",
+      armor: 117,
+      sta: 19,
+      int: 15,
+      SP: 26,
+      hit: 6,
+      resil: 17,
+      set: "Grand Marshal's Dreadgear",
+      gems: 2,
+      gem1: "blue",
+      gem2: "yellow",
+      gemB: "resil: 3",
+      id: 28627
+    }, {
+      name: "Mantle of Three Terrors",
+      source: "Black Morass",
+      armor: 114,
+      sta: 29,
+      int: 25,
+      SP: 29,
+      hit: 12,
+      id: 27994
+    }, {
+      name: "Spaulders of the Torn-heart",
+      source: "TBC Quest",
+      armor: 111,
+      sta: 10,
+      int: 7,
+      spi: 8,
+      SP: 40,
+      crit: 18,
+      id: 30925
+    }, {
       name: "Plagueheart Shoulderpads",
       source: "Naxx",
       armor: 111,
