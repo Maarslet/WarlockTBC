@@ -110,8 +110,22 @@ function createFilter() {
   }
   if (document.getElementById("filterBCDung").checked == false) {
     filter.push("TBC Dungeon");
+    filter.push("Badges of Justice");
     // Specifics here
     filter.push("Shadow Labyrinth");
+    filter.push("Shadow Labyrinth (HC)");
+    filter.push("Sethekk Halls");
+    filter.push("Sethekk Halls (HC)");
+    filter.push("Black Morass");
+    filter.push("Black Morass (HC)");
+    filter.push("Mechanar");
+    filter.push("Mechanar (HC)");
+    filter.push("Arcatraz");
+    filter.push("Arcatraz (HC)");
+    filter.push("Mana-Tombs");
+    filter.push("Mana-Tombs (HC)");
+    filter.push("Underbog");
+    filter.push("Underbog (HC)");
   }
   if (document.getElementById("filterBCQ").checked == false)
     filter.push("TBC Quest");
@@ -126,6 +140,42 @@ function createFilter() {
 function createGear() {
   var gear = {
     mainhand: [{                    // Main Hand
+      name: "Gladiator's Spellblade",
+      source: "TBC PvP S1",
+      sta: 28,
+      int: 18,
+      SP: 199,
+      resil: 18,
+      id: 28297
+    }, {
+      name: "Eternium Runed Blade",
+      source: "TBC Crafting",
+      int: 19,
+      SP: 168,
+      crit: 21,
+      id: 23554
+    }, {
+      name: "Blade of the Archmage",
+      source: "Exalted Rep",
+      sta: 13,
+      int: 11,
+      SP: 159,
+      crit: 21,
+      id: 29153
+    }, {
+      name: "Blade of Wizardry (No Proc)",
+      source: "TBC BoE",
+      SP: 159,
+      id: 31336
+    }, {
+      name: "Greatsword of Horrid Dreams",
+      source: "Shadow Labyrinth",
+      sta: 15,
+      int: 14,
+      SP: 130,
+      hit: 14,
+      id: 27905
+    }, {
       name: "Wraith Blade",
       source: "Naxx",
       sta: 10,
@@ -261,45 +311,50 @@ function createGear() {
       int: 8,
       SP: 14,
       id: 13964
-    }, {
-      name: "Gladiator's Spellblade",
-      source: "TBC PvP S1",
-      sta: 28,
-      int: 18,
-      SP: 199,
-      resil: 18,
-      id: 28297
-    }, {
-      name: "Eternium Runed Blade",
-      source: "TBC Crafting",
-      int: 19,
-      SP: 168,
-      crit: 21,
-      id: 23554
-    }, {
-      name: "Blade of the Archmage",
-      source: "Exalted Rep",
-      sta: 13,
-      int: 11,
-      SP: 159,
-      crit: 21,
-      id: 29153
-    }, {
-      name: "Blade of Wizardry (No Proc)",
-      source: "TBC BoE",
-      SP: 159,
-      id: 31336
-    }, {
-      name: "Greatsword of Horrid Dreams",
-      source: "Shadow Labyrinth",
-      sta: 15,
-      int: 14,
-      SP: 130,
-      hit: 14,
-      id: 27905
     }],
     
     offhand: [{                     // Off Hand
+      name: "Lamp of Peaceful Radiance",
+      source: "Arcatraz",
+      sta: 13,
+      int: 14,
+      SP: 21,
+      hit: 12,
+      crit: 13,
+      id: 28412
+    }, {
+      name: "Orb of the Soul-Eater",
+      source: "Badges of Justice",
+      sta: 18,
+      ShP: 51,
+      id: 29272
+    }, {
+      name: "Khadgar's Knapsack",
+      source: "Badges of Justice",
+      SP: 49,
+      id: 29273
+    }, {
+      name: "Star-Heart Lamp",
+      source: "Black Morass",
+      sta: 17,
+      int: 18,
+      SP: 22,
+      hit: 12,
+      id: 28187
+    }, {
+      name: "Draenei Crystal Rod of Shadow Wrath",
+      source: "TBC BoE",
+      ShP: 45,
+      id: 25099
+    }, {
+      nane: "Manual of the Nethermancer",
+      source: "Mechanar",
+      sta: 12,
+      int: 15,
+      SP: 21,
+      crit: 19,
+      id: 28260
+    }, {
       name: "Sapphiron's Left Eye",
       source: "Naxx",
       sta: 12,
@@ -395,6 +450,14 @@ function createGear() {
     }],
     
     staff: [{                       // Staff
+      name: "Terokk's Shadowstaff",
+      source: "Sethekk Halls (HC)",
+      sta: 40,
+      int: 42,
+      SP: 168,
+      crit: 37,
+      id: 29355
+    }, {
       name: "Atiesh, Greatstaff of the Guardian",
       source: "Naxx",
       sta: 30,
@@ -524,6 +587,64 @@ function createGear() {
     }],
     
     helmet: [{                        // Helmet
+      name: "Spellstrike Hood",
+      source: "TBC Crafting",
+      armor: 145,
+      sta: 16,
+      int: 12,
+      SP: 46,
+      hit: 16,
+      crit: 24,
+      set: "Spellstrike",
+      gems: 3,
+      gem1: "blue",
+      gem2: "yellow",
+      gem3: "red",
+      gemB: "sta: 6",
+      id: 24266
+    }, {
+      name: "Gnomish Power Goggles",
+      source: "TBC Crafting",
+      armor: 132,
+      int: 21,
+      SP: 59,
+      crit: 28,
+      id: 23838
+    }, {
+      name: "Evoker's Helmet of Second Sight",
+      source: "TBC Quest",
+      armor: 120,
+      sta: 12,
+      int: 15,
+      spi: 8,
+      SP: 35,
+      crit: 24,
+      gems: 3,
+      gem1: "blue",
+      gem2: "blue",
+      gem3: "yellow",
+      gemB: "SP: 5",
+      id: 31104
+    }, {
+      name: "Elementalist Skullcap of Shadow Wrath",
+      source: "TBC BoE",
+      armor: 120,
+      ShP: 80,
+      id: 24689
+    }, {
+      name: "Mana-Binders Cowl",
+      source: "Badges of Justice",
+      armor: 151,
+      sta: 38,
+      int: 29,
+      SP: 34,
+      crit: 15,
+      gems: 1,
+      gem1: "yellow",
+      meta: true,
+      gemB: "SP: 5",
+      id: 32089
+    }, {
       name: "Plagueheart Circlet",
       source: "Naxx",
       armor: 123,
@@ -2043,6 +2164,47 @@ function createGear() {
     }],
     
     wand: [{                                // Wand
+      name: "Nether Core's Control Rod",
+      source: "Arcatraz",
+      sta: 9,
+      int: 10,
+      SP: 13,
+      hit: 8,
+      id: 28386
+    }, {
+      name: "The Black Stalk",
+      source: "Underbog (HC)",
+      sta: 10,
+      SP: 20,
+      crit: 11,
+      id: 29350
+    }, {
+      name: "Voidfire Wand",
+      source: "Mana-Tombs",
+      sta: 9,
+      int: 9,
+      SP: 11,
+      hit: 7,
+      id: 25939
+    }, {
+      name: "Flawless Wand of Shadow Wrath",
+      source: "TBC BoE",
+      ShP: 25,
+      id: 25295
+    }, {
+      name: "Nesingwary Safari Stick",
+      source: "TBC Quest",
+      SP: 14,
+      crit: 12,
+      id: 25640
+    }, {
+      name: "Nethekurse's Rod of Torment",
+      source: "TBC Quest",
+      int: 10,
+      SP: 11,
+      crit: 10,
+      id: 25806
+    }, {
       name: "Wand of Fates",
       source: "Naxx",
       sta: 7,
