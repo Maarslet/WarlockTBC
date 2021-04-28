@@ -1677,6 +1677,76 @@ function createGear() {
     }],
     
     hands: [{                         // Hands
+      name: "Mana-Etched Gloves",
+      source: "Ramparts (HC)",
+      armor: 97,
+      sta: 25,
+      int: 17,
+      SP: 20,
+      crit: 16,
+      gems: 2,
+      gem1: "red",
+      gem2: "yellow",
+      gemB: "resil: 3",
+      set: "Mana-Etched",
+      id: 27465
+    }, {
+      name: "Gloves of the Deadwatcher",
+      source: "Auchenai Crypts (HC)",
+      armor: 97,
+      sta: 24,
+      int: 24,
+      SP: 29,
+      hit: 18,
+      id: 27493
+    }, {
+      name: "Gloves of Oblivion",
+      source: "Shattered Halls",
+      armor: 97,
+      sta: 33,
+      int: 21,
+      SP: 26,
+      hit: 20,
+      set: "Oblivion",
+      id: 27537
+    }, {
+      name: "Gloves of Pandemonium",
+      source: "TBC BoE",
+      armor: 78,
+      int: 15,
+      SP: 25,
+      crit: 22,
+      hit: 10,
+      id: 31149
+    }, {
+      name: "Manaspark Gloves",
+      source: "Underbog",
+      armor: 81,
+      sta: 14,
+      int: 14,
+      spi: 10,
+      SP: 16,
+      hit: 15,
+      gems: 2,
+      gem1: "red",
+      gem2: "yellow",
+      gemB: "crit: 3",
+      id: 24450
+    }, {
+      name: "Tempest's Touch",
+      source: "TBC Quest",
+      armor: 88,
+      sta: 10,
+      int: 20,
+      spi: 6,
+      SP: 27,
+      pen: 10,
+      gems: 2,
+      gem1: "blue",
+      gem2: "blue",
+      gemB: "crit: 3",
+      id: 29317
+    }, {
       name: "Dark Storm Gauntlets",
       source: "AQ40",
       armor: 95,
@@ -1815,6 +1885,66 @@ function createGear() {
     }],
     
     waist: [{                         // Waist
+      name: "Girdle of Ruination",
+      source: "TBC Crafting",
+      armor: 100,
+      sta: 18,
+      int: 13,
+      SP: 39,
+      crit: 20,
+      gems: 2,
+      gem1: "red",
+      gem2: "yellow",
+      gemB: "sta: 4",
+      id: 24256
+    }, {
+      name: "Belt of Depravity",
+      source: "Arcatraz (HC)",
+      armor: 105,
+      sta: 31,
+      int: 27,
+      SP: 34,
+      hit: 17,
+      id: 29241
+    }, {
+      name: "Glyph-Lined Sash",
+      source: "Mana-Tombs (HC)",
+      armor: 88,
+      sta: 21,
+      int: 23,
+      SP: 30,
+      crit: 9,
+      gems: 2,
+      gem1: "yellow",
+      gem2: "yellow",
+      gemB: "SP: 4",
+      id: 27843
+    }, {
+      name: "A'dal's Gift",
+      source: "TBC Quest",
+      armor: 88,
+      int: 25,
+      SP: 34,
+      crit: 21,
+      id: 31461
+    }, {
+      name: "Sash of Serpentra",
+      source: "Steamvaults",
+      armor: 88,
+      sta: 31,
+      int: 21,
+      SP: 25,
+      hit: 17,
+      id: 27795
+    }, {
+      name: "Sash of Sealed Fate",
+      source: "TBC BoE",
+      armor: 81,
+      int: 15,
+      SP: 35,
+      crit: 23,
+      id: 31283
+    }, {
       name: "Eyestalk Waist Cord",
       source: "AQ40",
       armor: 85,
@@ -1926,6 +2056,86 @@ function createGear() {
     }],
     
     legs: [{                    // Legs
+      name: "Spellstrike Pants",
+      source: "TBC Crafting",
+      armor: 156,
+      sta: 12,
+      int: 8,
+      SP: 46,
+      crit: 26,
+      hit: 22,
+      set: "Spellstrike",
+      gems: 3,
+      gem1: "blue",
+      gem2: "yellow",
+      gem3: "red",
+      gemB: "sta: 6",
+      id: 24262
+    }, {
+      name: "Breeches of the Occultist",
+      source: "Black Morass (HC)",
+      armor: 163,
+      sta: 37,
+      int: 22,
+      SP: 36,
+      crit: 23,
+      gems: 3,
+      gem1: "blue",
+      gem2: "yellow",
+      gem3: "yellow",
+      gemB: "SP: 5",
+      id: 30531
+    }, {
+      name: "Aran's Sorcerous Slacks",
+      source: "Old Hillsbrad Foothills (HC)",
+      armor: 136,
+      sta: 29,
+      int: 28,
+      SP: 23,
+      crit: 21,
+      gems: 3,
+      gem1: "red",
+      gem2: "yellow",
+      gem3: "blue",
+      gemB: "SP: 5",
+      id: 28212
+    }, {
+      name: "Pantaloons of Flaming Wrath",
+      source: "Shattered Halls (HC)",
+      armor: 136,
+      int: 28,
+      SP: 33,
+      crit: 42,
+      id: 30709
+    }, {
+      name: "Kirin Tor Master's Trousers",
+      source: "Shadow Labyrinth (HC)",
+      armor: 163,
+      sta: 27,
+      int: 29,
+      spi: 25,
+      SP: 36,
+      gems: 3,
+      gem1: "red",
+      gem2: "yellow",
+      gem3: "blue",
+      gemB: "hit: 4",
+      id: 30532
+    }, {
+      name: "Khadgar's Kilt of Abjuration",
+      source: "Black Morass",
+      armor: 133,
+      sta: 20,
+      int: 22,
+      spi: 15,
+      SP: 36,
+      gems: 3,
+      gem1: "yellow",
+      gem2: "blue",
+      gem3: "blue",
+      gemB: "SP: 5",
+      id: 28185
+    }, {
       name: "Leggings of Polarity",
       source: "Naxx",
       armor: 128,
@@ -2080,6 +2290,69 @@ function createGear() {
     }],
     
     feet: [{                        // Feet
+      name: "Frozen Shadoweave Boots",
+      source: "TBC Crafting",
+      armor: 122,
+      sta: 15,
+      int: 9,
+      ShP: 57,
+      set: "Shadow's Embrace",
+      gems: 2,
+      gem1: "yellow",
+      gem2: "blue",
+      gemB: "hit: 3",
+      id: 21870
+    }, {
+      name: "Extravagant Boots of Malice",
+      source: "Mana-Tombs (HC)",
+      armor: 107,
+      sta: 27,
+      int: 24,
+      SP: 30,
+      hit: 14,
+      id: 27821
+    }, {
+      name: "Sigil-Laced Boots",
+      source: "Arcatraz",
+      armor: 107,
+      sta: 24,
+      int: 18,
+      SP: 20,
+      crit: 17,
+      gems: 2,
+      gem1: "red",
+      gem2: "yellow",
+      gemB: "int: 3",
+      id: 28406
+    }, {
+      name: "Boots of the Nexus Warden",
+      source: "TBC Quest",
+      armor: 97,
+      sta: 27,
+      int: 17,
+      SP: 21,
+      hit: 18,
+      id: 30519
+    }, {
+      name: "General's Silk Footguards",
+      source: "TBC PvP S1",
+      armor: 142,
+      sta: 33,
+      int: 23,
+      SP: 28,
+      crit: 24,
+      resil: 24,
+      id: 28410
+    }, {
+      name: "Shimmering Azure Boots",
+      source: "TBC Quest",
+      armor: 94,
+      int: 19,
+      SP: 23,
+      hit: 16,
+      mp5: 5,
+      id: 29808
+    }, {
       name: "Plagueheart Sandals",
       source: "Naxx",
       armor: 102,
@@ -2223,6 +2496,51 @@ function createGear() {
     }],
     
     ring: [{                      // Ring
+      name: "Ashyen's Gift",
+      source: "TBC Reputation",
+      sta: 30,
+      SP: 23,
+      hit: 21,
+      id: 29172
+    }, {
+      name: "Sparking Arcanite Ring",
+      source: "Old Hillsbrad Foothills (HC)",
+      sta: 13,
+      int: 14,
+      SP: 22,
+      crit: 14,
+      hit: 10,
+      id: 28227
+    }, {
+      name: "Seal of the Exorcist",
+      source: "Spirit Shards",
+      sta: 24,
+      SP: 28,
+      hit: 12,
+      resil: 11,
+      id: 28555
+    }, {
+      name: "Ring of Cryptic Dreams",
+      source: "Badges of Justice",
+      sta: 16,
+      int: 17,
+      SP: 23,
+      crit: 20,
+      id: 29367
+    }, {
+      name: "Band of Dominion",
+      source: "TBC BoE",
+      SP: 28,
+      crit: 21,
+      id: 31290
+    }, {
+      name: "Seer's Signet",
+      source: "TBC Reputation",
+      sta: 24,
+      SP: 34,
+      crit: 12,
+      id: 29126
+    }, {
       name: "Ring of the Fallen God",
       source: "AQ40",
       sta: 5,
