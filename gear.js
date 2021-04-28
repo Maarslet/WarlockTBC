@@ -2695,6 +2695,51 @@ function createGear() {
     }],
     
     trinket: [{                             // Trinket
+      name: "Scryer's Bloodgem",
+      source: "TBC Reputation",
+      hit: 32,
+      activeSP: 150,
+      activeCD: 90,
+      activeDur: 15,
+      id: 29132
+    }, {
+      name: "Icon of the Silver Crescent",
+      source: "Badges of Justice",
+      SP: 43,
+      activeSP: 155,
+      activeCD: 120,
+      activeDur: 20,
+      id: 29370
+    }, {
+      name: "Quagmirran's Eye",
+      source: "Slave Pens (HC)",
+      SP: 37,
+      id: 27683
+    }, {
+      name: "Starkiller's Bauble",
+      source: "TBC Quest",
+      hit: 26,
+      activeSP: 125,
+      activeCD: 90,
+      activeDur: 15,
+      id: 30340
+    }, {
+      name: "Arcanist's Stone",
+      source: "Old Hillsbrad Foothills (HC)",
+      hit: 25,
+      activeSP: 167,
+      activeCD: 120,
+      activeDur: 20,
+      id: 28223
+    }, {
+      name: "Ancient Crystal Talisman",
+      source: "TBC Quest",
+      SP: 26,
+      activeSP: 104,
+      activeCD: 120,
+      activeDur: 20,
+      id: 25620
+    }, {
       name: "Mark of the Champion",
       source: "Naxx",
       SP: 85,
@@ -2709,6 +2754,9 @@ function createGear() {
       name: "The Restrained Essence of Sapphiron",
       source: "Naxx",
       SP: 40,
+      activeSP: 130,
+      activeCD: 120,
+      activeDur: 20,
       id: 23046
     }, {
       name: "Rune of the Dawn",
@@ -2718,6 +2766,9 @@ function createGear() {
     }, {
       name: "Talisman of Ephemeral Power",
       source: "MC",
+      activeSP: 175,
+      activeCD: 90,
+      activeDur: 15,
       id: 18820
     }, {
       name: "Zandalarian Hero Charm",
@@ -2727,6 +2778,9 @@ function createGear() {
       name: "Hazza'rah's Charm of Destruction",
       source: "ZG",
       set: "ZG",
+      activeCrit: 140,
+      activeCD: 180,
+      activeDur: 20,
       id: 19957
     }, {
       name: "Briarwood Reed",
@@ -2742,6 +2796,9 @@ function createGear() {
       name: "Eye of Diminution",
       source: "Naxx",
       crit: 28,
+      activeThreat: 25,
+      activeCD: 120,
+      activeDur: 20,
       id: 23001
     }, {
       name: "Royal Seal of Eldre'Thalas",
@@ -2751,14 +2808,24 @@ function createGear() {
     }, {
       name: "Nat Pagle's Broken Reel",
       source: "ZG",
+      activeHit: 80,
+      activeCD: 75,
+      activeDur: 15,
       id: 19947
     }, {
       name: "Eye of Moam",
       source: "AQ20",
+      activeSP: 50,
+      activePen: 100,
+      activeCD: 180,
+      activeDur: 30,
       id: 21473
     }, {
       name: "Fetish of the Sand Reaver",
       source: "AQ40",
+      activeThreat: 50,
+      activeCD: 180,
+      activeDur: 20,
       id: 21647
     }],
     
