@@ -1155,6 +1155,41 @@ function createGear() {
     }],
     
     back: [{                                          // Back
+      name: "Sethekk Oracle Cloak",
+      source: "Sethekk Halls",
+      armor: 78,
+      sta: 18,
+      int: 18,
+      SP: 22,
+      hit: 12,
+      id: 27981
+    }, {
+      name: "Cloak of Entropy",
+      source: "TBC BoE",
+      armor: 61,
+      int: 11,
+      SP: 25,
+      hit: 10,
+      id: 31140
+    }, {
+      name: "Shawl of Shifting Probabilities",
+      source: "Badges of Justice",
+      armor: 93,
+      sta: 18,
+      int: 16,
+      SP: 21,
+      crit: 22,
+      id: 29369
+    }, {
+      name: "Ogre Slayer's Cover",
+      source: "TBC Quest",
+      armor: 68,
+      int: 18,
+      spi: 11,
+      SP: 20,
+      crit: 16,
+      id: 25777
+    }, {
       name: "Cloak of the Necropolis",
       source: "Naxx",
       armor: 77,
@@ -1233,7 +1268,79 @@ function createGear() {
       id: 21418
     }],
     
-    chest: [{
+    chest: [{                           // Robe // Chest
+      name: "Frozen Shadoweave Robe",
+      source: "TBC Crafting",
+      armor: 178,
+      sta: 30,
+      int: 20,
+      ShP: 72,
+      gems: 2,
+      gem1: "yellow",
+      gem2: "blue",
+      gemB: "hit: 3",
+      set: "Shadow's Embrace",
+      id: 21871
+    }, {
+      name: "Robe of the Crimson Order",
+      source: "TBC BoE",
+      armor: 152,
+      int: 23,
+      SP: 50,
+      hit: 30,
+      id: 31297
+    }, {
+      name: "Auchenai Anchorite's Robe",
+      source: "TBC Quest",
+      armor: 136,
+      int: 24,
+      SP: 28,
+      hit: 23,
+      gems: 3,
+      gem1: "yellow",
+      gem2: "yellow",
+      gem3: "red",
+      gemB: "crit: 4",
+      id: 29341
+    }, {
+      name: "Will of Edward the Odd",
+      source: "TBC BoE",
+      armor: 170,
+      int: 30,
+      SP: 53,
+      crit: 30,
+      id: 31340
+    }, {
+      name: "Warp Infused Drape",
+      source: "Botanica",
+      armor: 156,
+      sta: 27,
+      int: 28,
+      SP: 30,
+      hit: 12,
+      gems: 3,
+      gem1: "red",
+      gem2: "blue",
+      gem3: "yellow",
+      gemB: "crit: 4",
+      id: 28342
+    }, {
+      name: "Gladiator's Felweave Raiment",
+      source: "TBC PvP S1",
+      armor: 207,
+      sta: 51,
+      int: 16,
+      SP: 32,
+      crit: 27,
+      resil: 24,
+      set: "Gladiator",
+      gems: 3,
+      gem1: "red",
+      gem2: "yellow",
+      gem3: "yellow",
+      gemB: "crit: 4",
+      id: 30200
+    }, {
       name: "Plagueheart Robe",
       source: "Naxx",
       armor: 158,
@@ -1402,7 +1509,55 @@ function createGear() {
       id: 19156
     }],
     
-    wrist: [{
+    wrist: [{                                 // Wrist
+      name: "Crimson Bracers of Gloom",
+      source: "Ramparts (HC)",
+      armor: 68,
+      sta: 18,
+      int: 18,
+      SP: 22,
+      hit: 12,
+      id: 27462
+    }, {
+      name: "General's Silk Cuffs",
+      source: "TBC PvP S1",
+      armor: 84,
+      sta: 22,
+      int: 17,
+      SP: 20,
+      crit: 12,
+      resil: 11,
+      gems: 1,
+      gem1: "yellow",
+      gemB: "SP: 2",
+      id: 28411
+    }, {
+      name: "Bracers of Havok",
+      source: "TBC Crafting",
+      armor: 67,
+      int: 12,
+      SP: 30,
+      gems: 1,
+      gem1: "yellow",
+      gemB: "crit: 2",
+      id: 24250
+    }, {
+      name: "Bands of Negation",
+      source: "Mana-Tombs (HC)",
+      armor: 81,
+      sta: 25,
+      int: 22,
+      SP: 29,
+      id: 29240
+    }, {
+      name: "Arcanium Signet Bands",
+      source: "Underbog (HC)",
+      armor: 68,
+      sta: 14,
+      int: 15,
+      SP: 30,
+      id: 27746
+    }, {
       name: "Rockfury Bracers",
       source: "Vanilla Quest",
       armor: 48,
