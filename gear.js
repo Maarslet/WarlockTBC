@@ -1155,6 +1155,13 @@ function createGear() {
     }],
     
     back: [{                                          // Back
+      name: "Cloak of the Black Void",
+      source: "TBC Crafting",
+      armor: 76,
+      int: 11,
+      SP: 35,
+      id: 24252
+    }, {
       name: "Sethekk Oracle Cloak",
       source: "Sethekk Halls",
       armor: 78,
@@ -1269,6 +1276,35 @@ function createGear() {
     }],
     
     chest: [{                           // Robe // Chest
+      name: "Sunfire Robe",
+      source: "TBC Crafting",
+      phase: 5,
+      armor: 266,
+      sta: 36,
+      int: 34,
+      SP: 71,
+      crit: 40,
+      haste: 40,
+      gems: 3,
+      gem1: "red",
+      gem2: "red",
+      gem3: "red",
+      gemB: "SP: 5",
+      id: 34364
+    }, {
+      name: "Spellfire Robe",
+      source: "TBC Crafting",
+      armor: 178,
+      int: 17,
+      FiP: 72,
+      crit: 28,
+      set: "Spellfire",
+      gems: 2,
+      gem1: "yellow",
+      gem2: "blue",
+      gemB: "sta: 4",
+      id: 21848
+    }, {
       name: "Frozen Shadoweave Robe",
       source: "TBC Crafting",
       armor: 178,
