@@ -21,7 +21,7 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var healthMain = 3310;
   var manaBase = 2335;
   
-  var tailoring = document.getElementById("tailoring").checked;
+  var tailoring = true;
   var fightStart = Number(document.getElementById("fightStart").value);
   var fightEnd = Number(document.getElementById("fightEnd").value);
   var timeVec = new Array;
