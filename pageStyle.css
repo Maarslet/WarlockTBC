@@ -100,7 +100,7 @@ body, html {
     cursor: pointer;
     padding: 15px;
     font-size: 20px;
-    width: 1fr;
+    width: calc(100% / 6);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
