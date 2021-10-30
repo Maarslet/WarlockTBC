@@ -84,6 +84,7 @@
         if (arguments.length >= 2) {
           element.style.backgroundColor = "#9482C9";
           element.setAttribute('name', 'activeItem');
+          element.setAttribute('itemSlot', tableName.slice(5,tableName.length));
         }
         if (arguments.length !== 3) {
           runSim();
