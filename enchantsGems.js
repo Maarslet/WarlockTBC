@@ -3,7 +3,7 @@ function loadEnchants() {
   var cell = document.getElementById("enchantHead");
   cell.innerHTML = "
     <select name='enchants' id='enchantHeadSelection'>
-      <option value='volvo'>Volvo</option>
+      <option value='volvo'>SP and Hit</option>
       <option value='saab'>Saab</option>
       <option value='mercedes'>Mercedes</option>
       <option value='audi'>Audi</option>
