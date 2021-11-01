@@ -1,11 +1,32 @@
 function loadEnchants() {
-  //Head Enchant
-  var cell = document.getElementById("enchantHead");
+  var cell;
+  cell = document.getElementById("enchantHead");
   cell.innerHTML = "<select name='enchants' id='enchantHeadSelection'>"
-      + "<option value='volvo'>SP and Hit</option>"
-      + "<option value='saab'>Saab</option>"
-      + "<option value='mercedes'>Mercedes</option>"
-      + "<option value='audi'>Audi</option></select>";
+      + "<option value='SP: 22,hit: 14'>Glyph of Power</option>"
+      + "<option value='SP: 18,sta: 10'>Hoodoo Hex</option>"
+      + "<option value='SP: 0'>None</option></select>";
+  
+  cell = document.getElementById("enchantShoulder");
+  cell.innerHTML = "<select name='enchants' id='enchantShoulderSelection'>"
+      + "<option value='SP: 18,crit: 10'>Greater Inscription of Discipline</option>"
+      + "<option value='SP: 12,crit: 15'>Greater Inscription of the Orb	</option>"
+      + "<option value='SP: 15'>Inscription of Discipline</option>"
+      + "<option value='crit: 13'>Inscription of the Orb</option>"
+      + "<option value='SP: 15,crit: 14'>Power of the Scourge</option>"
+      + "<option value='SP: 18'>Zandalar SIgnet of Mojo</option>"
+      + "<option value='SP: 0'>None</option></select>";
+  
+  cell = document.getElementById("enchantBack");
+  cell.innerHTML = "<select name='enchants' id='enchantBackSelection'>"
+      + "<option value='SP: 0'>Subtlety</option>"
+      + "<option value='pen: 20'>Spell Penetration</option>"
+      + "<option value='SP: 0'>None</option></select>";
+  
+  cell = document.getElementById("enchantChest");
+  cell.innerHTML = "<select name='enchants' id='enchantChestSelection'>"
+      + "<option value='sta: 6,int: 6,spi: 6'>Exceptional Stats</option>"
+      + "<option value='sta: 4,int: 4,spi: 4'>Greater Stats</option>"
+      + "<option value='SP: 0'>None</option></select>";
 }
 
 /*
