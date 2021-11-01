@@ -27,7 +27,52 @@ function loadEnchants() {
       + "<option value='sta: 6,int: 6,spi: 6'>Exceptional Stats</option>"
       + "<option value='sta: 4,int: 4,spi: 4'>Greater Stats</option>"
       + "<option value='SP: 0'>None</option></select>";
+  
+  cell = document.getElementById("enchantWrist");
+  cell.innerHTML = "<select name='enchantSelect' id='enchantWristSelection'>"
+      + "<option value='SP: 15'>Spellpower</option>"
+      + "<option value='SP: 10'>Superior Healing</option>"
+      + "<option value='SP: 8'>Healing Power</option>"
+      + "<option value='int: 12'>Major Intellect</option>"
+      + "<option value='sta: 4,int: 4,spi: 4'>Stats</option>"
+      + "<option value='SP: 0'>None</option></select>";
+  
+  cell = document.getElementById("enchantHand");
+  cell.innerHTML = "<select name='enchantSelect' id='enchantHandSelection'>"
+      + "<option value='SP: 20'>Major Spellpower</option>"
+      + "<option value='hit: 15'>Spell Strike</option>"
+      + "<option value='crit: 10'>Blasting</option>"
+      + "<option value='SP: 0'>None</option></select>";
+  
+  cell = document.getElementById("enchantLegs");
+  cell.innerHTML = "<select name='enchantSelect' id='enchantLegsSelection'>"
+      + "<option value='SP: 35,sta: 20'>Runic Spellthread</option>"
+      + "<option value='SP: 25,sta: 15'>Mystic Spellthread</option>"
+      + "<option value='SP: 18,sta: 10'>Hoodoo Hex</option>"
+      + "<option value='SP: 0'>None</option></select>";
+  
+  cell = document.getElementById("enchantFeet");
+  cell.innerHTML = "<select name='enchantSelect' id='enchantFeetSelection'>"
+      + "<option value='sta: 9'>Boar's Speed</option>"
+      + "<option value='SP: 0'>Minor Speed</option>"
+      + "<option value='mp5: 3'>Magister's Armor Kit</option>"
+      + "<option value='SP: 0'>None</option></select>";
+  
+  cell = document.getElementById("enchantFinger1");
+  cell.innerHTML = "<select name='enchantSelect' id='enchantFinger1Selection'>"
+      + "<option value='SP: 0'>None</option>"
+      + "<option value='SP: 12'>Spellpower</option>"
+      + "<option value='sta: 4,int: 4,spi: 4'>Stats</option></select>";
+  
+  cell = document.getElementById("enchantFinger2");
+  cell.innerHTML = "<select name='enchantSelect' id='enchantFinger2Selection'>"
+      + "<option value='SP: 0'>None</option>"
+      + "<option value='SP: 12'>Spellpower</option>"
+      + "<option value='sta: 4,int: 4,spi: 4'>Stats</option></select>";
 }
+
+
+
 
 /*
   <select name="cars" id="cars">
