@@ -60,21 +60,21 @@ function loadEnchants() {
   
   cell = document.getElementById("enchantFinger1");
   cell.innerHTML = "<select name='enchantSelect' id='enchantFinger1Selection'>"
-      + "<option value='SP: 0'>None</option>"
       + "<option value='SP: 12'>Spellpower</option>"
-      + "<option value='sta: 4,int: 4,spi: 4'>Stats</option></select>";
+      + "<option value='sta: 4,int: 4,spi: 4'>Stats</option>"
+      + "<option value='SP: 0' selected>None</option></select>";
   
   cell = document.getElementById("enchantFinger2");
   cell.innerHTML = "<select name='enchantSelect' id='enchantFinger2Selection'>"
-      + "<option value='SP: 0'>None</option>"
       + "<option value='SP: 12'>Spellpower</option>"
-      + "<option value='sta: 4,int: 4,spi: 4'>Stats</option></select>";
+      + "<option value='sta: 4,int: 4,spi: 4'>Stats</option>"
+      + "<option value='SP: 0' selected>None</option></select>";
   
   cell = document.getElementById("enchantWeapon");
   cell.innerHTML = "<select name='enchantSelect' id='enchantWeaponSelection'>"
-      + "<option value='SP: 40'>Major Spellpower</option>"
       + "<option value='ShP: 54'>Soulfrost</option>"
       + "<option value='FiP: 50'>Sunfire</option>"
+      + "<option value='SP: 40' selected>Major Spellpower</option>"
       + "<option value='SP: 30'>Spell Power</option>"
       + "<option value='int: 30'>Major Intellect</option>"
       + "<option value='SP: 0'>None</option></select>";
