@@ -97,7 +97,7 @@ function loadGems(type) {
   + "<optgroup label='Orange Gems'>"
   + "<option value='SP: 6,haste:5'>Reckless Pyrestone</option>"
   + "</optgroup>"
-  + "<option value='SP: 0'>None</option></select>";
+  + "<option value='SP: 0'>No Gem Equipped</option></select>";
   
   cellArray = document.getElementsByName('gemslot');
   for (i = 0; i<cellArray.length; i++) {
