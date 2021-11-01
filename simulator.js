@@ -1133,8 +1133,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   document.getElementById("statSpellPen").innerHTML     = "&nbsp&nbsp" + pen;
   document.getElementById("statHp5").innerHTML          = "&nbsp&nbsp" + hp5;
   document.getElementById("statMp5").innerHTML          = "&nbsp&nbsp" + mp5;
-  document.getElementById("statShadowMulti").innerHTML  = "&nbsp&nbsp" + formatNumber(shadowMultiplier,4);
-  document.getElementById("statFireMulti").innerHTML    = "&nbsp&nbsp" + formatNumber(fireMultiplier,4);
+  document.getElementById("statShadowMulti").innerHTML  = "&nbsp&nbsp" + formatNumber(shadowMultiplier/shadowReduction,4);
+  document.getElementById("statFireMulti").innerHTML    = "&nbsp&nbsp" + formatNumber(fireMultiplier/fireReduction,4);
   document.getElementById("statShadowVuln").innerHTML   = "&nbsp&nbsp" + formatNumber(shadowVuln*100,2) + "%";
   
   document.getElementById('dpsCanvas').remove();
