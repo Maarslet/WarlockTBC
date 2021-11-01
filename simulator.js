@@ -461,6 +461,10 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     stat = enchantArray[i];
     if (stat.includes('SP'))
       SP += Number(stat.split('SP:')[1]);
+    if (stat.includes('ShP'))
+      ShP += Number(stat.split('ShP:')[1]);
+    if (stat.includes('FiP'))
+      FiP += Number(stat.split('FiP:')[1]);
     if (stat.includes('hit'))
       hit += Number(stat.split('hit:')[1]);
     if (stat.includes('crit'))
