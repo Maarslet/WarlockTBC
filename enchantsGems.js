@@ -1,13 +1,13 @@
 function loadEnchants() {
   var cell;
   cell = document.getElementById("enchantHead");
-  cell.innerHTML = "<select name='enchants' id='enchantHeadSelection'>"
+  cell.innerHTML = "<select name='enchantSelect' id='enchantHeadSelection'>"
       + "<option value='SP: 22,hit: 14'>Glyph of Power</option>"
       + "<option value='SP: 18,sta: 10'>Hoodoo Hex</option>"
       + "<option value='SP: 0'>None</option></select>";
   
   cell = document.getElementById("enchantShoulder");
-  cell.innerHTML = "<select name='enchants' id='enchantShoulderSelection'>"
+  cell.innerHTML = "<select name='enchantSelect' id='enchantShoulderSelection'>"
       + "<option value='SP: 18,crit: 10'>Greater Inscription of Discipline</option>"
       + "<option value='SP: 12,crit: 15'>Greater Inscription of the Orb	</option>"
       + "<option value='SP: 15'>Inscription of Discipline</option>"
@@ -17,13 +17,13 @@ function loadEnchants() {
       + "<option value='SP: 0'>None</option></select>";
   
   cell = document.getElementById("enchantBack");
-  cell.innerHTML = "<select name='enchants' id='enchantBackSelection'>"
+  cell.innerHTML = "<select name='enchantSelect' id='enchantBackSelection'>"
       + "<option value='SP: 0'>Subtlety</option>"
       + "<option value='pen: 20'>Spell Penetration</option>"
       + "<option value='SP: 0'>None</option></select>";
   
   cell = document.getElementById("enchantChest");
-  cell.innerHTML = "<select name='enchants' id='enchantChestSelection'>"
+  cell.innerHTML = "<select name='enchantSelect' id='enchantChestSelection'>"
       + "<option value='sta: 6,int: 6,spi: 6'>Exceptional Stats</option>"
       + "<option value='sta: 4,int: 4,spi: 4'>Greater Stats</option>"
       + "<option value='SP: 0'>None</option></select>";
