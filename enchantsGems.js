@@ -2,11 +2,11 @@ function loadEnchants() {
   //Head Enchant
   var cell = document.getElementById("enchantHead");
   cell.innerHTML = "
-    <select name="enchants" id="enchantHeadSelection">
-      <option value="volvo">Volvo</option>
-      <option value="saab">Saab</option>
-      <option value="mercedes">Mercedes</option>
-      <option value="audi">Audi</option>
+    <select name='enchants' id='enchantHeadSelection'>
+      <option value='volvo'>Volvo</option>
+      <option value='saab'>Saab</option>
+      <option value='mercedes'>Mercedes</option>
+      <option value='audi'>Audi</option>
     </select>";
 }
 
