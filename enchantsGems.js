@@ -80,6 +80,31 @@ function loadEnchants() {
       + "<option value='SP: 0'>None</option></select>";
 }
 
+function loadGems(type) {
+  var metaHTML, normalHTML, cellArray, i;
+  
+  if (type !== "meta")
+    type = "normal";
+  
+  normalHTML = ""
+  + "<optgroup label='Red Gems'>"
+  + "<option value='SP: 14'>Don Julio's Heart</option>"
+  + "<option value='SP: 12'>Runed Ornate Ruby</option>"
+  + "<option value='SP: 12'>Runed Crimson Spinel</option>"
+  + "<option value='SP: 9'>Runed Living Ruby</option>"
+  + "<option value='SP: 7'>Runed Blood Garnet</option>"
+  + "</optgroup>"
+  + "<optgroup label='Orange Gems'>"
+  + "<option value='SP: 6,haste:5'>Reckless Pyrestone</option>"
+  + "</optgroup>"
+  + "<option value='SP: 0'>None</option></select>";
+  
+  cellArray = document.getElementsByName('gemslot');
+  for (i = 0; i<cellArray.length; i++) {
+    cellArray[i].innerHTML = "<select name='gemselect'>" + normalHTML;
+  }
+  
+}
 
 
 
