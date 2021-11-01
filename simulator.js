@@ -449,6 +449,38 @@ function runSim(gearTable, baseLine, makeBaseLine) {
   var songflower = document.getElementById("songflower").checked;
   var diremaulBuff = document.getElementById("diremaulBuff").checked;*/
   
+  // Enchants & Gems
+  var enchantList = document.getElementsByName('enchantSelect');
+  var enchantString = "";
+  for (i = 0; i<enchantList.length; i++) {
+    enchantString += enchantList[i].value + ",";
+  }
+  var enchantArray = enchantString.split(',');
+  var stat = "";
+  for (i = 0;i<enchantArray.length; i++) {
+    stat = enchantArray[i];
+    if (stat.includes('SP'))
+      SP += Number(stat.split('SP:')[1]);
+    if (stat.includes('hit'))
+      hit += Number(stat.split('hit:')[1]);
+    if (stat.includes('crit'))
+      crit += Number(stat.split('crit:')[1]);
+    if (stat.includes('stam'))
+      stam += Number(stat.split('sta:')[1]);
+    if (stat.includes('int'))
+      int += Number(stat.split('int:')[1]);
+    if (stat.includes('spi'))
+      spirit += Number(stat.split('spi:')[1]);
+    if (stat.includes('haste'))
+      haste += Number(stat.split('haste:')[1]);
+    if (stat.includes('pen'))
+      pen += Number(stat.split('pen:')[1]);
+    if (stat.includes('mp5'))
+      mp5 += Number(stat.split('mp5:')[1]);
+    if (stat.includes('hp5'))
+      hp5 += Number(stat.split('hp5:')[1]);
+  }
+  
   // Final Touches on Stats
   stam = Math.round(stam * (1 + 0.1*kings) * (1 + 0.03*talentStamina));
   healthMain = Math.round((healthMain + stam*10) * (1 + 0.01*talentFelStamina));
