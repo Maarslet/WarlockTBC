@@ -11,6 +11,7 @@
     <script src="/WarlockTBC/talents.js"></script>
     <script src="/WarlockTBC/cookies.js"></script>
     <script src="/WarlockTBC/gear.js"></script>
+    <script src="/WarlockTBC/enchantsGems.js"></script>
     <script type="text/javascript">
       function openPage(pageName,elmnt,color) {
         var i, tabcontent, tablinks;
@@ -140,6 +141,7 @@
         Chart.defaults.global.defaultFontColor = 'black';
         setTalents('DS/Ruin');
         loadGear();
+        loadEnchants();
         loadCookie();
         
         setTimeout(function(){ 
