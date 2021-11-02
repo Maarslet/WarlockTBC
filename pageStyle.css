@@ -299,6 +299,10 @@ input[type=number]{
 }
 
 /* Gem CSS */
+.select {
+    height: auto;
+    overflow: scroll;
+}
 .redgem {
     color: red;
     background-color: #222222;
