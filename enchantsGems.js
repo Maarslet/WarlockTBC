@@ -87,7 +87,7 @@ function loadGems(type) {
     type = "normal";
   
   normalHTML = ""
-  + "<div color='red'>"
+  + "<div style='color:red'>"
   + "<option value='SP: 14'>Don Julio's Heart</option>"
   + "<option value='SP: 12'>Runed Ornate Ruby</option>"
   + "<option value='SP: 12'>Runed Crimson Spinel</option>"
