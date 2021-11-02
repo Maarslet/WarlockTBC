@@ -20,10 +20,10 @@ function loadGear() {
       item = gear[list][j];
       extra = "";
       if (item.set !== undefined) {
-        extra = " class='" + item.set + "'";
+        extra = " data-set='" + item.set + "'";
       }
       if (filter.includes(item.source) == false) {
-        info += "<tr onclick=clickTable('" + slot + "',this);" + extra + "><td>" + item.name + "</td><td>" + item.source + "</td><td>" + item.sta + "</td><td>" + item.int + "</td><td>" + item.spi + "</td><td>" + item.SP + "</td><td>" + item.ShP + "</td><td>" + item.FiP + "</td><td>" + item.hit + "</td><td>" + item.crit + "</td><td>" + item.haste + "</td><td>" + item.pen + "</td><td>" + item.hp5 + "</td><td>" + item.mp5 + "</td><td></td><td></td></tr>";
+        info += "<tr onclick=clickTable('" + slot + "',this);" + extra + "><td><a href='https://tbc.wowhead.com/item=" + item.id + "'>" + item.name + "</a></td><td>" + item.source + "</td><td>" + item.sta + "</td><td>" + item.int + "</td><td>" + item.spi + "</td><td>" + item.SP + "</td><td>" + item.ShP + "</td><td>" + item.FiP + "</td><td>" + item.hit + "</td><td>" + item.crit + "</td><td>" + item.haste + "</td><td>" + item.pen + "</td><td>" + item.hp5 + "</td><td>" + item.mp5 + "</td><td></td><td></td></tr>";
         count++;
       }
     }
@@ -347,7 +347,7 @@ function createGear() {
       ShP: 45,
       id: 25099
     }, {
-      nane: "Manual of the Nethermancer",
+      name: "Manual of the Nethermancer",
       source: "Mechanar",
       sta: 12,
       int: 15,
@@ -639,9 +639,9 @@ function createGear() {
       int: 29,
       SP: 34,
       crit: 15,
-      gems: 1,
-      gem1: "yellow",
-      meta: true,
+      gems: 2,
+      gem1: "meta",
+      gem2: "yellow",
       gemB: "SP: 5",
       id: 32089
     }, {
