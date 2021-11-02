@@ -87,26 +87,27 @@ function loadGems(type) {
     type = "normal";
   
   normalHTML = ""
-  + "<div style='color:red'>"
-  + "<option style='color:red' value='SP: 14'>Don Julio's Heart</option>"
-  + "<option value='SP: 12'>Runed Ornate Ruby</option>"
-  + "<option value='SP: 12'>Runed Crimson Spinel</option>"
-  + "<option value='SP: 9'>Runed Living Ruby</option>"
-  + "<option value='SP: 7'>Runed Blood Garnet</option>"
-  + "</div>"
-  + "<optgroup label='Orange Gems'>"
-  + "<option value='SP: 6,haste:5'>Reckless Pyrestone</option>"
-  + "</optgroup>"
+  // Red Gems
+  + "<option class='redgem' value='SP: 14'>Don Julio's Heart</option>"
+  + "<option class='redgem' value='SP: 12'>Runed Ornate Ruby</option>"
+  + "<option class='redgem' value='SP: 12'>Runed Crimson Spinel</option>"
+  + "<option class='redgem' value='SP: 9'>Runed Living Ruby</option>"
+  + "<option class='redgem' value='SP: 7'>Runed Blood Garnet</option>"
+  // Orange Gems
+  + "<option class='orangegem' value='SP: 6,haste:5'>Reckless Pyrestone</option>"
+  // No Gem
   + "<option value='SP: 0' selected>No Gem Equipped</option></select>";
   
   cellArray = document.getElementsByName('gemslot');
   for (i = 0; i<cellArray.length; i++) {
-    cellArray[i].innerHTML = "<select name='gemselect'>" + normalHTML;
+    cellArray[i].innerHTML = "<select name='gemselect' onchange='updateSelectColor(this)'>" + normalHTML;
   }
   
 }
 
-
+function updateSelectColor(element) {
+  element.style.color = element[element.selectedIndex].style.color;
+}
 
 /*
   <select name="cars" id="cars">
