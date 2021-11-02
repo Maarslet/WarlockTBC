@@ -277,9 +277,9 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     if (arguments.length > 0 && gearTable.parentNode.parentNode.id === items[i].parentNode.parentNode.id) {
       var iIndex = i;
       if (arguments.length < 3) {
-        stam += Number(gearTable.children[2].innerHTML);
-        int  += Number(gearTable.children[3].innerHTML);
-        spirit+= Number(gearTable.children[4].innerHTML);
+        stam += Number(gearTable.children[3].innerHTML);
+        int  += Number(gearTable.children[4].innerHTML);
+        //spirit+= Number(gearTable.children[4].innerHTML);
         SP   += Number(gearTable.children[5].innerHTML);
         ShP  += Number(gearTable.children[6].innerHTML);
         FiP  += Number(gearTable.children[7].innerHTML);
@@ -287,15 +287,15 @@ function runSim(gearTable, baseLine, makeBaseLine) {
         crit += Number(gearTable.children[9].innerHTML);
         haste+= Number(gearTable.children[10].innerHTML);
         pen  += Number(gearTable.children[11].innerHTML);
-        mp5  += Number(gearTable.children[12].innerHTML);
-        mp5  += Number(gearTable.children[13].innerHTML);
+        //mp5  += Number(gearTable.children[12].innerHTML);
+        //mp5  += Number(gearTable.children[13].innerHTML);
         classList.push(gearTable.classList[0]);
       }
     }
     else {
-      stam += Number(items[i].children[2].innerHTML);
-      int  += Number(items[i].children[3].innerHTML);
-      spirit+= Number(items[i].children[4].innerHTML);
+      stam += Number(items[i].children[3].innerHTML);
+      int  += Number(items[i].children[4].innerHTML);
+      //spirit+= Number(items[i].children[4].innerHTML);
       SP   += Number(items[i].children[5].innerHTML);
       ShP  += Number(items[i].children[6].innerHTML);
       FiP  += Number(items[i].children[7].innerHTML);
@@ -303,8 +303,8 @@ function runSim(gearTable, baseLine, makeBaseLine) {
       crit += Number(items[i].children[9].innerHTML);
       haste+= Number(items[i].children[10].innerHTML);
       pen  += Number(items[i].children[11].innerHTML);
-      mp5  += Number(items[i].children[12].innerHTML);
-      mp5  += Number(items[i].children[13].innerHTML);
+      //mp5  += Number(items[i].children[12].innerHTML);
+      //mp5  += Number(items[i].children[13].innerHTML);
       classList.push(items[i].classList[0]);
     }
   }
@@ -1144,10 +1144,10 @@ function runSim(gearTable, baseLine, makeBaseLine) {
     return math.sum(baseVec)/baseVec.length;
   }
   if (arguments.length == 2) {
-    gearTable.children[15].innerHTML = Number(formatNumber(math.sum(baseVec)/baseVec.length,2));
+    gearTable.children[13].innerHTML = Number(formatNumber(math.sum(baseVec)/baseVec.length,2));
     //var valueSP = Number(gearTable.children[4].innerHTML) + Number(gearTable.children[5].innerHTML)*shadowDS + Number(gearTable.children[6].innerHTML)*fireDS + Number(gearTable.children[8].innerHTML.slice(0,1))*critVal/SPVal + Number(gearTable.children[7].innerHTML.slice(0,1))*hitVal/SPVal + Number(gearTable.children[3].innerHTML)*intVal/SPVal + Number(gearTable.children[9].innerHTML)*penVal/SPVal + Number(gearTable.children[10].innerHTML)*mp5Val/SPVal;
     //gearTable.children[11].innerHTML = Number(formatNumber(valueSP,2));
-    gearTable.children[14].innerHTML = Number(formatNumber((math.sum(baseVec)/baseVec.length-baseLine)/SPVal,2));
+    gearTable.children[12].innerHTML = Number(formatNumber((math.sum(baseVec)/baseVec.length-baseLine)/SPVal,2));
     console.timeEnd('Timer');
     return
   }
