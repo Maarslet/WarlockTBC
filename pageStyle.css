@@ -323,7 +323,10 @@ input[type=number]{
     color: blue;
     background-color: #1A1A1A;
 }
-gemselect::selection {
+.gemselect {
+    background-color: #1A1A1A;
+}
+.gemselect::selection {
     color: none;
     background-color: #444444;
 }
