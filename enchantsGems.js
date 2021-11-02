@@ -85,6 +85,14 @@ function loadGems(type) {
   
   if (type !== "meta")
     type = "normal";
+  metaHTML = ""
+  + "<option class='nogem' value='nometa' selected>No Gem Equipped</option>"
+  + "<option class='nogem' value='chaotic' selected>Chaotic Skyfire Diamond</option>"
+  + "<option class='nogem' value='ember' selected>Ember Skyfire Diamond</option>"
+  + "<option class='nogem' value='mystical' selected>Mystical Skyfire Diamond</option>"
+  + "<option class='nogem' value='swift' selected>Swift Starfire Diamond</option>"
+  + "<option class='nogem' value='insightful' selected>Insightful Earthstorm Diamond</option>"
+  + "<option class='nogem' value='imbued' selected>Imbued Unstable Diamond</option>"
   
   normalHTML = ""
   // No Gem
@@ -127,8 +135,8 @@ function loadGems(type) {
   + "</select></span>";
   
   cellArray = document.getElementsByName('gemslot');
-  cellArray[i].innerHTML = "<select display='none' name='gemselect' class='nogem' onchange='updateSelectColor(this);'>" + normalHTML;
-  cellArray[i].innerHTML += "<select display='inline-block' name='gemselect' class='nogem' onchange='updateSelectColor(this);'>" + normalHTML;
+  cellArray[0].innerHTML = "<select display='none' name='gemselect' class='nogem' onchange='updateSelectColor(this);'>" + normalHTML;
+  cellArray[0].innerHTML += "<select display='inline-block' name='gemselect' class='nogem' onchange='updateSelectColor(this);'>" + metaHTML;
   for (i = 1; i<cellArray.length; i++) {
     cellArray[i].innerHTML = "<select name='gemselect' class='nogem' onchange='updateSelectColor(this);'>" + normalHTML;
   }
