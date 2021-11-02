@@ -123,11 +123,11 @@ function loadGems(type) {
   + "<option class='bluegem' value='pen: 13'>Stormy Empyrean Sapphire</option>"
   + "<option class='bluegem' value='pen: 10'>Stormy Star of Elune</option>"
   // No Gem
-  + "<option style='color:black' value='SP: 0' selected>No Gem Equipped</option></select>";
+  + "<option style='color:black' value='SP: 0' selected>No Gem Equipped</option></select></div>";
   
   cellArray = document.getElementsByName('gemslot');
   for (i = 0; i<cellArray.length; i++) {
-    cellArray[i].innerHTML = "<select name='gemselect' onchange='updateSelectColor(this)'>" + normalHTML;
+    cellArray[i].innerHTML = "<div class='gemselectClass'><select name='gemselect' onchange='updateSelectColor(this)'>" + normalHTML;
   }
   
 }
