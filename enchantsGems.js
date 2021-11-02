@@ -127,9 +127,8 @@ function loadGems(type) {
   
   cellArray = document.getElementsByName('gemslot');
   for (i = 0; i<cellArray.length; i++) {
-    cellArray[i].innerHTML = "<span class='gemselectClass'><select name='gemselect' class='nogem' onchange='updateSelectColor(this)'>" + normalHTML;
+    cellArray[i].innerHTML = "<span class='gemselectClass'><select name='gemselect' class='nogem' onfocus='this.size=28;' onchange='updateSelectColor(this);this.blur();' onblur='this.size=1;'>" + normalHTML;
   }
-  
 }
 
 function updateSelectColor(element) {
