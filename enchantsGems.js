@@ -87,6 +87,8 @@ function loadGems(type) {
     type = "normal";
   
   normalHTML = ""
+  // No Gem
+  + "<option class='nogem' value='SP: 0' selected>No Gem Equipped</option>"
   // Red Gems
   + "<option class='redgem' value='SP: 14'>Don Julio's Heart</option>"
   //+ "<option class='redgem' value='SP: 12'>Runed Ornate Ruby</option>"
@@ -122,8 +124,7 @@ function loadGems(type) {
   // Blue Gems
   + "<option class='bluegem' value='pen: 13'>Stormy Empyrean Sapphire</option>"
   + "<option class='bluegem' value='pen: 10'>Stormy Star of Elune</option>"
-  // No Gem
-  + "<option class='nogem' value='SP: 0' selected>No Gem Equipped</option></select></span>";
+  + "</select></span>";
   
   cellArray = document.getElementsByName('gemslot');
   for (i = 0; i<cellArray.length; i++) {
