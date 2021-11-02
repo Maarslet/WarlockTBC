@@ -355,6 +355,9 @@ select[name=gemselect] {
 .nogem {
     color: #EEE;
 }
-
+.enchantsTable th {
+    text-align: center;
+    font-size: 16px;
+}
 
 
