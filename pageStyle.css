@@ -301,26 +301,32 @@ input[type=number]{
 /* Gem CSS */
 .redgem {
     color: red;
-    background-color: #33333380;
+    background-color: #1A1A1A;
 }
 .orangegem {
     color: orange;
+    background-color: #1A1A1A;
 }
 .yellowgem {
     color: yellow;
-    background-color: #33333380;
+    background-color: #1A1A1A;
 }
 .purplegem {
     color: purple;
+    background-color: #1A1A1A;
 }
 .greengem {
     color: green;
-    background-color: #33333380;
+    background-color: #1A1A1A;
 }
 .bluegem {
     color: blue;
+    background-color: #1A1A1A;
 }
-
+gemselect::selection {
+    color: none;
+    background-color: #444444;
+}
 
 
 
