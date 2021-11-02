@@ -298,4 +298,7 @@ input[type=number]{
     visibility: visible;
 }
 
-
+/* Gem CSS */
+.redgem {
+    color: red;
+}
