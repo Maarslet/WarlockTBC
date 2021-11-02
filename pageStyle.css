@@ -299,43 +299,34 @@ input[type=number]{
 }
 
 /* Gem CSS */
-.select {
-    height: auto;
-    overflow: scroll;
+option {
+    background-color: #333;
 }
-.redgem {
-    color: red;
-    background-color: #222222;
-}
-.orangegem {
-    color: orange;
-    background-color: #222222;
-}
-.yellowgem {
-    color: yellow;
-    background-color: #222222;
-}
-.purplegem {
-    color: purple;
-    background-color: #222222;
-}
-.greengem {
-    color: green;
-    background-color: #222222;
-}
-.bluegem {
-    color: blue;
-    background-color: #222222;
-}
-.nogem {
-    color: #DDDDDD;
-    background-color: #222222;
-}
-.gemselectClass::selection {
+option::selection {
     color: none;
     background-color: #444444;
 }
-
+.redgem {
+    color: red;
+}
+.orangegem {
+    color: orange;
+}
+.yellowgem {
+    color: yellow;
+}
+.purplegem {
+    color: purple;
+}
+.greengem {
+    color: green;
+}
+.bluegem {
+    color: blue;
+}
+.nogem {
+    color: #DDDDDD;
+}
 
 
 
