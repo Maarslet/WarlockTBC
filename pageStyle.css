@@ -301,18 +301,21 @@ input[type=number]{
 /* Gem CSS */
 .redgem {
     color: red;
+    background-color: #33333380;
 }
 .orangegem {
     color: orange;
 }
 .yellowgem {
     color: yellow;
+    background-color: #33333380;
 }
 .purplegem {
     color: purple;
 }
 .greengem {
     color: green;
+    background-color: #33333380;
 }
 .bluegem {
     color: blue;
