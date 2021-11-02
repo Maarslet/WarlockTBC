@@ -1,7 +1,7 @@
 function loadGear() {
   var gear = createGear();
   var filter = createFilter();
-  var i, j, info, item, slot, list, extra, count
+  var i, j, info, item, slot, list, extra, count, gemstring
   
   var slotArray = ['tableMainHand', 'tableOffHand', 'tableStaff', 'tableHelmet', 'tableNeck', 'tableShoulders', 'tableBack', 'tableChest', 'tableWrists', 
                    'tableHands', 'tableWaist', 'tableLegs', 'tableFeet', 'tableRing1', 'tableRing2', 'tableTrinket1', 'tableTrinket2', 'tableWand'];
@@ -19,11 +19,22 @@ function loadGear() {
     for (j=0; j<gear[list].length; j++) {
       item = gear[list][j];
       extra = "";
+      gemstring = "";
       if (item.set !== undefined) {
         extra = " data-set='" + item.set + "'";
       }
+      if (item.gems > 0) {
+        gemstring = item.gem1[0];
+        if (item.gems > 1) {
+          gemstring += item.gem2[0];
+          if (item.gems > 2) {
+            gemstring += item.gem3[0];
+          }
+        }
+        gemstring = gemstring.toUpperCase();
+      }
       if (filter.includes(item.source) == false) {
-        info += "<tr onclick=clickTable('" + slot + "',this);" + extra + "><td><a href='https://tbc.wowhead.com/item=" + item.id + "'>" + item.name + "</a></td><td>" + item.source + "</td><td>" + item.sta + "</td><td>" + item.int + "</td><td>" + item.spi + "</td><td>" + item.SP + "</td><td>" + item.ShP + "</td><td>" + item.FiP + "</td><td>" + item.hit + "</td><td>" + item.crit + "</td><td>" + item.haste + "</td><td>" + item.pen + "</td><td>" + item.hp5 + "</td><td>" + item.mp5 + "</td><td></td><td></td></tr>";
+        info += "<tr onclick=clickTable('" + slot + "',this);" + extra + "><td><a href='https://tbc.wowhead.com/item=" + item.id + "'>" + item.name + "</a></td><td>" + gemstring + "</td><td>" + item.source + "</td><td>" + item.sta + "</td><td>" + item.int + "</td><td>" + item.SP + "</td><td>" + item.ShP + "</td><td>" + item.FiP + "</td><td>" + item.hit + "</td><td>" + item.crit + "</td><td>" + item.haste + "</td><td>" + item.pen + "</td><td></td><td></td></tr>";
         count++;
       }
     }
