@@ -306,9 +306,9 @@ option::selection {
     color: none;
     background-color: #444444;
 }
-.gemselect {
-	width: 200px;
-    height: 2em;
+input[name="gemselect"] {
+	width: 180px;
+    height: 1.75em;
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -317,8 +317,8 @@ option::selection {
 .gemselectClass {
 	display: inline-block;
 	position: relative;
-	width: 200px;
-	height: 1.75em;
+	width: 180px;
+	height: 1.5em;
 }
 .redgem {
     color: red;
