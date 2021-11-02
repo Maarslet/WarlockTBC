@@ -309,7 +309,6 @@ option::selection {
 }
 select[name=gemselect] {
 	width: 180px;
-    height: 1.75em;
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -319,7 +318,7 @@ select[name=gemselect] {
 	display: inline-block;
 	position: relative;
 	width: 180px;
-	height: 1.5em;
+	height: 1.25em;
 }
 .redgem {
     color: red;
