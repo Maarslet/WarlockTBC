@@ -86,13 +86,13 @@ function loadGems(type) {
   if (type !== "meta")
     type = "normal";
   metaHTML = ""
-  + "<option class='nogem' value='nometa' selected>No Gem Equipped</option>"
+  + "<option class='nogem' value='nometa'>No Gem Equipped</option>"
   + "<option class='nogem' value='chaotic' selected>Chaotic Skyfire Diamond</option>"
-  + "<option class='nogem' value='ember' selected>Ember Skyfire Diamond</option>"
-  + "<option class='nogem' value='mystical' selected>Mystical Skyfire Diamond</option>"
-  + "<option class='nogem' value='swift' selected>Swift Starfire Diamond</option>"
-  + "<option class='nogem' value='insightful' selected>Insightful Earthstorm Diamond</option>"
-  + "<option class='nogem' value='imbued' selected>Imbued Unstable Diamond</option>"
+  + "<option class='nogem' value='ember'>Ember Skyfire Diamond</option>"
+  + "<option class='nogem' value='mystical'>Mystical Skyfire Diamond</option>"
+  + "<option class='nogem' value='swift'>Swift Starfire Diamond</option>"
+  + "<option class='nogem' value='insightful'>Insightful Earthstorm Diamond</option>"
+  + "<option class='nogem' value='imbued'>Imbued Unstable Diamond</option>"
   
   normalHTML = ""
   // No Gem
