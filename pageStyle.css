@@ -52,10 +52,10 @@ tr:nth-child(odd) /*{ background-color: #dddddd; }*/
 }
 .gearTable tr td:nth-child(1), .gearTable tr th:nth-child(1) {
     text-align: left;
-    width: 300px;
+    width: 275px;
 }
-.gearTable tr td:nth-child(2), .gearTable tr th:nth-child(2) {
-    width: 125px;
+.gearTable tr td:nth-child(3), .gearTable tr th:nth-child(3) {
+    width: 150px;
 }
 /*.gearTable tr td:nth-child(2), .gearTable tr th:nth-child(2), .gearTable tr td:nth-child(3), .gearTable tr th:nth-child(3), .gearTable tr td:nth-child(4), .gearTable tr th:nth-child(4), .gearTable tr td:nth-child(5), .gearTable tr th:nth-child(5), {
     width: 100px;
@@ -167,7 +167,7 @@ body, html {
 }
 .allTheTabs {
     width: 80%;
-    padding: 10px;
+    padding: 0px;
     padding-bottom: 0px;
 }
 .buffs {
