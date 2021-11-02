@@ -39,7 +39,7 @@ function loadGear() {
       }
     }
     if (count == 0)
-      info = "<tr onclick=clickTable('" + slot + "',this);><td>No items found, check your filter in the Advanced Tab</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
+      info = "<tr onclick=clickTable('" + slot + "',this);><td>No items found, check your filter in the Advanced Tab</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
     
     document.getElementById(slot).children[1].innerHTML = info.replaceAll("undefined","");
     $('#' + slot).DataTable();
