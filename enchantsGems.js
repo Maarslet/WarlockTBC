@@ -135,8 +135,8 @@ function loadGems(type) {
   + "</select></span>";
   
   cellArray = document.getElementsByName('gemslot');
-  cellArray[0].innerHTML = "<select display='none' name='gemselect' class='nogem' onchange='updateSelectColor(this);'>" + normalHTML;
-  cellArray[0].innerHTML += "<select display='inline-block' name='gemselect' class='nogem' onchange='updateSelectColor(this);'>" + metaHTML;
+  cellArray[0].innerHTML = "<select style='display:none' name='gemselect' class='nogem' onchange='updateSelectColor(this);'>" + normalHTML;
+  cellArray[0].innerHTML += "<select style='display:inline-block' name='gemselect' class='nogem' onchange='updateSelectColor(this);'>" + metaHTML;
   for (i = 1; i<cellArray.length; i++) {
     cellArray[i].innerHTML = "<select name='gemselect' class='nogem' onchange='updateSelectColor(this);'>" + normalHTML;
   }
