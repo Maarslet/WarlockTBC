@@ -89,14 +89,41 @@ function loadGems(type) {
   normalHTML = ""
   // Red Gems
   + "<option class='redgem' value='SP: 14'>Don Julio's Heart</option>"
-  + "<option class='redgem' value='SP: 12'>Runed Ornate Ruby</option>"
+  //+ "<option class='redgem' value='SP: 12'>Runed Ornate Ruby</option>"
   + "<option class='redgem' value='SP: 12'>Runed Crimson Spinel</option>"
   + "<option class='redgem' value='SP: 9'>Runed Living Ruby</option>"
-  + "<option class='redgem' value='SP: 7'>Runed Blood Garnet</option>"
+  //+ "<option class='redgem' value='SP: 7'>Runed Blood Garnet</option>"
   // Orange Gems
   + "<option class='orangegem' value='SP: 6,haste:5'>Reckless Pyrestone</option>"
+  + "<option class='orangegem' value='SP: 5,haste:4'>Reckless Noble Topaz</option>"
+  + "<option class='orangegem' value='SP: 6,crit:5'>Potent Pyrestone</option>"
+  + "<option class='orangegem' value='SP: 5,crit:4'>Potent Noble Topaz</option>"
+  + "<option class='orangegem' value='SP: 6,hit:5'>Veiled Pyrestone</option>"
+  + "<option class='orangegem' value='SP: 5,hit:4'>Veiled Noble Topaz</option>"
+  // Yellow Gems
+  + "<option class='yellowgem' value='haste: 10'>Quick Lionseye</option>"
+  + "<option class='yellowgem' value='haste: 8'>Quick Dawnstone</option>"
+  + "<option class='yellowgem' value='hit: 12'>Great Bladestone</option>"
+  + "<option class='yellowgem' value='hit: 10'>Great Lionseye</option>"
+  + "<option class='yellowgem' value='hit: 8'>Great Dawnstone</option>"
+  + "<option class='yellowgem' value='crit: 12'>Blood of Amber</option>"
+  + "<option class='yellowgem' value='crit: 10'>Gleaming Lionseye</option>"
+  + "<option class='yellowgem' value='crit: 8'>Gleaming Dawnstone</option>"
+  + "<option class='yellowgem' value='int: 10'>Brilliant Lionseye</option>"
+  + "<option class='yellowgem' value='int: 8'>Brilliant Dawnstone</option>"
+  // Purple Gems
+  + "<option class='purplegem' value='SP: 6,sta:7'>Glowing Shadowsong Amethyst</option>"
+  + "<option class='purplegem' value='SP: 5,sta:6'>Glowing Nightseye</option>"
+  // Green Gems
+  + "<option class='greengem' value='haste: 5,sta:7'>Forceful Seaspray Emerald</option>"
+  + "<option class='greengem' value='haste: 4,sta:6'>Forceful Talasite</option>"
+  + "<option class='greengem' value='crit: 5,pen:6'>Radiant Seaspray Emerald</option>"
+  + "<option class='greengem' value='crit: 4,pen:5'>Radiant Talasite</option>"
+  // Blue Gems
+  + "<option class='bluegem' value='pen: 13'>Stormy Empyrean Sapphire</option>"
+  + "<option class='bluegem' value='pen: 10'>Stormy Star of Elune</option>"
   // No Gem
-  + "<option value='SP: 0' selected>No Gem Equipped</option></select>";
+  + "<option style='color:black' value='SP: 0' selected>No Gem Equipped</option></select>";
   
   cellArray = document.getElementsByName('gemslot');
   for (i = 0; i<cellArray.length; i++) {
@@ -106,40 +133,5 @@ function loadGems(type) {
 }
 
 function updateSelectColor(element) {
-  element.style.color = element[element.selectedIndex].style.color;
+  element.className = element[element.selectedIndex].className;
 }
-
-/*
-  <select name="cars" id="cars">
-    <optgroup label="Swedish Cars">
-      <option value="volvo">Volvo</option>
-      <option value="saab">Saab</option>
-    </optgroup>
-    <optgroup label="German Cars">
-      <option value="mercedes">Mercedes</option>
-      <option value="audi">Audi</option>
-    </optgroup>
-  </select>
-*/
-
-/*function clickDropdown(elem) {
-  var menuList = document.getElementsByClassName("dropdown-content");
-    for (i = 0; i<menuList.length; i++) {
-      if (menuList[i].classList.contains('show')) {
-    	menuList[i].classList.remove('show');
-      }
-    }
-  elem.parentNode.children[1].classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(e) {
-  if (!e.target.matches('.dropbtn')) {
-  	var menuList = document.getElementsByClassName("dropdown-content");
-    for (i = 0; i<menuList.length; i++) {
-      if (menuList[i].classList.contains('show')) {
-    	menuList[i].classList.remove('show');
-      }
-    }
-  }
-}*/
