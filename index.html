@@ -139,7 +139,7 @@
       } );
       $(document).ready( function () {
         Chart.defaults.global.defaultFontColor = 'black';
-        setTalents('DS/Ruin');
+        setTalents('Destruction');
         loadGear();
         loadEnchants();
         loadGems();
@@ -367,12 +367,13 @@
         <div id="talents" class="tabcontent" name="talent" oninput="runSim();">
           <!--<p style="font-size:20px">Pick your talents & rotation</p>-->
           <br>
-          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('DS/Ruin');runSim()" id="DSRuin"> Raid Spec 1</button>
-          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('SM/Ruin');runSim()">             Raid Spec 2</button>
-          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('DS/ES');runSim()">               PvE Spec</button>
-          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('SM/DS');runSim()">               Meme Spec</button>
-          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('Conflagrate');runSim()">         PvP Spec</button>
-          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('Reset');runSim()">               Reset</button>
+          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('Destruction');runSim()" id="DSRuin">Destruction</button>
+          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('Catabolt');runSim()">               Pure Shadow</button>
+          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('Affliction');runSim()">             Affliction</button>
+          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('Demonology');runSim()">             Demonology</button>
+          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('Destro/NF');runSim()">              Destro/NF</button>
+          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('SL/SL');runSim()">                  SL/SL</button>
+          <button style="width:118px;height:25px;font-size:14px" onclick="setTalents('Reset');runSim()">                  Reset</button>
           <div class="row">
             <div class="column talents" style='background-image: url("https://wow.zamimg.com/images/wow/talents/backgrounds/classic/302.jpg');>
               <table class="center" style="border:0px;" id="afflictionTree" onclick="runSim();" oncontextmenu="runSim();">
