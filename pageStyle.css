@@ -269,10 +269,12 @@ input[type=number]{
 }
 .arrowWrapper {
     height: 100px;
-    width: 46px;
+    width: 54px;
     overflow: hidden;
     position: absolute;
-    margin-top: -4px;
+    margin-top: -9px;
+    text-align: center;
+    filter: grayscale(100%);
 }
 .talentArrowLong {
     position: relative;
@@ -281,7 +283,7 @@ input[type=number]{
 }
 .talentArrowShort {
     position: relative;
-    bottom: 262px;
+    bottom: 281px;
     width: 18px;
 }
 
