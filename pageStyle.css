@@ -267,6 +267,23 @@ input[type=number]{
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+.arrowWrapper {
+    height: 100px;
+    width: 46px;
+    overflow: hidden;
+    position: absolute;
+    margin-top: -4px;
+}
+.talentArrowLong {
+    position: relative;
+    bottom: 212px;
+    width: 18px;
+}
+.talentArrowShort {
+    position: relative;
+    bottom: 262px;
+    width: 18px;
+}
 
 .tooltip {
     position: relative;
