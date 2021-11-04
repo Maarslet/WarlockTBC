@@ -272,18 +272,19 @@ input[type=number]{
     width: 54px;
     overflow: hidden;
     position: absolute;
-    margin-top: -9px;
+    margin-top: -8px;
     text-align: center;
     filter: grayscale(100%);
+    z-index: 5;
 }
 .talentArrowLong {
     position: relative;
-    bottom: 212px;
+    bottom: 208px;
     width: 18px;
 }
 .talentArrowShort {
     position: relative;
-    bottom: 281px;
+    bottom: 278px;
     width: 18px;
 }
 
