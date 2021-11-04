@@ -33,16 +33,25 @@ function talentFunc(click,element) {
               element.style.filter = "grayscale(0%)";
               element.style.color = "green";
               talent.style.border = "2px solid green";
+              if (element.parentNode.parentNode.children[1] !== undefined) {
+                element.parentNode.parentNode.children[1].style.filter = "grayscale(100%)";
+              }
             }  
             else if (text.innerHTML >= max) {
               element.style.filter = "grayscale(0%)";
               element.style.color = "orange";
               talent.style.border = "2px solid orange";
+              if (element.parentNode.parentNode.children[1] !== undefined) {
+                element.parentNode.parentNode.children[1].style.filter = "grayscale(0%)";
+              }
             }
             else if (text.innerHTML <= 0) {
               element.style.filter = "grayscale(100%)";
               element.style.color = "orange";
               talent.style.border = "2px solid orange";
+              if (element.parentNode.parentNode.children[1] !== undefined) {
+                element.parentNode.parentNode.children[1].style.filter = "grayscale(100%)";
+              }
             }
           }
         }
@@ -70,18 +79,27 @@ function talentFunc(click,element) {
       element.style.filter = "grayscale(0%)";
       element.style.color = "green";
       talent.style.border = "2px solid green";
+      if (element.parentNode.parentNode.children[1] !== undefined) {
+        element.parentNode.parentNode.children[1].style.filter = "grayscale(100%)";
+      }
     }  
     else if (text.innerHTML >= max) {
       element.style.filter = "grayscale(0%)";
       element.style.color = "orange";
       talent.style.border = "2px solid orange";
       text.innerHTML = max;
+      if (element.parentNode.parentNode.children[1] !== undefined) {
+        element.parentNode.parentNode.children[1].style.filter = "grayscale(0%)";
+      }
     }
     else if (text.innerHTML <= 0) {
       element.style.filter = "grayscale(100%)";
       element.style.color = "orange";
       talent.style.border = "2px solid orange";
       text.innerHTML = 0;
+      if (element.parentNode.parentNode.children[1] !== undefined) {
+        element.parentNode.parentNode.children[1].style.filter = "grayscale(100%)";
+      }
     }
   }
   countTalents()
