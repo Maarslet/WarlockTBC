@@ -338,6 +338,7 @@ select {
     color: #EEE;
     background-color: #333;
     border-radius: 5px;
+    outline: none;
 }
 select[name=enchantSelect] {
     width: 150px;
