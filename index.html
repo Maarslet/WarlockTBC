@@ -103,9 +103,15 @@
           table = document.getElementById(gearArray[i-1]);
           if (table.children[1].children.activeItem == undefined) {
             enchantTable[i].children[1].innerHTML = "None";
+            if (enchantTable[i].children[2].children[0] !== undefined) {
+              enchantTable[i].children[2].children[0].disabled = true;
+            }
           }
           else {
             enchantTable[i].children[1].innerHTML = table.children[1].children.activeItem.children[0].innerHTML;
+            if (enchantTable[i].children[2].children[0] !== undefined) {
+              enchantTable[i].children[2].children[0].disabled = false;
+            }
           }
         }
         
@@ -113,6 +119,9 @@
         if (tableStaff.children[1].children.activeItem !== undefined) {
           enchantTable[15].children[1].innerHTML = tableStaff.children[1].children.activeItem.children[0].innerHTML;
           enchantTable[16].children[1].innerHTML = "None";
+          if (enchantTable[i].children[2].children[0] !== undefined) {
+            enchantTable[i].children[2].children[0].disabled = false;
+          }
         }
       }
       
@@ -613,129 +622,130 @@
           <div id="gearMainHand" class="gearcontent" name="gearMainHand">
             <table class="gearTable compact row-border hover" id="tableMainHand">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearOffHand" class="gearcontent" name="gearOffHand">
             <table class="gearTable compact row-border hover" id="tableOffHand">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearStaff" class="gearcontent" name="gearStaff">
             <table class="gearTable compact row-border hover" id="tableStaff">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearHelmet" class="gearcontent" name="gearHelmet">
             <table class="gearTable compact row-border hover" id="tableHelmet">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearNeck" class="gearcontent" name="gearNeck">
             <table class="gearTable compact row-border hover" id="tableNeck">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearShoulders" class="gearcontent" name="gearShoulders">
             <table class="gearTable compact row-border hover" id="tableShoulders">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearBack" class="gearcontent" name="gearBack">
             <table class="gearTable compact row-border hover" id="tableBack">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearChest" class="gearcontent" name="gearChest">
             <table class="gearTable compact row-border hover" id="tableChest">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearWrists" class="gearcontent" name="gearWrists">
             <table class="gearTable compact row-border hover" id="tableWrists">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearHands" class="gearcontent" name="gearHands">
             <table class="gearTable compact row-border hover" id="tableHands">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearWaist" class="gearcontent" name="gearWaist">
             <table class="gearTable compact row-border hover" id="tableWaist">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearLegs" class="gearcontent" name="gearLegs">
             <table class="gearTable compact row-border hover" id="tableLegs">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearFeet" class="gearcontent" name="gearFeet">
             <table class="gearTable compact row-border hover" id="tableFeet">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearRing1" class="gearcontent" name="gearRing1">
             <table class="gearTable compact row-border hover" id="tableRing1">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearRing2" class="gearcontent" name="gearRing2">
             <table class="gearTable compact row-border hover" id="tableRing2">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearTrinket1" class="gearcontent" name="gearTrinket1">
             <table class="gearTable compact row-border hover" id="tableTrinket1">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearTrinket2" class="gearcontent" name="gearTrinket2">
             <table class="gearTable compact row-border hover" id="tableTrinket2">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
           <div id="gearWand" class="gearcontent" name="gearWand">
             <table class="gearTable compact row-border hover" id="tableWand">
               <thead>
-                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Sta</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
+                <tr><th>Item Name</th><th>Sockets</th><th>Source</th><th>Stam</th><th>Int</th><th>Spell Power</th><th>Shadow Power</th><th>Fire Power</th><th>Hit Rating</th><th>Crit Rating</th><th>Haste Rating</th><th>Spell Pen</th><th>Value</th><th>DPS</th></tr>
               </thead><tbody></tbody>
             </table>
           </div>
+          <!--
           <div id="gearEnchants" class="gearcontent" name="gearEnchants" oninput="runSim()">
             <div class="row">
               <div class="column buffs" style="background-color:#555555;">
@@ -784,7 +794,7 @@
                 <label style=color:#9482C9> <input type="checkbox" id="enchantStaminaFeet">           Greater Stamina</label><br>
                 <br><br>
               </div>
-            </div>
+            </div>-->
           </div>
         </div> 
   
@@ -792,41 +802,41 @@
         <div id="enchants" class="tabcontent" name="enchants" oninput="runSim();">
           <table class='enchantsTable' style="text-align:left" id="enchantTable">
             <tr>
-              <th>Slot</th><th>Item</th><th>Sockets</th><th>Enchant</th><th>Gem 1</th><th>Gem 2</th><th>Gem 3</th><th>Bonus</th></tr>
+              <th>Slot</th><th>Item</th><th>Enchant</th><th>Gem 1</th><th>Gem 2</th><th>Gem 3</th><th>Bonus</th></tr>
             <tr>
-              <td>Head</td>     <td></td><td></td><td id="enchantHead"></td>    <td name="gemslot"></td><td name="gemslot"></td><td name="gemslot"></td><td></td></tr>
+              <td>Head</td>     <td></td><td id="enchantHead"></td>    <td name="gemslot"></td><td name="gemslot"></td><td name="gemslot"></td><td></td></tr>
             <tr>
-              <td>Neck</td>     <td></td><td></td><td></td>                     <td name="gemslot"></td><td></td><td></td><td></td></tr>
+              <td>Neck</td>     <td></td><td></td>                     <td name="gemslot"></td><td></td><td></td><td></td></tr>
             <tr>
-              <td>Shoulder</td> <td></td><td></td><td id="enchantShoulder"></td><td name="gemslot"></td><td name="gemslot"></td><td></td><td></td></tr>
+              <td>Shoulder</td> <td></td><td id="enchantShoulder"></td><td name="gemslot"></td><td name="gemslot"></td><td></td><td></td></tr>
             <tr>
-              <td>Back</td>     <td></td><td></td><td id="enchantBack"></td>    <td name="gemslot"></td><td></td><td></td><td></td></tr>
+              <td>Back</td>     <td></td><td id="enchantBack"></td>    <td name="gemslot"></td><td></td><td></td><td></td></tr>
             <tr>
-              <td>Chest</td>    <td></td><td></td><td id="enchantChest"></td>   <td name="gemslot"></td><td name="gemslot"></td><td name="gemslot"></td><td></td></tr>
+              <td>Chest</td>    <td></td><td id="enchantChest"></td>   <td name="gemslot"></td><td name="gemslot"></td><td name="gemslot"></td><td></td></tr>
             <tr>
-              <td>Wrist</td>    <td></td><td></td><td id="enchantWrist"></td>   <td name="gemslot"></td><td></td><td></td><td></td></tr>
+              <td>Wrist</td>    <td></td><td id="enchantWrist"></td>   <td name="gemslot"></td><td></td><td></td><td></td></tr>
             <tr>
-              <td>Hand</td>     <td></td><td></td><td id="enchantHand"></td>    <td name="gemslot"></td><td name="gemslot"></td><td></td><td></td></tr>
+              <td>Hand</td>     <td></td><td id="enchantHand"></td>    <td name="gemslot"></td><td name="gemslot"></td><td></td><td></td></tr>
             <tr>
-              <td>Waist</td>    <td></td><td></td><td></td>                     <td name="gemslot"></td><td name="gemslot"></td><td></td><td></td></tr>
+              <td>Waist</td>    <td></td><td></td>                     <td name="gemslot"></td><td name="gemslot"></td><td></td><td></td></tr>
             <tr>
-              <td>Legs</td>     <td></td><td></td><td id="enchantLegs"></td>    <td name="gemslot"></td><td name="gemslot"></td><td name="gemslot"></td><td></td></tr>
+              <td>Legs</td>     <td></td><td id="enchantLegs"></td>    <td name="gemslot"></td><td name="gemslot"></td><td name="gemslot"></td><td></td></tr>
             <tr>
-              <td>Feet</td>     <td></td><td></td><td id="enchantFeet"></td>    <td name="gemslot"></td><td name="gemslot"></td><td></td><td></td></tr>
+              <td>Feet</td>     <td></td><td id="enchantFeet"></td>    <td name="gemslot"></td><td name="gemslot"></td><td></td><td></td></tr>
             <tr>
-              <td>Finger</td> <td></td><td></td><td id="enchantFinger1"></td> <td name="gemslot"></td><td></td><td></td><td></td></tr>
+              <td>Finger</td>   <td></td><td id="enchantFinger1"></td> <td name="gemslot"></td><td></td><td></td><td></td></tr>
             <tr>
-              <td>Finger</td> <td></td><td></td><td id="enchantFinger2"></td> <td name="gemslot"></td><td></td><td></td><td></td></tr>
+              <td>Finger</td>   <td></td><td id="enchantFinger2"></td> <td name="gemslot"></td><td></td><td></td><td></td></tr>
             <tr>
-              <td>Trinket</td><td></td><td></td><td></td>                     <td></td><td></td><td></td><td></td></tr>
+              <td>Trinket</td>  <td></td><td></td>                     <td></td><td></td><td></td><td></td></tr>
             <tr>
-              <td>Trinket</td><td></td><td></td><td></td>                     <td></td><td></td><td></td><td></td></tr>
+              <td>Trinket</td>  <td></td><td></td>                     <td></td><td></td><td></td><td></td></tr>
             <tr>
-              <td>Weapon</td>   <td></td><td></td><td id="enchantWeapon"></td>  <td name="gemslot"></td><td name="gemslot"></td><td></td><td></td></tr>
+              <td>Weapon</td>   <td></td><td id="enchantWeapon"></td>  <td name="gemslot"></td><td name="gemslot"></td><td></td><td></td></tr>
             <tr>
-              <td>Offhand</td>  <td></td><td></td><td></td>                     <td></td><td></td><td></td><td></td></tr>
+              <td>Offhand</td>  <td></td><td></td>                     <td></td><td></td><td></td><td></td></tr>
             <tr>
-              <td>Wand</td>     <td></td><td></td><td></td>                     <td name="gemslot"></td><td></td><td></td><td></td></tr>
+              <td>Wand</td>     <td></td><td></td>                     <td name="gemslot"></td><td></td><td></td><td></td></tr>
         </table>
         </div>
         
