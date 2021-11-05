@@ -366,25 +366,25 @@ select[name=gemselect] {
 }*/
 
 .redgem {
-    color: red;
+    color: #ff3333;
 }
 .orangegem {
-    color: orange;
+    color: #ffa500;
 }
 .yellowgem {
-    color: yellow;
+    color: #ffff44;
 }
 .purplegem {
-    color: purple;
+    color: #9080f5;
 }
 .greengem {
-    color: green;
+    color: #00b900;
 }
 .bluegem {
-    color: blue;
+    color: #4444ff;
 }
 .nogem {
-    color: #EEE;
+    color: #EEEEEE;
 }
 .enchantsTable th {
     text-align: center;
