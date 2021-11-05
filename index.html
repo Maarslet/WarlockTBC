@@ -141,7 +141,14 @@
                   if (i == 1 && j == 0 && gems[0] == "M") {
                     enchantTable[i].children[3].children[0].style.display = "none";
                     enchantTable[i].children[3].children[1].style.display = "inline-block";
+                    enchantTable[i].children[3].children[1].style.border = "4px #DDDDDD";
                   }
+                  if (gems[j] == "R")
+                    enchantTable[i].children[3].children[1].style.border = "4px red";
+                  else if (gems[j] == "Y")
+                    enchantTable[i].children[3].children[1].style.border = "4px yellow";
+                  else if (gems[j] == "B")
+                    enchantTable[i].children[3].children[1].style.border = "4px blue";
                 }
                 else if (enchantTable[i].children[3+j].children[0] !== undefined && gems.length <= j) {
                   enchantTable[i].children[3+j].children[0].style.display = "none";
