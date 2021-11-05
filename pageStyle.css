@@ -341,9 +341,11 @@ select {
 }
 select[name=enchantSelect] {
     width: 150px;
+    height: 20px;
 }
 select[name=gemselect] {
     width: 150px;
+    height: 20px;
 }
 
 /*select[name=gemselect] {
