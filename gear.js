@@ -21,7 +21,7 @@ function loadGear() {
       extra = "";
       gemstring = "";
       if (item.set !== undefined) {
-        extra = " data-set='" + item.set + "'";
+        extra += " data-set='" + item.set + "'";
       }
       if (item.gems > 0) {
         gemstring = item.gem1[0];
@@ -32,6 +32,7 @@ function loadGear() {
           }
         }
         gemstring = gemstring.toUpperCase();
+        extra += " data-gems=" + gemstring;
       }
       if (filter.includes(item.source) == false) {
         info += "<tr onclick=clickTable('" + slot + "',this);" + extra + "><td><a href='https://tbc.wowhead.com/item=" + item.id + "'>" + item.name + "</a></td><td>" + gemstring + "</td><td>" + item.source + "</td><td>" + item.sta + "</td><td>" + item.int + "</td><td>" + item.SP + "</td><td>" + item.ShP + "</td><td>" + item.FiP + "</td><td>" + item.hit + "</td><td>" + item.crit + "</td><td>" + item.haste + "</td><td>" + item.pen + "</td><td></td><td></td></tr>";
