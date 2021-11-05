@@ -98,6 +98,7 @@
         var gearArray = ["tableHelmet", "tableNeck", "tableShoulders", "tableBack", "tableChest", "tableWrists", "tableHands", "tableWaist", "tableLegs", "tableFeet", "tableRing1", "tableRing2", "tableTrinket1", "tableTrinket2", "tableMainHand", "tableOffHand", "tableWand", "tableStaff"];
         var enchantTable = document.getElementById('enchantTable').children[0].children;
         var table = "";
+        var j, gems, gembonus
         
         for (i = 1; i<18; i++) {
           table = document.getElementById(gearArray[i-1]);
@@ -106,11 +107,50 @@
             if (enchantTable[i].children[2].children[0] !== undefined) {
               enchantTable[i].children[2].children[0].disabled = true;
             }
+            for (j = 0; j<3; j++) {
+              if (enchantTable[i].children[3+j].children[0] !== undefined) {
+                enchantTable[i].children[3+j].children[0].style.display = "none";
+                if (i == 1 && j == 0) {
+                  enchantTable[i].children[3].children[1].style.display = "none";}
+              }
+            }
+            enchantTable[i].children[6].innerHTML = "";
           }
           else {
             enchantTable[i].children[1].innerHTML = table.children[1].children.activeItem.children[0].innerHTML;
             if (enchantTable[i].children[2].children[0] !== undefined) {
               enchantTable[i].children[2].children[0].disabled = false;
+            }
+            gems = table.children[1].children.activeItem.dataset.gems;
+            gembonus = table.children[1].children.activeItem.dataset.gembonus;
+            if (gems == undefined || gems.length == 0) {
+              for (j = 0; j<3; j++) {
+                if (enchantTable[i].children[3+j].children[0] !== undefined) {
+                  enchantTable[i].children[3+j].children[0].style.display = "none";
+                  if (i == 1 && j == 0) {
+                    enchantTable[i].children[3].children[1].style.display = "none";
+                  }
+                }
+              }
+              enchantTable[i].children[6].innerHTML = "";
+            }
+            else if (gems.length > 0) {
+              for (j = 0; j<3; j++) {
+                if (enchantTable[i].children[3+j].children[0] !== undefined && gems.length > j) {
+                  enchantTable[i].children[3+j].children[0].style.display = "inline-block";
+                  if (i == 1 && j == 0 && gems[0] == "M") {
+                    enchantTable[i].children[3].children[0].style.display = "none";
+                    enchantTable[i].children[3].children[1].style.display = "inline-block";
+                  }
+                }
+                else if (gems.length <= j) {
+                  enchantTable[i].children[3+j].children[0].style.display = "none";
+                  if (i == 1 && j == 0) {
+                    enchantTable[i].children[3].children[1].style.display = "none";
+                  }
+                }
+              }
+              enchantTable[i].children[6].innerHTML = gembonus;
             }
           }
         }
