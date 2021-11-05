@@ -337,6 +337,7 @@ option::selection {
 select {
     color: #EEE;
     background-color: #333;
+    border-radius: 5px;
 }
 select[name=enchantSelect] {
     width: 150px;
