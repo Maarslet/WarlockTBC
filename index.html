@@ -144,11 +144,11 @@
                     enchantTable[i].children[3].children[1].style.border = "2px solid #DDDDDD";
                   }
                   if (gems[j] == "R")
-                    enchantTable[i].children[3].children[0].style.border = "2px solid red";
+                    enchantTable[i].children[3+j].children[0].style.border = "2px solid red";
                   else if (gems[j] == "Y")
-                    enchantTable[i].children[3].children[0].style.border = "2px solid yellow";
+                    enchantTable[i].children[3+j].children[0].style.border = "2px solid #FF0";
                   else if (gems[j] == "B")
-                    enchantTable[i].children[3].children[0].style.border = "2px solid blue";
+                    enchantTable[i].children[3+j].children[0].style.border = "2px solid #0070dd";
                 }
                 else if (enchantTable[i].children[3+j].children[0] !== undefined && gems.length <= j) {
                   enchantTable[i].children[3+j].children[0].style.display = "none";
