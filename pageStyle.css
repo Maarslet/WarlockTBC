@@ -35,14 +35,14 @@ tr:nth-child(odd) /*{ background-color: #dddddd; }*/
 .wowhead-tooltip * {
     font-family: Verdana,"Open Sans",Arial,"Helvetica Neue",Helvetica,sans-serif;
 }
-.linkCell a {
+a {
     color: inherit;
     text-decoration: none;
-    width: 100%;
+    /*width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
-    display: block;
+    display: block;*/
 }
 .gearTable {
     width: 100%;
