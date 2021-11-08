@@ -87,12 +87,12 @@ function loadGems(type) {
     type = "normal";
   metaHTML = ""
   + "<option class='nogem' value='nometa'>No Gem Equipped</option>"
-  + "<option class='nogem' value='chaotic' selected>Chaotic Skyfire Diamond</option>"
-  + "<option class='nogem' value='ember'>Ember Skyfire Diamond</option>"
-  + "<option class='nogem' value='mystical'>Mystical Skyfire Diamond</option>"
-  + "<option class='nogem' value='swift'>Swift Starfire Diamond</option>"
-  + "<option class='nogem' value='insightful'>Insightful Earthstorm Diamond</option>"
-  + "<option class='nogem' value='imbued'>Imbued Unstable Diamond</option>"
+  + "<option class='metagem' value='chaotic' selected>Chaotic Skyfire Diamond</option>"
+  + "<option class='metagem' value='ember'>Ember Skyfire Diamond</option>"
+  + "<option class='metagem' value='mystical'>Mystical Skyfire Diamond</option>"
+  + "<option class='metagem' value='swift'>Swift Starfire Diamond</option>"
+  + "<option class='metagem' value='insightful'>Insightful Earthstorm Diamond</option>"
+  + "<option class='metagem' value='imbued'>Imbued Unstable Diamond</option>"
   
   normalHTML = ""
   // No Gem
@@ -145,3 +145,103 @@ function loadGems(type) {
 function updateSelectColor(element) {
   element.className = element[element.selectedIndex].className;
 }
+
+function checkGems() {
+  var enchantTable = document.getElementById('enchantTable').children[0].children;
+  var i, red, blue, yellow, slot1, slot2, slot3, meta, gem1, gem2, gem3
+  red = 0; blue = 0; yellow = 0;
+  
+  for (i = 1; i<18; i++) {
+    if (enchantTable[i].children[6].innerHTML !== "")
+      continue
+    slot1 = true; slot2 = true; slot3 = true;
+    
+    if (i == 1)
+      meta = enchantTable[i].children[4].children[1];
+    gem1 = enchantTable[i].children[4].children[0];
+    gem2 = enchantTable[i].children[5].children[0];
+    gem3 = enchantTable[i].children[6].children[0];
+    if (i == 1 && meta.style.display !== "none") {
+      if (meta.dataSlot == "meta" && meta.class == "metagem") {
+        slot1 = true;
+      }
+      else 
+        slot1 = false;
+    }
+    
+    if (gem1 !== "undefined" && gem1.style.display !== "none") {
+      if (gem1.dataSlot == "red" && (gem1.class == "redgem" || gem1.class == "orangegem" || gem1.class == "purplegem")) {
+        slot1 = true;
+      }
+      else if (gem1.dataSlot == "blue" && (gem1.class == "bluegem" || gem1.class == "purplegem" || gem1.class == "greengem")) {
+        slot1 = true;
+      }
+      else if (gem1.dataSlot == "yellow" && (gem1.class == "yellowgem" || gem1.class == "orangegem" || gem1.class == "greengem")) {
+        slot1 = true;
+      }
+      else
+        slot1 = false;
+      if (gem1.class == "redgem" || gem1.class == "orangegem" || gem1.class == "purplegem")
+        red++;
+      if (gem1.class == "bluegem" || gem1.class == "purplegem" || gem1.class == "greengem")
+        blue++;
+      if (gem1.class == "yellowgem" || gem1.class == "orangegem" || gem1.class == "greengem")
+        yellow++;
+    }
+    
+    if (gem2 !== "undefined" && gem2.style.display !== "none") {
+      if (gem2.dataSlot == "red" && (gem2.class == "redgem" || gem2.class == "orangegem" || gem2.class == "purplegem")) {
+        slot2 = true;
+      }
+      else if (gem2.dataSlot == "blue" && (gem2.class == "bluegem" || gem2.class == "purplegem" || gem2.class == "greengem")) {
+        slot2 = true;
+      }
+      else if (gem2.dataSlot == "yellow" && (gem2.class == "yellowgem" || gem2.class == "orangegem" || gem2.class == "greengem")) {
+        slot2 = true;
+      }
+      else
+        slot2 = false;
+      if (gem2.class == "redgem" || gem2.class == "orangegem" || gem2.class == "purplegem")
+        red++;
+      if (gem2.class == "bluegem" || gem2.class == "purplegem" || gem2.class == "greengem")
+        blue++;
+      if (gem2.class == "yellowgem" || gem2.class == "orangegem" || gem2.class == "greengem")
+        yellow++;
+    }
+    
+    if (gem3 !== "undefined" && gem3.style.display !== "none") {
+      if (gem3.dataSlot == "red" && (gem3.class == "redgem" || gem3.class == "orangegem" || gem3.class == "purplegem")) {
+        slot3 = true;
+      }
+      else if (gem3.dataSlot == "blue" && (gem3.class == "bluegem" || gem3.class == "purplegem" || gem3.class == "greengem")) {
+        slot3 = true;
+      }
+      else if (gem3.dataSlot == "yellow" && (gem3.class == "yellowgem" || gem3.class == "orangegem" || gem3.class == "greengem")) {
+        slot3 = true;
+      }
+      else
+        slot3 = false;
+      if (gem3.class == "redgem" || gem3.class == "orangegem" || gem3.class == "purplegem")
+        red++;
+      if (gem3.class == "bluegem" || gem3.class == "purplegem" || gem3.class == "greengem")
+        blue++;
+      if (gem3.class == "yellowgem" || gem3.class == "orangegem" || gem3.class == "greengem")
+        yellow++;
+    }
+    
+    if (slot1 * slot2 * slot3 == 1) {
+      enchantTable[i].children[6].style.color = "green";
+      enchantTable[i].children[6].style.textDecoration = "none";
+      enchantTable[i].children[6].style.fontStyle = "normal";
+      enchantTable[i].children[6].name = "activeBonus";
+    }
+    else {
+      enchantTable[i].children[6].style.color = "red";
+      enchantTable[i].children[6].style.textDecoration = "line-through";
+      enchantTable[i].children[6].style.fontStyle = "italic";
+      enchantTable[i].children[6].name = "notActiveBonus";
+    }
+  }
+}
+
+
