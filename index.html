@@ -142,13 +142,20 @@
                     enchantTable[i].children[3].children[0].style.display = "none";
                     enchantTable[i].children[3].children[1].style.display = "inline-block";
                     enchantTable[i].children[3].children[1].style.border = "2px solid #DDDDDD";
+                    enchantTable[i].children[3].children[1].dataSlot = "meta";
                   }
-                  if (gems[j] == "R")
+                  if (gems[j] == "R") {
                     enchantTable[i].children[3+j].children[0].style.border = "2px solid red";
-                  else if (gems[j] == "Y")
+                    enchantTable[i].children[3+j].children[0].dataSlot = "red";
+                  }
+                  else if (gems[j] == "Y") {
                     enchantTable[i].children[3+j].children[0].style.border = "2px solid #FF0";
-                  else if (gems[j] == "B")
+                    enchantTable[i].children[3+j].children[0].dataSlot = "yellow";
+                  }
+                  else if (gems[j] == "B") {
                     enchantTable[i].children[3+j].children[0].style.border = "2px solid #0070dd";
+                    enchantTable[i].children[3+j].children[0].dataSlot = "blue";
+                  }
                 }
                 else if (enchantTable[i].children[3+j].children[0] !== undefined && gems.length <= j) {
                   enchantTable[i].children[3+j].children[0].style.display = "none";
