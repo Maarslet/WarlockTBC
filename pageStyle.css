@@ -33,7 +33,7 @@ tr:nth-child(odd) /*{ background-color: #dddddd; }*/
     padding: 0px;
 }
 .wowhead-tooltip * {
-    font-family: Verdana;
+    font-family: Verdana,"Open Sans",Arial,"Helvetica Neue",Helvetica,sans-serif;
 }
 .linkCell a {
     color: inherit;
