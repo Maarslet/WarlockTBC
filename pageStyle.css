@@ -32,8 +32,8 @@ tr:nth-child(odd) /*{ background-color: #dddddd; }*/
 .finalStats, .finalStats td, .finalStats tr, .finalStats th {
     padding: 0px;
 }
-a * {
-    font-family: "Verdana";
+.wowhead-tooltip * {
+    font-family: Verdana;
 }
 .linkCell a {
     color: inherit;
