@@ -195,7 +195,7 @@
             document.getElementsByName('flask')[i].checked = false;
         }
       }
-      
+      $('a[href*="wowhead"]').click(function(e) { e.preventDefault ? e.preventDefault() : e.returnValue = false; });
       $.extend( $.fn.dataTable.defaults, {
         searching: false,
         info:  false,
