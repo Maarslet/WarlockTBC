@@ -32,7 +32,9 @@ tr:nth-child(odd) /*{ background-color: #dddddd; }*/
 .finalStats, .finalStats td, .finalStats tr, .finalStats th {
     padding: 0px;
 }
-
+a * {
+    font-family: "Verdana";
+}
 .linkCell a {
     color: inherit;
     text-decoration: none;
