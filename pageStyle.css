@@ -383,6 +383,9 @@ select[name=gemselect] {
 .bluegem {
     color: #4444ff;
 }
+.metagem {
+    color: #CCCCCC;
+}
 .nogem {
     color: #EEEEEE;
 }
