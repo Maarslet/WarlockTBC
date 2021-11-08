@@ -384,10 +384,10 @@ select[name=gemselect] {
     color: #4444ff;
 }
 .metagem {
-    color: #CCCCCC;
+    color: #EEEEEE;
 }
 .nogem {
-    color: #EEEEEE;
+    color: #CCCCCC;
 }
 .enchantsTable th {
     text-align: center;
