@@ -169,7 +169,7 @@ function checkGems() {
         slot1 = false;
     }
     
-    if (gem1 !== "undefined" && gem1.style.display !== "none") {
+    if (gem1 !== undefined && gem1.style.display !== "none") {
       if (gem1.dataSlot == "red" && (gem1.class == "redgem" || gem1.class == "orangegem" || gem1.class == "purplegem")) {
         slot1 = true;
       }
@@ -189,7 +189,7 @@ function checkGems() {
         yellow++;
     }
     
-    if (gem2 !== "undefined" && gem2.style.display !== "none") {
+    if (gem2 !== undefined && gem2.style.display !== "none") {
       if (gem2.dataSlot == "red" && (gem2.class == "redgem" || gem2.class == "orangegem" || gem2.class == "purplegem")) {
         slot2 = true;
       }
@@ -209,7 +209,7 @@ function checkGems() {
         yellow++;
     }
     
-    if (gem3 !== "undefined" && gem3.style.display !== "none") {
+    if (gem3 !== undefined && gem3.style.display !== "none") {
       if (gem3.dataSlot == "red" && (gem3.class == "redgem" || gem3.class == "orangegem" || gem3.class == "purplegem")) {
         slot3 = true;
       }
@@ -242,6 +242,8 @@ function checkGems() {
       enchantTable[i].children[6].name = "notActiveBonus";
     }
   }
+  if (arguments.length > 0)
+    return "red: " + red + ", blue: " + blue + ", yellow: " + yellow;
 }
 
 
