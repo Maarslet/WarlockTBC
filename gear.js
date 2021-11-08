@@ -45,6 +45,7 @@ function loadGear() {
     document.getElementById(slot).children[1].innerHTML = info.replaceAll("undefined","");
     $('#' + slot).DataTable();
   }
+  $('a[href*="wowhead"]').click(function(e) { e.preventDefault ? e.preventDefault() : e.returnValue = false; });
 }
 
 function createFilter() {
