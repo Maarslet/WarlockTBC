@@ -144,6 +144,7 @@ function loadGems(type) {
 
 function updateSelectColor(element) {
   element.className = element[element.selectedIndex].className;
+  checkGems();
 }
 
 function checkGems() {
