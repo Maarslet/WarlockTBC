@@ -277,6 +277,16 @@ input[type=number]{
     filter: grayscale(100%);
     z-index: 5;
 }
+.arrowWrapperShort {
+    height: 28px;
+    width: 54px;
+    overflow: hidden;
+    position: absolute;
+    margin-top: -8px;
+    text-align: center;
+    filter: grayscale(100%);
+    z-index: 5;
+}
 .talentArrowLong {
     position: relative;
     bottom: 208px;
