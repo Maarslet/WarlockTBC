@@ -152,7 +152,7 @@ function checkGems() {
   red = 0; blue = 0; yellow = 0;
   
   for (i = 1; i<18; i++) {
-    if (enchantTable[i].children[6].innerHTML !== "")
+    if (enchantTable[i].children[6].innerHTML == "")
       continue
     slot1 = true; slot2 = true; slot3 = true;
     
