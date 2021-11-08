@@ -136,7 +136,7 @@ function loadGems(type) {
   
   cellArray = document.getElementsByName('gemslot');
   cellArray[0].innerHTML = "<select style='display:none' name='gemselect' class='nogem' onchange='updateSelectColor(this);'>" + normalHTML;
-  cellArray[0].innerHTML += "<select style='display:inline-block' name='gemselect' class='nogem' onchange='updateSelectColor(this);'>" + metaHTML;
+  cellArray[0].innerHTML += "<select style='display:inline-block' name='gemselect' class='metagem' onchange='updateSelectColor(this);'>" + metaHTML;
   for (i = 1; i<cellArray.length; i++) {
     cellArray[i].innerHTML = "<select name='gemselect' class='nogem' onchange='updateSelectColor(this);'>" + normalHTML;
   }
@@ -157,10 +157,10 @@ function checkGems() {
     slot1 = true; slot2 = true; slot3 = true;
     
     if (i == 1)
-      meta = enchantTable[i].children[4].children[1];
-    gem1 = enchantTable[i].children[4].children[0];
-    gem2 = enchantTable[i].children[5].children[0];
-    gem3 = enchantTable[i].children[6].children[0];
+      meta = enchantTable[1].children[3].children[1];
+    gem1 = enchantTable[i].children[3].children[0];
+    gem2 = enchantTable[i].children[4].children[0];
+    gem3 = enchantTable[i].children[5].children[0];
     if (i == 1 && meta.style.display !== "none") {
       if (meta.dataSlot == "meta" && meta.class == "metagem") {
         slot1 = true;
