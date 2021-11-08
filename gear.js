@@ -35,7 +35,7 @@ function loadGear() {
         extra += " data-gems=" + gemstring + " data-gembonus='" + item.gemB + "'";
       }
       if (filter.includes(item.source) == false) {
-        info += "<tr onclick=clickTable('" + slot + "',this);" + extra + "><td class='linkCell'><a href='https://tbc.wowhead.com/item=" + item.id + "'></a>" + item.name + "</td><td>" + gemstring + "</td><td>" + item.source + "</td><td>" + item.sta + "</td><td>" + item.int + "</td><td>" + item.SP + "</td><td>" + item.ShP + "</td><td>" + item.FiP + "</td><td>" + item.hit + "</td><td>" + item.crit + "</td><td>" + item.haste + "</td><td>" + item.pen + "</td><td></td><td></td></tr>";
+        info += "<tr onclick=clickTable('" + slot + "',this);" + extra + "><td class='linkCell'><div><a href='https://tbc.wowhead.com/item=" + item.id + "'></a></div>" + item.name + "</td><td>" + gemstring + "</td><td>" + item.source + "</td><td>" + item.sta + "</td><td>" + item.int + "</td><td>" + item.SP + "</td><td>" + item.ShP + "</td><td>" + item.FiP + "</td><td>" + item.hit + "</td><td>" + item.crit + "</td><td>" + item.haste + "</td><td>" + item.pen + "</td><td></td><td></td></tr>";
         count++;
       }
     }
