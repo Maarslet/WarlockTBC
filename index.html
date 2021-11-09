@@ -63,32 +63,32 @@
         var i, tableContent
         tableContent = document.getElementById(tableName).children[1].children;
         for (i = 0; i < tableContent.length; i++) {
-          document.getElementById(tableName).children[1].children[i].style.backgroundColor = "#FFF";
+          //document.getElementById(tableName).children[1].children[i].style.backgroundColor = "#FFF";
           document.getElementById(tableName).children[1].children[i].setAttribute('name', tableName + 'Inactive');
         }
         
         if (tableName == "tableMainHand" || tableName == "tableOffHand") {
           tableContent = document.getElementById("tableStaff").children[1].children;
           for (i = 0; i < tableContent.length; i++) {
-            document.getElementById("tableStaff").children[1].children[i].style.backgroundColor = "#FFF";
+            //document.getElementById("tableStaff").children[1].children[i].style.backgroundColor = "#FFF";
             document.getElementById("tableStaff").children[1].children[i].setAttribute('name', "tableStaff" + 'Inactive');
           }
         }
         else if (tableName == "tableStaff") {
           tableContent = document.getElementById("tableMainHand").children[1].children;
           for (i = 0; i < tableContent.length; i++) {
-            document.getElementById("tableMainHand").children[1].children[i].style.backgroundColor = "#FFF";
+            //document.getElementById("tableMainHand").children[1].children[i].style.backgroundColor = "#FFF";
             document.getElementById("tableMainHand").children[1].children[i].setAttribute('name', "tableMainHand" + 'Inactive');
           }
           tableContent = document.getElementById("tableOffHand").children[1].children;
           for (i = 0; i < tableContent.length; i++) {
-            document.getElementById("tableOffHand").children[1].children[i].style.backgroundColor = "#FFF";
+            //document.getElementById("tableOffHand").children[1].children[i].style.backgroundColor = "#FFF";
             document.getElementById("tableOffHand").children[1].children[i].setAttribute('name', "tableOffHand" + 'Inactive');
           }
         }
         
         if (arguments.length >= 2) {
-          element.style.backgroundColor = "#9482C9";
+          //element.style.backgroundColor = "#9482C9";
           element.setAttribute('name', 'activeItem');
         }
         if (arguments.length !== 3) {
