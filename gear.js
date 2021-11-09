@@ -7,7 +7,6 @@ function loadGear() {
                    'tableHands', 'tableWaist', 'tableLegs', 'tableFeet', 'tableRing1', 'tableRing2', 'tableTrinket1', 'tableTrinket2', 'tableWand'];
   var listArray = ['mainhand', 'offhand', 'staff', 'helmet', 'neck', 'shoulder', 'back', 'chest', 'wrist',
                    'hands', 'waist', 'legs', 'feet', 'ring', 'ring', 'trinket', 'trinket', 'wand'];
-  var activeItem = " style='background-color:#AAAAAA' name='activeItem'";
   
   for (i=0; i<slotArray.length; i++) {
     slot = slotArray[i];
