@@ -2,7 +2,7 @@ function loadEnchants() {
   var cell;
   cell = document.getElementById("enchantHead");
   cell.innerHTML = "<select name='enchantSelect' id='enchantHeadSelection'>"
-      + "<option value='SP: 22,hit: 14'>Glyph of Power</option>"
+      + "<option value='SP: 22,hit: 14'><a href='https://tbc.wowhead.com/item=29191'>Glyph of Power</a></option>"
       + "<option value='SP: 18,sta: 10'>Hoodoo Hex</option>"
       + "<option value='SP: 0'>None</option></select>";
   
