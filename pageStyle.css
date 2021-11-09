@@ -73,9 +73,13 @@ a {
 /*.gearTable tr td:nth-child(2), .gearTable tr th:nth-child(2), .gearTable tr td:nth-child(3), .gearTable tr th:nth-child(3), .gearTable tr td:nth-child(4), .gearTable tr th:nth-child(4), .gearTable tr td:nth-child(5), .gearTable tr th:nth-child(5), {
     width: 100px;
 }*/
-.gearTable tbody>tr:hover td {
-  background-color: #DDD!important;
+/*.gearTable tbody>tr:hover td {
+  background-color: #DDD;
+}*/
+tr[name=activeItem] {
+    background-color: #9482C9;
 }
+
 
 
 .loader {
