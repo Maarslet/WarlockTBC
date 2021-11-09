@@ -77,7 +77,7 @@ a {
   background-color: #DDD;
 }*/
 tr[name=activeItem] {
-    background-color: #9482C9;
+    background-color: #9482C9!important;
 }
 
 
